@@ -1,4 +1,4 @@
-import { authorizedApiClient } from "./api.client";
+import { apiClient } from "./api.client";
 import type { SingleFileAPiResponse } from "../types/file.types";
 
 export const fileService = {
@@ -6,7 +6,7 @@ export const fileService = {
   async uploadImage(payload: FormData):Promise<SingleFileAPiResponse> {
     try {
 
-      const response = await authorizedApiClient.post(
+      const response = await apiClient.post(
         "files/upload/images",
         payload,
         { headers: { "Content-Type": "multipart/form-data", }}
