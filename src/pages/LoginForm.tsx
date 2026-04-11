@@ -1,40 +1,40 @@
-"use client";
-
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useState } from "react";
-import { authService } from "@/services/client/auth.service";
-import "./login.css";
+import { authService } from "../services/auth.service";
+import "../assets/css/login.css";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (loading) return;
     try {
-
       setLoading(true);
       await authService.login(email, password);
-      toast.success("Successfully logged in");
-
-      router.push("/dashboard");
+      toast.success("Successfully logged in", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      navigate("/dashboard");
     } catch (error: any) {
-      toast.error("Invalid email or password");
+      toast.error("Invalid email or password", {
+        position: "top-right",
+        autoClose: 5000,
+      });
     } finally {
       setLoading(false);
     }
   };
 
-
   return (
     <div
       className="min-h-screen bg-white flex justify-center items-center font-sans"
-      style={{ fontFamily: "'DM Sans', 'Inter', sans-serif" }}
+      style={{ fontFamily: "'Poppins', sans-serif" }}
     >
       <div className="max-w-screen-7xl w-full m-0 sm:m-10 bg-white border border-gray-200 sm:rounded-2xl flex flex-1 shadow-sm overflow-hidden" style={{ minHeight: '600px' }}>
 
@@ -44,10 +44,10 @@ export default function LoginPage() {
 
           {/* Top: Logo */}
           <div className="relative z-10">
-            <Image
-              src="/images/shamiri.png"
-              alt="Shamiri"
-              width={120}
+            <img
+              src="/images/sauti-cloud-logo.png"
+              alt="Sauti-Cloud"
+              width={140}
               height={40}
               className="object-contain"
               style={{ maxHeight: 40 }}
@@ -60,47 +60,46 @@ export default function LoginPage() {
             {/* AI Badge */}
             <div className="ai-pill mb-5" style={{ width: 'fit-content' }}>
               <span className="pulse-dot" />
-              <span className="font-mono-ui" style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#12245B' }}>
-                AI-Powered Supervision
+              <span className="font-mono-ui" style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#1E3A8A' }}>
+                AI-Powered Sales
               </span>
             </div>
 
             {/* Heading */}
-            <h1 style={{ fontSize: '26px', fontWeight: 700, letterSpacing: '-0.6px', lineHeight: 1.2, color: '#12245B', marginBottom: '10px' }}>
-              Supervisor Intelligence<br />
-              <span style={{ color: '#B4F000', filter: 'brightness(0.7)' }}>Dashboard</span>
+            <h1 style={{ fontSize: '26px', fontWeight: 700, letterSpacing: '-0.6px', lineHeight: 1.2, color: '#1E3A8A', marginBottom: '10px' }}>
+              Automate Your Sales<br />
+              <span style={{ color: '#F48120' }}>24/7 Intelligence</span>
             </h1>
 
             {/* Preamble */}
             <p style={{ fontSize: '13px', lineHeight: 1.65, color: '#6B7280', marginBottom: '24px', maxWidth: '360px' }}>
-              Monitor session quality, fidelity, and safety across youth-delivered
-              mental health interventions — with AI insight and human oversight working together.
+              Close deals and provide support around the clock with AI bots that understand your customers—no human in the loop required.
             </p>
 
             {/* Stat chips */}
             <div style={{ display: 'flex', gap: '10px', marginBottom: '28px' }}>
               <div className="stat-card">
-                <span style={{ fontSize: '17px', fontWeight: 700, color: '#12245B', letterSpacing: '-0.5px' }}>
-                  200k<span style={{ color: '#B4F000', filter: 'brightness(0.65)' }}>+</span>
+                <span style={{ fontSize: '17px', fontWeight: 700, color: '#1E3A8A', letterSpacing: '-0.5px' }}>
+                  24/7<span style={{ color: '#F48120' }}>+</span>
                 </span>
                 <span className="font-mono-ui" style={{ fontSize: '9px', fontWeight: 500, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.07em' }}>
-                  Youth Served
+                  Availability
                 </span>
               </div>
               <div className="stat-card">
-                <span style={{ fontSize: '17px', fontWeight: 700, color: '#12245B', letterSpacing: '-0.5px' }}>
-                  80<span style={{ color: '#B4F000', filter: 'brightness(0.65)' }}>%</span>
+                <span style={{ fontSize: '17px', fontWeight: 700, color: '#1E3A8A', letterSpacing: '-0.5px' }}>
+                  40<span style={{ color: '#F48120' }}>%</span>
                 </span>
                 <span className="font-mono-ui" style={{ fontSize: '9px', fontWeight: 500, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.07em' }}>
-                  Show Improvement
+                  Higher Conversion
                 </span>
               </div>
               <div className="stat-card">
-                <span style={{ fontSize: '17px', fontWeight: 700, color: '#12245B', letterSpacing: '-0.5px' }}>
-                  3k<span style={{ color: '#B4F000', filter: 'brightness(0.65)' }}>+</span>
+                <span style={{ fontSize: '17px', fontWeight: 700, color: '#1E3A8A', letterSpacing: '-0.5px' }}>
+                  0<span style={{ color: '#F48120' }}>s</span>
                 </span>
                 <span className="font-mono-ui" style={{ fontSize: '9px', fontWeight: 500, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.07em' }}>
-                  Providers Trained
+                  Wait Time
                 </span>
               </div>
             </div>
@@ -112,12 +111,12 @@ export default function LoginPage() {
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div>
                 <label className="font-mono-ui" style={{ display: 'block', fontSize: '10px', fontWeight: 600, letterSpacing: '0.07em', textTransform: 'uppercase', color: '#9CA3AF', marginBottom: '6px' }}>
-                  Organisational Email
+                  Business Email
                 </label>
                 <input
                   type="email"
                   className="input-field"
-                  placeholder="you@shamiri.org"
+                  placeholder="you@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -130,7 +129,7 @@ export default function LoginPage() {
                     Password
                   </label>
                   <a href="#" style={{ fontSize: '11px', color: '#9CA3AF', textDecoration: 'none', transition: 'color 0.2s' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = '#12245B')}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#1E3A8A')}
                     onMouseLeave={e => (e.currentTarget.style.color = '#9CA3AF')}
                   >
                     Forgot password?
@@ -169,7 +168,7 @@ export default function LoginPage() {
           {/* Footer */}
           <div className="relative z-10">
             <p className="font-mono-ui" style={{ fontSize: '11px', color: '#D1D5DB', textAlign: 'center' }}>
-              Access is provisioned by your organisation · shamiri.institute
+              AI-powered sales automation · sauti-cloud.com
             </p>
           </div>
         </div>
@@ -177,19 +176,15 @@ export default function LoginPage() {
         {/* ── RIGHT PANEL ── */}
         <div
           className="right-panel flex-1 hidden lg:block"
-          style={{ background: '#0f1f52', position: 'relative' }}
+          style={{ background: '#1E3A8A', position: 'relative' }}
         >
           {/* Background image */}
-          <Image
-            src="/images/session_school.jpg"
-            alt="Shamiri session in progress"
-            fill
-            className="object-cover"
-            style={{ opacity: 0.55 }}
-            priority
+          <img
+            src="/images/ai-sales-bg.jpg"
+            alt="AI sales automation"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ opacity: 0.4 }}
           />
-
-          {/* Gradient overlay handled by ::before pseudo */}
 
           {/* Top-right decorative element */}
           <div style={{
@@ -205,46 +200,46 @@ export default function LoginPage() {
           }}>
             <span className="pulse-dot" />
             <span className="font-mono-ui" style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.08em', color: 'rgba(255,255,255,0.9)', textTransform: 'uppercase' }}>
-              Live AI Analysis
+              Live Bot Activity
             </span>
           </div>
 
           {/* Bottom overlay card */}
           <div className="overlay-card">
             <p className="font-mono-ui" style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>
-              What you get access to
+              Platform Capabilities
             </p>
 
             <div className="feature-row">
               <div className="feature-icon">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B4F000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F48120" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                 </svg>
               </div>
               <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.85)', fontWeight: 500 }}>
-                AI-generated session summaries & quality scores
+                Conversational AI sales bots
               </span>
             </div>
 
             <div className="feature-row">
               <div className="feature-icon">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B4F000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-              </div>
-              <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.85)', fontWeight: 500 }}>
-                Risk detection with flagging & human validation
-              </span>
-            </div>
-
-            <div className="feature-row">
-              <div className="feature-icon">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B4F000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F48120" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
                 </svg>
               </div>
               <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.85)', fontWeight: 500 }}>
-                Fidelity monitoring across your Fellow network
+                Real-time sales analytics & tracking
+              </span>
+            </div>
+
+            <div className="feature-row">
+              <div className="feature-icon">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F48120" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                </svg>
+              </div>
+              <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.85)', fontWeight: 500 }}>
+                Automated customer support
               </span>
             </div>
           </div>
