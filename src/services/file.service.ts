@@ -7,7 +7,7 @@ export const fileService = {
     try {
 
       const response = await apiClient.post(
-        "files/upload/images",
+        "files/upload/images/whatsapp",
         payload,
         { headers: { "Content-Type": "multipart/form-data", }}
       )
