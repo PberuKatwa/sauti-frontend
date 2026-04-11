@@ -1,25 +1,36 @@
 import axios from "axios";
-
-const API_URL: string = import.meta.env.VITE_API_URL;
+import { toast } from "react-toastify";
 
 export const apiClient = axios.create({
-  baseURL: API_URL,
-  headers: { "Content-Type": "application/json" },
-});
-
-export const authorizedApiClient = axios.create({
-  baseURL: API_URL,
-  headers: { "Content-Type": "application/json" },
-});
-
-authorizedApiClient.interceptors.request.use(
-  (config) => {
-    const raw = localStorage.getItem('access_token');
-    const token = raw ? JSON.parse(raw) : null;
-    if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
-    }
-    return config;
+  baseURL: "/api",
+  withCredentials: true,
+  headers: {
+    "Content-Type": "application/json",
   },
-  (error) => Promise.reject(error)
+});
+
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const status = error?.response?.status;
+
+    if (status === 401 || status === 403) {
+      toast.error("Your session has expired. Please log in again.", {
+        position: "top-right",
+        autoClose: 5000,
+        style: {
+          background: "#fee2e2",
+          color: "#b91c1c",
+          fontWeight: "bold",
+        },
+      });
+
+      // Delay to let toast show before redirect
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 100);
+    }
+
+    return Promise.reject(error);
+  }
 );

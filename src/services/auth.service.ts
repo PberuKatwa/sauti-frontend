@@ -1,4 +1,4 @@
-import type { AuthUser, AuthUserApiResponse, ProfileApiResponse } from "../types/auth.types";
+import type { AuthUserApiResponse, ProfileApiResponse } from "../types/auth.types";
 import { apiClient } from "./api.client";
 
 export const authService = {
