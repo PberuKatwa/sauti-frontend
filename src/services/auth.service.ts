@@ -1,41 +1,40 @@
-import type { AuthUserApiResponse, ProfileApiResponse } from "../types/auth.types";
-import { apiClient, authorizedApiClient } from "./api.client";
+import type { AuthUser, AuthUserApiResponse, ProfileApiResponse } from "../types/auth.types";
+import { apiClient } from "./api.client";
 
 export const authService = {
 
-  async signUp( firstName:string, lastName:string, email:string, password:string ) {
-    try {
-      const response = await apiClient.post("/auth/register", {
-        firstName,lastName,email,password
-      })
+  async login(email: string, password: string): Promise<AuthUserApiResponse> {
 
-      return response.data;
+    try {
+      const response = await apiClient.post("/auth/login", {
+        email,
+        password
+      });
+
+      const user: AuthUserApiResponse = response.data;
+      return user
+    } catch (error) {
+      throw error
+    }
+
+  },
+
+  async profile(): Promise<ProfileApiResponse> {
+    try {
+      const response = await apiClient.get("/auth/user");
+      const user:ProfileApiResponse = response.data;
+      return user;
     } catch (error) {
       throw error;
     }
   },
 
-  async login( email:string, password:string ) {
+  async logout(): Promise<void>{
     try {
-
-      const response = await apiClient.post("/auth/login", { email, password })
-      const loginRes: AuthUserApiResponse = response.data;
-      if (!loginRes.data?.access_token) throw new Error(`Invalid login, try again`);
-      return loginRes;
-
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  async profile() {
-    try {
-      const response = await authorizedApiClient.get("/auth/profile")
-      const profileData: ProfileApiResponse = response.data;
-      return profileData;
+      await apiClient.post("/auth/logout");
     } catch (error) {
       throw error;
     }
   }
 
-}
+};

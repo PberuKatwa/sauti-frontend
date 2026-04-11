@@ -15,41 +15,25 @@ export interface UpdateUserPayload{
   id: number;
   firstName: string;
   lastName: string;
-  fileId: number | null;
 }
-
-export interface SignedUser {
-  userId: number;
-  role: string;
-  iat?: number;
-  exp?: number;
-};
 
 export interface AuthUser extends BaseUser {
   id: number;
-  access_token: string;
+  email: string;
 };
+
+export interface LoginUser extends AuthUser {
+  password: string;
+}
 
 export interface UserProfile extends BaseUser {
   id: number;
   last_name: string;
   email: string;
-  file_id: number | null;
-  file_url: string | null;
-  signed_url: string | null;
+  role: string;
+  created_at: Date;
 }
 
 export interface UserApiResponse extends ApiResponse<BaseUser> { };
 export interface AuthUserApiResponse extends ApiResponse<AuthUser> { };
 export interface ProfileApiResponse extends ApiResponse<UserProfile> { };
-export type LoginUser = (email: string, password: string) => Promise<UserApiResponse>;
-
-export interface AuthContextType {
-  user: UserProfile | null;
-  token: string | null;
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  login: LoginUser;
-  fetchProfile: () => Promise<UserProfile>;
-  logout: () => void;
-}
