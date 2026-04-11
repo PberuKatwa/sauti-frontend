@@ -1,15 +1,8 @@
 import { BrowserRouter, Routes, Route} from "react-router-dom";
-import { SignupForm } from './pages/SignUpForm';
-import { LoginForm } from './pages/LoginForm';
-import { DashboardLayout } from "./components/layout/DashboardLayout";
-import { Blogs } from "./pages/Blogs";
-import { Home } from "./pages/Home";
-import { Properties } from "./pages/Properties";
-import { Profile } from "./pages/Profile";
-import { Sidebar } from "./components/layout/Sidebar";
+import LoginPage from "./pages/LoginPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthProvider } from "./context/AuthContext";
+import Dashboard from "./pages/Dashboard";
 
 function AppContent() {
   return (
@@ -26,15 +19,8 @@ function AppContent() {
         pauseOnHover
       />
       <Routes>
-        <Route path="/sign-up" element={<SignupForm />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/sidebar" element={<Sidebar />} />
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          <Route index element={<Home />} />
-          <Route path="properties" element={<Properties />} />
-          <Route path="blogs" element={<Blogs />} />
-          <Route path="profile" element={<Profile />} />
-        </Route>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </div>
   );
