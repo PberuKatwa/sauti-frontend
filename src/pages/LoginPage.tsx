@@ -48,7 +48,7 @@ export default function LoginPage() {
         />
 
         {/* Top: Logo */}
-        <div className="relative z-10 mb-10">
+        <div className="relative z-10 mb-2">
           <div className="flex items-center gap-3">
             <img
               src="/logo/sauti.png"
@@ -59,7 +59,7 @@ export default function LoginPage() {
         </div>
 
         {/* Middle: Preamble + Form */}
-        <div className="relative z-10 flex-1 flex flex-col justify-center max-w-[440px] w-full mx-auto">
+        <div className="relative z-10 flex-1 flex flex-col justify-center w-full p-3">
 
           {/* Badge */}
           <div className="inline-flex items-center gap-1.5 mb-5 w-fit bg-[rgba(244,129,32,0.05)] border border-[rgba(244,129,32,0.12)] rounded-full px-2.5 py-1">
@@ -173,7 +173,7 @@ export default function LoginPage() {
       <div className="hidden lg:block lg:w-[48%] relative overflow-hidden bg-[#1E3A8A]">
         {/* Background image */}
         <img
-          src="/logo/back_2.webp"
+          src="/logo/back_56.png"
           alt="AI sales automation"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ opacity: 0.4 }}
