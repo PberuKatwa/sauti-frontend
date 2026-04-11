@@ -1,8 +1,10 @@
-# Cloudflare Design System Documentation
+# Sauti-Cloud Design System Documentation
 
 ## Brand Philosophy
 
-Cloudflare's design philosophy centers on **"Help, Not Bureaucracy"**—reducing friction during moments of user frustration while maintaining technical credibility. The visual identity communicates security, speed, and accessibility without intimidating complexity.
+Sauti-Cloud's design philosophy centers on **"Intelligence, Not Interruption"**—creating seamless AI-driven sales and customer support experiences that feel human, not robotic. The visual identity communicates innovation, trust, and effortless automation without losing the personal touch.
+
+Our AI-powered platform enables businesses to close sales and provide support 24/7 through intelligent bots and web interfaces—no human required in the loop.
 
 ---
 
@@ -12,54 +14,61 @@ Cloudflare's design philosophy centers on **"Help, Not Bureaucracy"**—reducing
 
 | Color | Hex | Tailwind Class | Usage |
 |-------|-----|----------------|-------|
-| **Cloudflare Orange** | `#F48120` | `text-[#F48120]` / `bg-[#F48120]` | Primary brand color, active protection states, CTAs |
-| **Cloudflare Orange Dark** | `#D2630D` | `text-[#D2630D]` / `bg-[#D2630D]` | Hover states, emphasis |
+| **Sauti Orange** | `#F48120` | `text-[#F48120]` / `bg-[#F48120]` | Primary brand color, active bot states, CTAs, energy accents |
+| **Sauti Navy Blue** | `#1E3A8A` | `text-[#1E3A8A]` / `bg-[#1E3A8A]` | Trust, AI intelligence, primary actions, headers |
+| **Sauti Navy Dark** | `#172554` | `text-[#172554]` / `bg-[#172554]` | Hover states, emphasis, deep contrast |
 | **Black** | `#000000` | `text-black` / `bg-black` | Typography, strong contrast |
-| **White** | `#FFFFFF` | `text-white` / `bg-white` | Backgrounds, dark mode text |
+| **White** | `#FFFFFF` | `text-white` / `bg-white` | Backgrounds, cards, clean spaces |
 
 ### Secondary Palette
 
 | Color | Hex | Tailwind Class | Usage |
 |-------|-----|----------------|-------|
-| **Cloudflare Blue** | `#0055FF` | `text-[#0055FF]` / `bg-[#0055FF]` | Links, interactive elements, dark mode CTAs |
-| **Cloudflare Blue Dark** | `#003EC2` | `text-[#003EC2]` / `bg-[#003EC2]` | Hover states for blue elements |
-| **Gray Cloud (Inactive)** | `#9CA3AF` | `text-gray-400` / `bg-gray-400` | Disabled states, inactive protection |
+| **Sauti Blue Accent** | `#3B82F6` | `text-[#3B82F6]` / `bg-[#3B82F6]` | Links, interactive elements, secondary actions |
+| **Sauti Blue Dark** | `#2563EB` | `text-[#2563EB]` / `bg-[#2563EB]` | Hover states for blue elements |
+| **Gray (Inactive)** | `#9CA3AF` | `text-gray-400` / `bg-gray-400` | Disabled states, inactive bots, placeholders |
 
 ### Extended Scale (Modular Color System)
 
-| Step | Light Mode | Dark Mode | Tailwind Usage |
-|------|------------|-----------|----------------|
-| 0 | `#FFFFFF` | `#0A0A0A` | `bg-white` / `dark:bg-[#0A0A0A]` |
-| 1 | `#F9FAFB` | `#1A1A1A` | `bg-gray-50` / `dark:bg-[#1A1A1A]` |
-| 2 | `#F3F4F6` | `#2A2A2A` | `bg-gray-100` / `dark:bg-[#2A2A2A]` |
-| 3 | `#E5E7EB` | `#3A3A3A` | `bg-gray-200` / `dark:bg-[#3A3A3A]` |
-| 4 | `#D1D5DB` | `#4A4A4A` | `bg-gray-300` / `dark:bg-[#4A4A4A]` |
-| 5 | `#9CA3AF` | `#6A6A6A` | `bg-gray-400` / `dark:bg-[#6A6A6A]` |
-| 6 | `#6B7280` | `#8A8A8A` | `bg-gray-500` / `dark:bg-[#8A8A8A]` |
-| 7 | `#4B5563` | `#AAAAAA` | `bg-gray-600` / `dark:bg-[#AAAAAA]` |
-| 8 | `#374151` | `#CACACA` | `bg-gray-700` / `dark:bg-[#CACACA]` |
-| 9 | `#1F2937` | `#EAEAEA` | `bg-gray-800` / `dark:bg-[#EAEAEA]` |
-| 10 | `#111827` | `#FFFFFF` | `bg-gray-900` / `dark:bg-white` |
+| Step | Color | Tailwind Usage |
+|------|-------|----------------|
+| 0 | `#FFFFFF` | `bg-white` |
+| 1 | `#F9FAFB` | `bg-gray-50` |
+| 2 | `#F3F4F6` | `bg-gray-100` |
+| 3 | `#E5E7EB` | `bg-gray-200` |
+| 4 | `#D1D5DB` | `bg-gray-300` |
+| 5 | `#9CA3AF` | `bg-gray-400` |
+| 6 | `#6B7280` | `bg-gray-500` |
+| 7 | `#4B5563` | `bg-gray-600` |
+| 8 | `#374151` | `bg-gray-700` |
+| 9 | `#1F2937` | `bg-gray-800` |
+| 10 | `#111827` | `bg-gray-900` |
 
 ---
 
 ## Color Psychology & Brand Meaning
 
-### Orange (#F48120)
-- **Represents**: Progress, security, creativity, dynamism
-- **Psychological effect**: Energy, warmth, action-oriented
-- **Brand metaphor**: The orange cloud symbolizes protection—as inaccessible as clouds in the sky
-- **Functional use**: Active protection indicator (orange cloud = secured, gray cloud = unprotected)
+### Navy Blue (#1E3A8A) - Primary
+- **Represents**: AI intelligence, trust, professionalism, stability
+- **Psychological effect**: Authority, reliability, technological sophistication
+- **Brand metaphor**: The deep blue represents the depth of our AI capabilities and the trust businesses place in automated sales
+- **Functional use**: Primary actions, headers, AI bot indicators, trust signals
 
-### Blue (#0055FF)
-- **Represents**: Trust, reliability, technology
-- **Psychological effect**: Calm, professional, trustworthy
-- **Usage**: Primary action color in dark mode (preserves brand consistency)
+### Orange (#F48120) - Secondary Accent
+- **Represents**: Energy, action, conversion, warmth
+- **Psychological effect**: Urgency, enthusiasm, human touch
+- **Brand metaphor**: The spark of automated sales happening in real-time
+- **Functional use**: CTAs, active sale states, notifications, accent highlights
+
+### Blue Accent (#3B82F6)
+- **Represents**: Communication, clarity, support
+- **Psychological effect**: Approachable, helpful, responsive
+- **Usage**: Links, chat interfaces, support elements
 
 ### Gray Scale
-- **Represents**: Neutrality, balance, hierarchy
-- **Psychological effect**: Non-intrusive, supportive
-- **Usage**: Backgrounds, borders, inactive states
+- **Represents**: Neutrality, balance, system states
+- **Psychological effect**: Non-intrusive, background support
+- **Usage**: Backgrounds, borders, inactive bot states, secondary information
 
 ---
 
@@ -68,4 +77,4 @@ Cloudflare's design philosophy centers on **"Help, Not Bureaucracy"**—reducing
 ### Font Stack
 
 ```css
-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+font-family: 'Poppins', sans-serif;
