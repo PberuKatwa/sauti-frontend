@@ -2,7 +2,9 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Dashboard from "./pages/Dashboard";
+import { Sidebar } from "./components/layout/Sidebar";
+import { DashboardLayout } from "./components/layout/DashboardLayout";
+import { Products } from "./pages/Products";
 
 function AppContent() {
   return (
@@ -20,7 +22,10 @@ function AppContent() {
       />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/sidebar" element={<Sidebar />} />
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route path="products" element={<Products />} />
+        </Route>
       </Routes>
     </div>
   );

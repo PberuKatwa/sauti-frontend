@@ -58,7 +58,7 @@ export const Products = function () {
 
   const handleDelete = async function (_id: number) {
     try {
-      // Add delete functionality when service is available
+      const response = await ProductsService.trashProduct(_id);
       toast.success("Product deleted successfully");
       getAllProducts(currentPage, limit);
     } catch (error) {

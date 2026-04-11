@@ -1,3 +1,4 @@
+import type { ApiResponse } from "../types/api.types";
 import type { AllProductsApiResponse, CreateProductPayload, SingleProductMinimalApiResponse, UpdateProductPayload } from "../types/product.types"
 import { apiClient } from "./api.client"
 
@@ -38,6 +39,19 @@ export const ProductsService = {
     const products: AllProductsApiResponse = response.data;
     return products;
 
-  }
+  },
+
+  async trashProduct(id: number) {
+    try {
+      const response= await apiClient.delete(
+        `/products/catalog/${id}`
+      )
+
+      const propertyRes: ApiResponse = response.data;
+      return propertyRes;
+    } catch (error) {
+      throw error;
+    }
+  },
 
 }
