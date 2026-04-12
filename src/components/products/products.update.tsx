@@ -123,7 +123,7 @@ export const UpdateProductModal = function ({
   if (!isOpen || !product) return null;
 
   const inputClass =
-    "w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-900 placeholder-gray-400 outline-none bg-white focus:border-[#1E3A8A] focus:ring-2 focus:ring-[#1E3A8A]/20 transition-colors duration-150";
+    "w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-900 placeholder-gray-400 outline-none bg-white focus:border-[#0F172A] focus:ring-2 focus:ring-[#0F172A]/20 transition-colors duration-150";
 
   const labelClass = "text-sm font-medium text-gray-700";
 
@@ -156,9 +156,9 @@ export const UpdateProductModal = function ({
             type="button"
             onClick={handleClose}
             className="w-9 h-9 flex items-center justify-center rounded-lg
-                       text-[#1E3A8A]
-                       hover:bg-[#1E3A8A] hover:text-white
-                       active:bg-[#172554]
+                       text-[#0F172A]
+                       hover:bg-[#0F172A] hover:text-white
+                       active:bg-[#020617]
                        transition-colors duration-150"
           >
             <FontAwesomeIcon icon={faXmark} />
@@ -179,7 +179,7 @@ export const UpdateProductModal = function ({
                 "flex items-center gap-4 px-4 py-4 rounded-lg border border-dashed cursor-pointer transition-colors duration-150",
                 imageUploaded
                   ? "border-[#3B82F6] bg-blue-50"
-                  : "border-gray-300 bg-gray-50 hover:border-[#1E3A8A] hover:bg-blue-50",
+                  : "border-gray-300 bg-gray-50 hover:border-[#0F172A] hover:bg-blue-50",
                 loading ? "opacity-60 pointer-events-none" : "",
               ].join(" ")}
             >
@@ -191,7 +191,7 @@ export const UpdateProductModal = function ({
               ) : imageUploaded ? (
                 <>
                   <FontAwesomeIcon icon={faCircleCheck} className="text-[#3B82F6] text-lg flex-shrink-0" />
-                  <span className="text-sm font-medium text-[#2563EB]">Image replaced successfully</span>
+                  <span className="text-sm font-medium text-[#0F172A]">Image replaced successfully</span>
                 </>
               ) : (
                 <>
@@ -350,7 +350,7 @@ export const UpdateProductModal = function ({
             <button
               type="button"
               onClick={handleClose}
-              className="flex-1 border border-gray-200 text-gray-500 text-sm font-medium px-4 py-2.5 rounded-lg transition-colors duration-150 hover:border-[#1E3A8A] hover:bg-[#1E3A8A] hover:text-white active:bg-[#172554] active:border-[#172554]"
+              className="flex-1 border border-gray-200 text-gray-500 text-sm font-medium px-4 py-2.5 rounded-lg transition-colors duration-150 hover:border-[#0F172A] hover:bg-[#0F172A] hover:text-white active:bg-[#020617] active:border-[#020617]"
             >
               Cancel
             </button>

@@ -60,7 +60,7 @@ export const Products = function () {
 
   const handleDelete = async function (_id: number) {
     try {
-      const response = await ProductsService.trashProduct(_id);
+      await ProductsService.trashProduct(_id);
       toast.success("Product deleted successfully");
       getAllProducts(currentPage, limit);
     } catch (error) {
@@ -190,7 +190,7 @@ export const Products = function () {
                   onClick={() => openUpdateModal(product)}
                   className="flex-1 flex items-center justify-center gap-1.5 py-2 text-xs font-medium rounded-lg
                     border border-gray-200 text-gray-500 bg-white
-                    hover:border-[#3B82F6] hover:bg-blue-50 hover:text-[#1E3A8A]
+                    hover:border-[#3B82F6] hover:bg-blue-50 hover:text-[#0F172A]
                     transition-all duration-150"
                 >
                   <FontAwesomeIcon icon={faEdit} className="w-3 h-3" />

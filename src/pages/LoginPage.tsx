@@ -42,7 +42,7 @@ export default function LoginPage() {
           className="absolute inset-0 pointer-events-none"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(30,58,138,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(30,58,138,0.04) 1px, transparent 1px)",
+              "linear-gradient(rgba(15,23,42,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.04) 1px, transparent 1px)",
             backgroundSize: "28px 28px",
           }}
         />
@@ -51,7 +51,7 @@ export default function LoginPage() {
         <div className="relative z-10 mb-2">
           <div className="flex items-center gap-3">
             <img
-              src="/logo/sauti.png"
+              src="/logo/sauti-main.png"
               alt="Sauti-Cloud"
               className="h-10 w-auto object-contain"
             />
@@ -71,7 +71,7 @@ export default function LoginPage() {
           </div>
 
           {/* Heading */}
-          <h1 className="text-3xl leading-tight mb-2 text-[#1E3A8A] font-bold tracking-tight">
+          <h1 className="text-3xl leading-tight mb-2 text-[#0F172A] font-bold tracking-tight">
             Automate Your Sales<br />
             <span className="text-[#F48120]">24/7 Intelligence</span>
           </h1>
@@ -92,7 +92,7 @@ export default function LoginPage() {
                 key={label}
                 className="flex flex-col gap-0.5 flex-1 min-w-[90px] bg-white border-[1.5px] border-gray-200 rounded-[10px] px-3.5 py-3 shadow-[0_1px_4px_rgba(30,58,138,0.05)]"
               >
-                <span className="text-base text-[#1E3A8A] font-bold">
+                <span className="text-base text-[#0F172A] font-bold">
                   {value}<span className="text-[#F48120]">{highlight}</span>
                 </span>
                 <span className="text-xs text-gray-500 font-normal">{label}</span>
@@ -115,7 +115,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-[13px] rounded-[10px] bg-gray-50 border-[1.5px] border-gray-200 text-sm text-gray-900 outline-none transition-all duration-200 placeholder:text-gray-400 focus:border-[#1E3A8A] focus:bg-white focus:shadow-[0_0_0_3px_rgba(30,58,138,0.08)] font-[inherit]"
+                className="w-full px-4 py-[13px] rounded-[10px] bg-gray-50 border-[1.5px] border-gray-200 text-sm text-gray-900 outline-none transition-all duration-200 placeholder:text-gray-400 focus:border-[#0F172A] focus:bg-white focus:shadow-[0_0_0_3px_rgba(30,58,138,0.08)] font-[inherit]"
               />
             </div>
 
@@ -126,7 +126,7 @@ export default function LoginPage() {
                 </label>
                 <button
                   type="button"
-                  className="text-xs text-gray-400 hover:text-[#1E3A8A] transition-colors bg-transparent border-none cursor-pointer font-[inherit]"
+                  className="text-xs text-gray-400 hover:text-[#0F172A] transition-colors bg-transparent border-none cursor-pointer font-[inherit]"
                 >
                   Forgot password?
                 </button>
@@ -137,14 +137,14 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full px-4 py-[13px] rounded-[10px] bg-gray-50 border-[1.5px] border-gray-200 text-sm text-gray-900 outline-none transition-all duration-200 placeholder:text-gray-400 focus:border-[#1E3A8A] focus:bg-white focus:shadow-[0_0_0_3px_rgba(30,58,138,0.08)] font-[inherit]"
+                className="w-full px-4 py-[13px] rounded-[10px] bg-gray-50 border-[1.5px] border-gray-200 text-sm text-gray-900 outline-none transition-all duration-200 placeholder:text-gray-400 focus:border-[#0F172A] focus:bg-white focus:shadow-[0_0_0_3px_rgba(30,58,138,0.08)] font-[inherit]"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full px-5 py-[13px] mt-1 rounded-[10px] bg-[#1E3A8A] text-white font-bold text-sm flex items-center justify-center gap-2 tracking-[-0.2px] transition-all duration-200 shadow-[0_4px_14px_rgba(30,58,138,0.22)] hover:enabled:bg-[#172554] hover:enabled:-translate-y-px hover:enabled:shadow-[0_6px_20px_rgba(30,58,138,0.30)] active:enabled:translate-y-0 disabled:opacity-70 disabled:cursor-not-allowed font-[inherit]"
+              className="w-full px-5 py-[13px] mt-1 rounded-[10px] bg-[#0F172A] text-white font-bold text-sm flex items-center justify-center gap-2 tracking-[-0.2px] transition-all duration-200 shadow-[0_4px_14px_rgba(15,23,42,0.22)] hover:enabled:bg-[#020617] hover:enabled:-translate-y-px hover:enabled:shadow-[0_6px_20px_rgba(15,23,42,0.30)] active:enabled:translate-y-0 disabled:opacity-70 disabled:cursor-not-allowed font-[inherit]"
             >
               {loading ? (
                 <>
@@ -170,7 +170,7 @@ export default function LoginPage() {
       </div>
 
       {/* ── RIGHT PANEL ── */}
-      <div className="hidden lg:block lg:w-[48%] relative overflow-hidden bg-[#1E3A8A]">
+      <div className="hidden lg:block lg:w-[48%] relative overflow-hidden bg-[#0F172A]">
         {/* Background image */}
         <img
           src="/logo/back_56.png"
@@ -180,7 +180,7 @@ export default function LoginPage() {
         />
 
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[rgba(30,58,138,0.70)] via-[rgba(30,58,138,0.30)] to-transparent pointer-events-none z-[1]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[rgba(15,23,42,0.70)] via-[rgba(15,23,42,0.30)] to-transparent pointer-events-none z-[1]" />
 
         {/* Top-right decorative element */}
         <div className="absolute top-8 right-8 z-10 flex items-center gap-2 px-3 py-2 rounded-xl bg-white/[0.12] backdrop-blur-xl border border-white/20">

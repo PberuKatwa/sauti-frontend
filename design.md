@@ -15,8 +15,8 @@ Our AI-powered platform enables businesses to close sales and provide support 24
 | Color | Hex | Tailwind Class | Usage |
 |-------|-----|----------------|-------|
 | **Sauti Orange** | `#F48120` | `text-[#F48120]` / `bg-[#F48120]` | Primary brand color, active bot states, CTAs, energy accents |
-| **Sauti Navy Blue** | `#1E3A8A` | `text-[#1E3A8A]` / `bg-[#1E3A8A]` | Trust, AI intelligence, primary actions, headers |
-| **Sauti Navy Dark** | `#172554` | `text-[#172554]` / `bg-[#172554]` | Hover states, emphasis, deep contrast |
+| **Sauti Navy Blue** | `#0F172A` | `text-[#0F172A]` / `bg-[#0F172A]` | Trust, AI intelligence, primary actions, headers |
+| **Sauti Navy Dark** | `#020617` | `text-[#020617]` / `bg-[#020617]` | Hover states, emphasis, deep contrast |
 | **Black** | `#000000` | `text-black` / `bg-black` | Typography, strong contrast |
 | **White** | `#FFFFFF` | `text-white` / `bg-white` | Backgrounds, cards, clean spaces |
 
@@ -25,7 +25,7 @@ Our AI-powered platform enables businesses to close sales and provide support 24
 | Color | Hex | Tailwind Class | Usage |
 |-------|-----|----------------|-------|
 | **Sauti Blue Accent** | `#3B82F6` | `text-[#3B82F6]` / `bg-[#3B82F6]` | Links, interactive elements, secondary actions |
-| **Sauti Blue Dark** | `#2563EB` | `text-[#2563EB]` / `bg-[#2563EB]` | Hover states for blue elements |
+| **Sauti Blue Dark** | `#020617` | `text-[#020617]` / `bg-[#020617]` | Hover states for blue elements |
 | **Gray (Inactive)** | `#9CA3AF` | `text-gray-400` / `bg-gray-400` | Disabled states, inactive bots, placeholders |
 
 ### Extended Scale (Modular Color System)
@@ -48,7 +48,7 @@ Our AI-powered platform enables businesses to close sales and provide support 24
 
 ## Color Psychology & Brand Meaning
 
-### Navy Blue (#1E3A8A) - Primary
+### Navy Blue (#0F172A) - Primary
 - **Represents**: AI intelligence, trust, professionalism, stability
 - **Psychological effect**: Authority, reliability, technological sophistication
 - **Brand metaphor**: The deep blue represents the depth of our AI capabilities and the trust businesses place in automated sales

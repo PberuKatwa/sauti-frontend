@@ -31,7 +31,7 @@ export const Sidebar = () => {
       {/* Logo */}
       <div className="px-5 pt-6 pb-5 border-b border-white/10">
         <img
-          src="/logo/sauti.png"
+          src="/logo/sauti-main.png"
           alt="Sauti-Cloud"
           className="h-10 w-auto object-contain"
         />
