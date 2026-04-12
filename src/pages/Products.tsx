@@ -21,6 +21,7 @@ const initialUploadPayload: FullProduct = {
   file_id: null,
   file_url: null,
   inventory: 0,
+  signed_url:null,
   created_at: new Date(),
   metadata: null,
 };
@@ -45,6 +46,7 @@ export const Products = function () {
       setLoading(true);
       const response = await ProductsService.getAllProducts(currentPage, limit);
       const productsData: AllProducts = response.data!;
+      console.log("responseeeee", response)
       setProducts(productsData.products);
       setCurrentPage(productsData.pagination.currentPage);
       setTotalPages(productsData.pagination.totalPages);
@@ -139,9 +141,9 @@ export const Products = function () {
             >
               {/* Image */}
               <div className="relative overflow-hidden h-48 bg-gray-100">
-                {product.file_url ? (
+                {product.signed_url ? (
                   <img
-                    src={product.file_url}
+                  src={product.signed_url}
                     alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
