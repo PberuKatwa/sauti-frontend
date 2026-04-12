@@ -6,10 +6,12 @@ export const ProductsService = {
 
   async createProduct(payload:CreateProductPayload):Promise<SingleProductMinimalApiResponse> {
 
+    payload.user_id = 1;
+    console.log("userrr id", payload)
     const response = await apiClient.post(
       "products/catalog",
       payload,
-      { headers: { "Content-Type": "multipart/form-data", }}
+      { headers: { "Content-Type": "application/json", } }
     )
 
     const product: SingleProductMinimalApiResponse = response.data;
@@ -21,7 +23,7 @@ export const ProductsService = {
     await apiClient.post(
       "products/catalog/update",
       payload,
-      { headers: { "Content-Type": "multipart/form-data", }}
+      { headers: { "Content-Type": "application/json", }}
     )
 
   },
