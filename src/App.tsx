@@ -5,6 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { Sidebar } from "./components/layout/Sidebar";
 import { DashboardLayout } from "./components/layout/DashboardLayout";
 import { Products } from "./pages/Products";
+import Test from "./pages/Test";
+import TestMemo from "./pages/TestMemo";
 
 function AppContent() {
   return (
@@ -21,6 +23,9 @@ function AppContent() {
         pauseOnHover
       />
       <Routes>
+        <Route path="/test" element={<Test />} />
+        <Route path="/test-memo" element={<TestMemo />}/>
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sidebar" element={<Sidebar />} />
         <Route path="/dashboard" element={<DashboardLayout />}>
