@@ -15,7 +15,7 @@ Our AI-powered platform enables businesses to close sales and provide support 24
 | Color | Hex | Tailwind Class | Usage |
 |-------|-----|----------------|-------|
 | **Sauti Orange** | `#F48120` | `text-[#F48120]` / `bg-[#F48120]` | Primary brand color, active bot states, CTAs, energy accents |
-| **Sauti Navy Blue** | `#0F172A` | `text-[#0F172A]` / `bg-[#0F172A]` | Trust, AI intelligence, primary actions, headers |
+| **Sauti Navy Blue** | `#12245B` | `text-[#12245B]` / `bg-[#12245B]` | Backgrounds, primary buttons, headings. |
 | **Sauti Navy Dark** | `#020617` | `text-[#020617]` / `bg-[#020617]` | Hover states, emphasis, deep contrast |
 | **Black** | `#000000` | `text-black` / `bg-black` | Typography, strong contrast |
 | **White** | `#FFFFFF` | `text-white` / `bg-white` | Backgrounds, cards, clean spaces |
