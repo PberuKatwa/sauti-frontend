@@ -32,185 +32,416 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex bg-white font-[Poppins,sans-serif]">
+    <div
+      className="min-h-screen bg-white flex justify-center items-center font-sans"
+      style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
+    >
+      <div
+        className="max-w-screen-7xl w-full m-0 sm:m-10 bg-white border border-gray-200 sm:rounded-2xl flex flex-1 shadow-sm overflow-hidden"
+        style={{ minHeight: "600px" }}
+      >
+        {/* ── LEFT PANEL ── */}
+        <div className="lg:w-1/2 xl:w-5/12 p-8 sm:p-12 flex flex-col justify-between relative">
+          <div className="grid-bg" />
 
-      {/* ── LEFT PANEL ── */}
-      <div className="relative flex flex-col w-full lg:w-[52%] px-10 py-10 overflow-y-auto">
-
-        {/* Grid background */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(15,23,42,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.04) 1px, transparent 1px)",
-            backgroundSize: "28px 28px",
-          }}
-        />
-
-        {/* Top: Logo */}
-        <div className="relative z-10 mb-2">
-          <div className="flex items-center gap-3">
+          {/* Top: Logo */}
+          <div className="relative z-10">
             <img
               src="/logo/sauti-main.png"
               alt="Sauti-Cloud"
-              className="h-10 w-auto object-contain"
+              className="object-contain"
+              style={{ height: 40, maxHeight: 40, width: "auto" }}
             />
+          </div>
+
+          {/* Middle: Preamble + Form */}
+          <div className="relative z-10 flex-1 flex flex-col justify-center py-8">
+            {/* AI Badge */}
+            <div className="ai-pill mb-5" style={{ width: "fit-content" }}>
+              <span className="pulse-dot" />
+              <span
+                className="font-mono-ui"
+                style={{
+                  fontSize: "10px",
+                  fontWeight: 600,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: "#12245B",
+                }}
+              >
+                AI-Powered Sales
+              </span>
+            </div>
+
+            {/* Heading */}
+            <h1
+              style={{
+                fontSize: "26px",
+                fontWeight: 700,
+                letterSpacing: "-0.6px",
+                lineHeight: 1.2,
+                color: "#12245B",
+                marginBottom: "10px",
+              }}
+            >
+              Automate Your Sales
+              <br />
+              <span style={{ color: "#F48120" }}>24/7 Intelligence</span>
+            </h1>
+
+            {/* Preamble */}
+            <p
+              style={{
+                fontSize: "13px",
+                lineHeight: 1.65,
+                color: "#6B7280",
+                marginBottom: "24px",
+                maxWidth: "360px",
+              }}
+            >
+              Close deals and provide support around the clock with AI bots that
+              understand your customers—no human in the loop required.
+            </p>
+
+            {/* Stat chips */}
+            <div style={{ display: "flex", gap: "10px", marginBottom: "28px" }}>
+              <div className="stat-card">
+                <span
+                  style={{
+                    fontSize: "17px",
+                    fontWeight: 700,
+                    color: "#12245B",
+                    letterSpacing: "-0.5px",
+                  }}
+                >
+                  24/7<span style={{ color: "#F48120" }}>+</span>
+                </span>
+                <span
+                  className="font-mono-ui"
+                  style={{
+                    fontSize: "9px",
+                    fontWeight: 500,
+                    color: "#9CA3AF",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.07em",
+                  }}
+                >
+                  Availability
+                </span>
+              </div>
+              <div className="stat-card">
+                <span
+                  style={{
+                    fontSize: "17px",
+                    fontWeight: 700,
+                    color: "#12245B",
+                    letterSpacing: "-0.5px",
+                  }}
+                >
+                  40<span style={{ color: "#F48120" }}>%</span>
+                </span>
+                <span
+                  className="font-mono-ui"
+                  style={{
+                    fontSize: "9px",
+                    fontWeight: 500,
+                    color: "#9CA3AF",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.07em",
+                  }}
+                >
+                  Higher Conversion
+                </span>
+              </div>
+              <div className="stat-card">
+                <span
+                  style={{
+                    fontSize: "17px",
+                    fontWeight: 700,
+                    color: "#12245B",
+                    letterSpacing: "-0.5px",
+                  }}
+                >
+                  0<span style={{ color: "#F48120" }}>s</span>
+                </span>
+                <span
+                  className="font-mono-ui"
+                  style={{
+                    fontSize: "9px",
+                    fontWeight: 500,
+                    color: "#9CA3AF",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.07em",
+                  }}
+                >
+                  Wait Time
+                </span>
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div
+              style={{ borderBottom: "1.5px solid #E5E7EB", marginBottom: "28px" }}
+            />
+
+            {/* Form */}
+            <form
+              onSubmit={handleSubmit}
+              style={{ display: "flex", flexDirection: "column", gap: "12px" }}
+            >
+              <div>
+                <label
+                  className="font-mono-ui"
+                  style={{
+                    display: "block",
+                    fontSize: "10px",
+                    fontWeight: 600,
+                    letterSpacing: "0.07em",
+                    textTransform: "uppercase",
+                    color: "#9CA3AF",
+                    marginBottom: "6px",
+                  }}
+                >
+                  Business Email
+                </label>
+                <input
+                  type="email"
+                  className="input-field"
+                  placeholder="you@sauti-cloud.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: "6px",
+                  }}
+                >
+                  <label
+                    className="font-mono-ui"
+                    style={{
+                      fontSize: "10px",
+                      fontWeight: 600,
+                      letterSpacing: "0.07em",
+                      textTransform: "uppercase",
+                      color: "#9CA3AF",
+                    }}
+                  >
+                    Password
+                  </label>
+                  <button
+                    type="button"
+                    className="font-mono-ui"
+                    style={{
+                      fontSize: "11px",
+                      color: "#9CA3AF",
+                      textDecoration: "none",
+                      transition: "color 0.2s",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.color = "#12245B")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.color = "#9CA3AF")
+                    }
+                  >
+                    Forgot password?
+                  </button>
+                </div>
+                <input
+                  type="password"
+                  className="input-field"
+                  placeholder="••••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="btn-signin"
+                disabled={loading}
+                style={{ marginTop: "4px" }}
+              >
+                {loading ? (
+                  <>
+                    <span className="spinner" />
+                    <span>Signing in…</span>
+                  </>
+                ) : (
+                  <>
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                      <polyline points="10 17 15 12 10 7" />
+                      <line x1="15" y1="12" x2="3" y2="12" />
+                    </svg>
+                    <span>Sign In</span>
+                  </>
+                )}
+              </button>
+            </form>
+          </div>
+
+          {/* Footer */}
+          <div className="relative z-10">
+            <p
+              className="font-mono-ui"
+              style={{ fontSize: "11px", color: "#D1D5DB", textAlign: "center" }}
+            >
+              AI-powered sales automation · sauti-cloud.com
+            </p>
           </div>
         </div>
 
-        {/* Middle: Preamble + Form */}
-        <div className="relative z-10 flex-1 flex flex-col justify-center w-full p-3">
+        {/* ── RIGHT PANEL ── */}
+        <div
+          className="right-panel flex-1 hidden lg:block"
+          style={{ background: "#12245B", position: "relative" }}
+        >
+          {/* Background image */}
+          <img
+            src="/logo/back_56.png"
+            alt="Sauti AI sales automation"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ opacity: 0.55 }}
+          />
 
-          {/* Badge */}
-          <div className="inline-flex items-center gap-1.5 mb-5 w-fit bg-[rgba(244,129,32,0.05)] border border-[rgba(244,129,32,0.12)] rounded-full px-2.5 py-1">
-            {/* Pulse dot */}
-            <span className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_0_3px_rgba(34,197,94,0.3)] animate-pulse flex-shrink-0" />
-            <span className="text-xs font-medium text-[#F48120]">
-              AI-Powered Sales
+          {/* Top-right decorative element */}
+          <div
+            style={{
+              position: "absolute",
+              top: 28,
+              right: 28,
+              zIndex: 2,
+              background: "rgba(255,255,255,0.1)",
+              backdropFilter: "blur(12px)",
+              border: "1px solid rgba(255,255,255,0.18)",
+              borderRadius: "10px",
+              padding: "8px 14px",
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+            }}
+          >
+            <span className="pulse-dot" />
+            <span
+              className="font-mono-ui"
+              style={{
+                fontSize: "10px",
+                fontWeight: 600,
+                letterSpacing: "0.08em",
+                color: "rgba(255,255,255,0.9)",
+                textTransform: "uppercase",
+              }}
+            >
+              Live Bot Activity
             </span>
           </div>
 
-          {/* Heading */}
-          <h1 className="text-3xl leading-tight mb-2 text-[#0F172A] font-bold tracking-tight">
-            Automate Your Sales<br />
-            <span className="text-[#F48120]">24/7 Intelligence</span>
-          </h1>
-
-          {/* Preamble */}
-          <p className="text-sm mb-6 leading-relaxed text-gray-500 font-normal">
-            Close deals and provide support around the clock with AI bots that understand your customers—no human in the loop required.
-          </p>
-
-          {/* Stat chips */}
-          <div className="flex gap-3 mb-6 flex-wrap">
-            {[
-              { value: "24/7", label: "Availability", highlight: "+" },
-              { value: "40", label: "Higher Conversion", highlight: "%" },
-              { value: "0", label: "Wait Time", highlight: "s" },
-            ].map(({ value, label, highlight }) => (
-              <div
-                key={label}
-                className="flex flex-col gap-0.5 flex-1 min-w-[90px] bg-white border-[1.5px] border-gray-200 rounded-[10px] px-3.5 py-3 shadow-[0_1px_4px_rgba(30,58,138,0.05)]"
-              >
-                <span className="text-base text-[#0F172A] font-bold">
-                  {value}<span className="text-[#F48120]">{highlight}</span>
-                </span>
-                <span className="text-xs text-gray-500 font-normal">{label}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Divider */}
-          <div className="w-full mb-6 h-px bg-gray-200" />
-
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-gray-500 font-medium uppercase tracking-wider">
-                Business Email
-              </label>
-              <input
-                type="email"
-                placeholder="you@company.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full px-4 py-[13px] rounded-[10px] bg-gray-50 border-[1.5px] border-gray-200 text-sm text-gray-900 outline-none transition-all duration-200 placeholder:text-gray-400 focus:border-[#0F172A] focus:bg-white focus:shadow-[0_0_0_3px_rgba(30,58,138,0.08)] font-[inherit]"
-              />
-            </div>
-
-            <div className="flex flex-col gap-1.5">
-              <div className="flex items-center justify-between">
-                <label className="text-xs text-gray-500 font-medium uppercase tracking-wider">
-                  Password
-                </label>
-                <button
-                  type="button"
-                  className="text-xs text-gray-400 hover:text-[#0F172A] transition-colors bg-transparent border-none cursor-pointer font-[inherit]"
-                >
-                  Forgot password?
-                </button>
-              </div>
-              <input
-                type="password"
-                placeholder="••••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="w-full px-4 py-[13px] rounded-[10px] bg-gray-50 border-[1.5px] border-gray-200 text-sm text-gray-900 outline-none transition-all duration-200 placeholder:text-gray-400 focus:border-[#0F172A] focus:bg-white focus:shadow-[0_0_0_3px_rgba(30,58,138,0.08)] font-[inherit]"
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full px-5 py-[13px] mt-1 rounded-[10px] bg-[#0F172A] text-white font-bold text-sm flex items-center justify-center gap-2 tracking-[-0.2px] transition-all duration-200 shadow-[0_4px_14px_rgba(15,23,42,0.22)] hover:enabled:bg-[#020617] hover:enabled:-translate-y-px hover:enabled:shadow-[0_6px_20px_rgba(15,23,42,0.30)] active:enabled:translate-y-0 disabled:opacity-70 disabled:cursor-not-allowed font-[inherit]"
+          {/* Bottom overlay card */}
+          <div className="overlay-card">
+            <p
+              className="font-mono-ui"
+              style={{
+                fontSize: "9px",
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.5)",
+                marginBottom: "12px",
+              }}
             >
-              {loading ? (
-                <>
-                  <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Signing in…
-                </>
-              ) : (
-                <>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M6 3L11 8L6 13" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  Sign In
-                </>
-              )}
-            </button>
-          </form>
+              What you get access to
+            </p>
 
-          {/* Footer */}
-          <p className="text-xs text-center mt-6 text-gray-400">
-            AI-powered sales automation · sauti-cloud.com
-          </p>
-        </div>
-      </div>
-
-      {/* ── RIGHT PANEL ── */}
-      <div className="hidden lg:block lg:w-[48%] relative overflow-hidden bg-[#0F172A]">
-        {/* Background image */}
-        <img
-          src="/logo/back_56.png"
-          alt="AI sales automation"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ opacity: 0.4 }}
-        />
-
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[rgba(15,23,42,0.70)] via-[rgba(15,23,42,0.30)] to-transparent pointer-events-none z-[1]" />
-
-        {/* Top-right decorative element */}
-        <div className="absolute top-8 right-8 z-10 flex items-center gap-2 px-3 py-2 rounded-xl bg-white/[0.12] backdrop-blur-xl border border-white/20">
-          <span className="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0 animate-pulse" />
-          <span className="text-white text-xs font-medium">Live Bot Activity</span>
-        </div>
-
-        {/* Bottom overlay card */}
-        <div className="absolute bottom-8 left-8 right-8 z-10 text-white bg-white/[0.10] backdrop-blur-xl border border-white/20 rounded-[14px] px-5 py-[18px]">
-          <p className="text-xs mb-3 text-white/60 font-medium uppercase tracking-[0.05em]">
-            Platform Capabilities
-          </p>
-
-          {[
-            "Conversational AI sales bots",
-            "Real-time sales analytics & tracking",
-            "Automated customer support",
-          ].map((feature) => (
-            <div key={feature} className="flex items-center gap-2 mb-2 last:mb-0">
-              <div className="flex items-center justify-center flex-shrink-0 w-7 h-7 rounded-[7px] bg-[rgba(244,129,32,0.30)]">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M2.5 7L5.5 10L11.5 4" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            <div className="feature-row">
+              <div className="feature-icon">
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#F48120"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 16v-4M12 8h.01" />
                 </svg>
               </div>
-              <span className="text-sm text-white/90 font-normal">{feature}</span>
+              <span
+                style={{ fontSize: "12px", color: "rgba(255,255,255,0.85)", fontWeight: 500 }}
+              >
+                Conversational AI sales bots
+              </span>
             </div>
-          ))}
+
+            <div className="feature-row">
+              <div className="feature-icon">
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#F48120"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </div>
+              <span
+                style={{ fontSize: "12px", color: "rgba(255,255,255,0.85)", fontWeight: 500 }}
+              >
+                Real-time sales analytics & tracking
+              </span>
+            </div>
+
+            <div className="feature-row">
+              <div className="feature-icon">
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#F48120"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                </svg>
+              </div>
+              <span
+                style={{ fontSize: "12px", color: "rgba(255,255,255,0.85)", fontWeight: 500 }}
+              >
+                Automated customer support 24/7
+              </span>
+            </div>
+          </div>
         </div>
       </div>
-
     </div>
   );
 }
