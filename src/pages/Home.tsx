@@ -1,5 +1,7 @@
+import { useState } from "react";
+import { toast } from "react-toastify";
 import OrderFilters from "../components/filters/orders.filters";
-import type { FullOrderFilters, MonthlyOrderStat, TotalOrdersStats } from "../types/orders.types";
+import type { BaseOrderFilters, FullOrderFilters, MonthlyOrderStat, TotalOrdersStats } from "../types/orders.types";
 import type { MetricItem } from '../components/cards/metrics.cards';
 import MetricsGrid from "../components/cards/metrics.cards";
 import {
@@ -11,14 +13,16 @@ import {
   faCheckCircle
 } from '@fortawesome/free-solid-svg-icons';
 import MonthlySalesChart from "../components/charts/monthlyOrders.chart";
-import { useState } from "react";
+import { DashboardService } from "../services/dashboard.service";
+
+
 
 const OrderStatsTemplate: TotalOrdersStats = {
   count: 0,
   totalValue: 0
 };
 
-const monthlyData: MonthlyOrderStat[] = [
+const MonthlyDataStats: MonthlyOrderStat[] = [
   { month: 1, monthName: "Jan", totalValue: 168000, orderCount: 45 },
   { month: 2, monthName: "Feb", totalValue: 385000, orderCount: 89 },
   { month: 3, monthName: "Mar", totalValue: 201000, orderCount: 52 },
@@ -37,7 +41,43 @@ export default function Home() {
 
   const [orderStats, setOrderStats] = useState<TotalOrdersStats>(OrderStatsTemplate);
   const [totalCLients, setTotalClients] = useState<number>(0);
-  const [monthlyStats, setMonthlyStats] = useState<MonthlyOrderStat[]>();
+  const [monthlyStats, setMonthlyStats] = useState<MonthlyOrderStat[]>(MonthlyDataStats);
+  const [loading, setLoading] = useState(true);
+
+  const getDashboardStats = async (filters:BaseOrderFilters)=>{
+    try {
+      setLoading(true);
+
+      const [statsOrder, statsClients, statsMonthly] = await Promise.all([
+        DashboardService.getTotalOrderStats(filters),
+        DashboardService.getTotalClients(filters.startDate, filters.endDate),
+        DashboardService.getMonthlyOrderStats()
+      ]);
+
+      const metricss: MetricItem[] = [
+        {
+          label: `Total Orders`,
+          value: statsOrder.data.count,
+          icon:faBox
+        },
+        {
+          label: `Order Value`,
+          value: statsOrder.data.totalValue,
+          icon:faDollarSign
+        },        {
+          label: `Total Customers`,
+          value: statsClients.data.count,
+          icon:faUsers
+        },
+      ]
+
+    } catch (error) {
+      console.error("Failed to fetch dashboard stats", error);
+      toast.error(`${error}`);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const handleFilterChange = (filters: FullOrderFilters) => {
     console.log('Full filters:', filters);

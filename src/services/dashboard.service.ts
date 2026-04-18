@@ -28,7 +28,7 @@ export const DashboardService = {
 
   },
 
-  async getTotalClients(startDate:string, endDate:string) {
+  async getTotalClients(startDate?:string, endDate?:string) {
 
     const params = new URLSearchParams();
 
