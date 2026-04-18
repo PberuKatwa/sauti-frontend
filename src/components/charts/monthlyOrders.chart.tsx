@@ -1,13 +1,7 @@
 import React from 'react';
 import Chart from "react-apexcharts";
 import type { ApexOptions } from "apexcharts";
-
-export interface MonthlyOrderStat {
-  month: number;
-  monthName: string;
-  totalValue: number;
-  orderCount: number;
-}
+import type { MonthlyOrderStat } from '../../types/orders.types';
 
 interface MonthlySalesChartProps {
   data: MonthlyOrderStat[];
