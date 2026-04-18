@@ -6,6 +6,8 @@ import { ProductsService } from "../services/products.service";
 import type { AllProducts, FullProduct } from "../types/product.types";
 import { CreateProductModal } from "../components/products/product.create";
 import { UpdateProductModal } from "../components/products/products.update";
+import OrderFilters from "../components/filters/orders.filters";
+import type { FullOrderFilters } from "../types/orders.types";
 
 const initialUploadPayload: FullProduct = {
   id: 0,
@@ -76,8 +78,27 @@ export const Products = function () {
     [currentPage, limit]
   );
 
+  const handleFilterChange = (filters: FullOrderFilters) => {
+    console.log('Full filters:', filters);
+  };
+
+  const handleReset = () => {
+    console.log('Filters reset');
+  };
+
   return (
     <div className="min-h-screen bg-white px-3 py-8 font-[Poppins]">
+
+      <OrderFilters
+        variant="full"
+        initialFilters={{
+          statuses: ['pending_delivery'],
+          startDate: '2024-01-01'
+        }}
+        onFilterChange={handleFilterChange}
+        onReset={handleReset}
+      />
+
       {/* Page Header */}
       <div className="flex items-center justify-between mb-10">
         <div>
