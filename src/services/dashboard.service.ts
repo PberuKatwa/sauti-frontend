@@ -1,5 +1,5 @@
 import type { ApiResponse } from "../types/api.types";
-import type { BaseOrderFilters, TotalOrdersStatsApiResponse } from "../types/orders.types";
+import type { BaseOrderFilters, MonthlyOrdersStatsApiResponse, TotalOrdersStatsApiResponse } from "../types/orders.types";
 import { apiClient } from "./api.client";
 
 export const DashboardService = {
@@ -45,6 +45,26 @@ export const DashboardService = {
 
     const totalClients: ApiResponse = response.data;
     return totalClients;
+  },
+
+  async getMonthlyOrderStats(year?: string, status?: string) {
+
+
+    const params = new URLSearchParams();
+
+    if (year) {
+      params.append('year', year);
+    }
+
+    if (status) {
+      params.append('endDate', status);
+    }
+
+    const allParams = params.toString()
+    const response = await apiClient.get(`/dashboard/order/monthly?${allParams}`);
+
+    const monthlyOrders: MonthlyOrdersStatsApiResponse = response.data;
+    return monthlyOrders;
   }
 
 
