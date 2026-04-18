@@ -72,24 +72,89 @@ export default function Home() {
   ];
 
   return (
-    <div>
-      <h1>HOMEEEEEE</h1>
-      <OrderFilters
-        variant="base"
-        initialFilters={{
-          statuses: ['pending_delivery'],
-          startDate: '2024-01-01'
-        }}
-        onFilterChange={handleFilterChange}
-        onReset={handleReset}
-      />
+    <div className="min-h-screen bg-gray-50 font-['Poppins',sans-serif]">
+      {/* Main Content Container */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-      <MetricsGrid data={metricsData} />
+        {/* Page Header */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-[#12245B]">
+            Dashboard Overview
+          </h1>
+          <p className="mt-2 text-gray-500 text-sm">
+            Monitor your business performance and manage orders in real-time
+          </p>
+        </div>
 
-      <MonthlySalesChart
-        data={monthlyData}
-        currency="KES"
-      />
+        {/* Filters Section */}
+        <section className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-[#12245B]">
+              Filter Orders
+            </h2>
+            <span className="text-sm text-gray-400">
+              Refine your view
+            </span>
+          </div>
+          <OrderFilters
+            variant="base"
+            initialFilters={{
+              statuses: ['pending_delivery'],
+              startDate: '2024-01-01'
+            }}
+            onFilterChange={handleFilterChange}
+            onReset={handleReset}
+          />
+        </section>
+
+        {/* Key Metrics Section */}
+        <section className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-[#12245B]">
+              Key Metrics
+            </h2>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-[#F48120] animate-pulse"></div>
+              <span className="text-sm text-gray-500">Live updates</span>
+            </div>
+          </div>
+          <MetricsGrid data={metricsData} />
+        </section>
+
+        {/* Sales Chart Section */}
+        <section className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-[#12245B]">
+              Sales Performance
+            </h2>
+            <button className="text-sm text-[#3B82F6] hover:text-[#12245B] transition-colors font-medium">
+              View Detailed Report
+            </button>
+          </div>
+          <MonthlySalesChart
+            data={monthlyData}
+            currency="KES"
+          />
+        </section>
+
+        {/* Quick Actions Footer */}
+        <section className="mt-12 pt-6 border-t border-gray-200">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h3 className="text-sm font-semibold text-[#12245B]">
+                Need to manage orders?
+              </h3>
+              <p className="text-sm text-gray-500 mt-1">
+                Access your complete order management system
+              </p>
+            </div>
+            <button className="px-6 py-2.5 bg-[#F48120] text-white text-sm font-medium rounded-lg hover:bg-[#e67310] transition-all duration-200 shadow-sm hover:shadow-md">
+              View All Orders
+            </button>
+          </div>
+        </section>
+
+      </div>
     </div>
   )
 }
