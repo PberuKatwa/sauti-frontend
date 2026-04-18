@@ -7,6 +7,7 @@ import { DashboardLayout } from "./components/layout/DashboardLayout";
 import { Products } from "./pages/Products";
 import Test from "./pages/Test";
 import TestMemo from "./pages/TestMemo";
+import Home from "./pages/Home";
 
 function AppContent() {
   return (
@@ -29,6 +30,7 @@ function AppContent() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sidebar" element={<Sidebar />} />
         <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route path="" element={<Home />}/>
           <Route path="products" element={<Products />} />
         </Route>
       </Routes>
