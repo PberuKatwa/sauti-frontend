@@ -20,7 +20,7 @@ export const DashboardService = {
     }
 
     const allParams = params.toString()
-    const response = await apiClient.get(`/products/?${allParams}`);
+    const response = await apiClient.get(`/dashboard/order/stats?${allParams}`);
 
     const orderStats: TotalOrdersStatsApiResponse = response.data;
     return orderStats;
