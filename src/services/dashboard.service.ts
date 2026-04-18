@@ -1,3 +1,4 @@
+import type { ApiResponse } from "../types/api.types";
 import type { BaseOrderFilters, TotalOrdersStatsApiResponse } from "../types/orders.types";
 import { apiClient } from "./api.client";
 
@@ -25,6 +26,25 @@ export const DashboardService = {
     const orderStats: TotalOrdersStatsApiResponse = response.data;
     return orderStats;
 
+  },
+
+  async getTotalClients(startDate:string, endDate:string) {
+
+    const params = new URLSearchParams();
+
+    if (startDate) {
+      params.append('startDate', startDate);
+    }
+
+    if (endDate) {
+      params.append('endDate', endDate);
+    }
+
+    const allParams = params.toString()
+    const response = await apiClient.get(`/dashboard/client/stats?${allParams}`);
+
+    const totalClients: ApiResponse = response.data;
+    return totalClients;
   }
 
 
