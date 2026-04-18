@@ -41,7 +41,12 @@ export default function LoginPage() {
         style={{ minHeight: "600px" }}
       >
         {/* ── LEFT PANEL ── */}
-        <div className="lg:w-1/2 xl:w-5/12 p-8 sm:p-12 flex flex-col justify-between relative">
+        <div
+          className="lg:w-1/2 xl:w-5/12 p-8 sm:p-12 flex flex-col justify-between relative"
+          style={{
+            background: "linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%)",
+          }}
+        >
           <div className="grid-bg" />
 
           {/* Top: Logo */}
