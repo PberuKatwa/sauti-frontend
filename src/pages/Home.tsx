@@ -58,11 +58,17 @@ const MetricsSampleData: MetricItem[] = [
 
 export default function Home() {
 
-  const [orderStats, setOrderStats] = useState<TotalOrdersStats>(OrderStatsTemplate);
-  const [totalCLients, setTotalClients] = useState<number>(0);
+  const { startDate, endDate } = getDateRange(32);
+
+  const startFilters: BaseOrderFilters = {
+    startDate,
+    endDate,
+    statuses:['pending_delivery']
+  }
+
   const [monthlyStats, setMonthlyStats] = useState<MonthlyOrderStat[]>(MonthlySampleData);
   const [metrics, setMetrics] = useState<MetricItem[]>(MetricsSampleData);
-
+  const [filters,setFilters]= useState<BaseOrderFilters>(startFilters)
   const [loading, setLoading] = useState(true);
 
   const getDashboardStats = async (filters:BaseOrderFilters)=>{
@@ -105,7 +111,7 @@ export default function Home() {
   }
 
   const handleFilterChange = (filters: BaseOrderFilters) => {
-    console.log('Full filters:', filters);
+    setFilters(filters);
   };
 
   const handleReset = () => {
@@ -114,16 +120,8 @@ export default function Home() {
 
   useEffect(
     () => {
-      const { startDate, endDate } = getDateRange(32);
-
-      const startFilters: BaseOrderFilters = {
-        startDate,
-        endDate,
-        statuses:['pending_delivery']
-      }
-
-      getDashboardStats(startFilters)
-    },[metrics,monthlyStats]
+      getDashboardStats(filters)
+    },[filters]
   )
 
 
@@ -154,10 +152,7 @@ export default function Home() {
           </div>
           <OrderFilters
             variant="base"
-            initialFilters={{
-              statuses: ['pending_delivery'],
-              startDate: '2024-01-01'
-            }}
+            initialFilters={filters}
             onFilterChange={handleFilterChange}
             onReset={handleReset}
           />
