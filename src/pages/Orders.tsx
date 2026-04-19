@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import type { AdminOrderRow, BaseOrderFilters, FullOrderFilters, OrderProfile, OrderStatus } from "../types/orders.types";
 import { OrdersService } from "../services/orders.service";
@@ -6,6 +6,7 @@ import { getDateRange } from "../utils/getDateRange";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash,faEye } from "@fortawesome/free-solid-svg-icons";
 import type { ColumnType } from "../components/tables/basic.table";
+import { SautiCloudLoader } from "../components/spinners/sauti.loader";
 
 const OrderFallback: AdminOrderRow[] = [
   {
@@ -78,7 +79,25 @@ export default function Orders() {
 
   }
 
-  const userColumns: ColumnType[] = [
+  const handleFilterChange = (filters: BaseOrderFilters) => {
+    setFilters(filters);
+  };
+
+  const handleReset = () => {
+    console.log('Filters reset');
+  };
+
+  useEffect(
+    () => {
+      getAllOrders()
+    },[filters,currentPage,limit]
+  )
+
+  if (loading) {
+    return <SautiCloudLoader/>
+  }
+
+  const orderColumns: ColumnType[] = [
     {
       type: "text",
       key: "order_number",
