@@ -1,4 +1,4 @@
-import type { AllAdminOrdersApiResponse, FullOrderFilters } from "../types/orders.types";
+import type { AllAdminOrdersApiResponse, FullOrderFilters, UpdateStatusPayload } from "../types/orders.types";
 import { apiClient } from "./api.client";
 
 
@@ -32,6 +32,16 @@ export const OrdersService = {
 
     const orders: AllAdminOrdersApiResponse = response.data;
     return orders;
+  },
+
+  async updateStatus(payload: UpdateStatusPayload) {
+
+    const response = await apiClient.patch(
+      "products/catalog",
+      payload,
+      { headers: { "Content-Type": "application/json", } }
+    )
+
   }
 
 }
