@@ -14,6 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import MonthlySalesChart from "../components/charts/monthlyOrders.chart";
 import { DashboardService } from "../services/dashboard.service";
+import { getDateRange } from "../utils/getDateRange";
 
 
 
@@ -113,7 +114,15 @@ export default function Home() {
 
   useEffect(
     () => {
-      getDashboardStats({})
+      const { startDate, endDate } = getDateRange(32);
+
+      const startFilters: BaseOrderFilters = {
+        startDate,
+        endDate,
+        statuses:['pending_delivery']
+      }
+
+      getDashboardStats(startFilters)
     },[metrics,monthlyStats]
   )
 
