@@ -32,11 +32,17 @@ export const Sidebar = () => {
     >
       {/* Logo */}
       <div className="px-5 pt-6 pb-5 border-b border-white/10">
-        <img
-          src="/logo/sauti-main.png"
-          alt="Sauti-Cloud"
-          className="h-10 w-auto object-contain"
-        />
+        <div className="flex items-center gap-3">
+          <img
+            src="/logo/sauti-main.png"
+            alt="Sauti-Cloud"
+            className="h-10 w-auto object-contain"
+          />
+          <span className="font-['Poppins'] text-sm font-bold leading-tight">
+            <span className="text-white">Sauti</span>
+            <span className="text-[#F48120]"> Cloud</span>
+          </span>
+        </div>
       </div>
 
       {/* Nav */}
