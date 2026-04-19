@@ -5,8 +5,16 @@ import { apiClient } from "./api.client";
 
 export const OrdersService = {
 
-  async getAllOrders(filters:FullOrderFilters):Promise<AllAdminOrdersApiResponse> {
+  async getAllOrders(page: number, limit: number, filters: FullOrderFilters): Promise<AllAdminOrdersApiResponse> {
     const params = new URLSearchParams();
+
+    if (page) {
+      params.append('page', page.toString());
+    }
+
+    if (limit) {
+      params.append('limit', limit.toString());
+    }
 
     if (filters.startDate) {
       params.append('startDate', filters.startDate);
