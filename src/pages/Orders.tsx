@@ -14,7 +14,12 @@ const OrderFallback: AdminOrderRow[] = [
     total: 0,
     delivery_status: "pending_delivery",
     client_phone: 0,
-    created_at:""
+    created_at: "",
+    latitude: "",
+    longitude: "",
+    order_contact: 0,
+    delivery_type: "immediate",
+    special_instructions:""
   }
 ]
 
@@ -74,54 +79,64 @@ export default function Orders() {
   }
 
   const userColumns: ColumnType[] = [
-      {
-        type: "text",
-        key: "order_number",
-        label: "Order Number",
-      },
-      {
-        type: "text",
-        key: "delivery_status",
-        label: "Status",
+    {
+      type: "text",
+      key: "order_number",
+      label: "Order Number",
+    },
+    {
+      type: "text",
+      key: "delivery_status",
+      label: "Status",
     },
     {
       type: "text",
       key: "client_phone",
-      label: "client phone",
+      label: "Client",
     },
-      {
-        type: "badge",
-        key: "status",
-        label: "Status",
-        colorMap: {
-          Active: "success",
-          Pending: "warning",
-          Cancel: "error",
-        },
-      },
-      {
-        type: "text",
-        key: "role",
-        label: "Role",
-      },
-      {
-        type: "custom",
-        key: "actions",
-        label: "Actions",
-        render: () => (
-          <div className="flex gap-2">
-            <button className="p-2 text-[#3B82F6] hover:bg-blue-50 rounded-md transition-colors">
-              <FontAwesomeIcon icon={faEye} />
-            </button>
-            <button className="p-2 text-[#F48120] hover:bg-orange-50 rounded-md transition-colors">
-              <FontAwesomeIcon icon={faEdit} />
-            </button>
-            <button className="p-2 text-red-500 hover:bg-red-50 rounded-md transition-colors">
-              <FontAwesomeIcon icon={faTrash} />
-            </button>
-          </div>
-        ),
-      },
+    {
+      type: "text",
+      key: "google_maps_link",
+      label: "Google Maps",
+    },
+    {
+      type: "text",
+      key: "order_contact",
+      label: "Recipient",
+    },
+    {
+      type: "text",
+      key: "delivery_type",
+      label: "Delivery",
+    },
+    {
+      type: "text",
+      key: "special_instructions",
+      label: "Instructions",
+    },
+    {
+      type: "text",
+      key: "total",
+      label: "total",
+    },
+    {
+      type: "custom",
+      key: "actions",
+      label: "Actions",
+      render: () => (
+        <div className="flex gap-2">
+          <button className="p-2 text-[#3B82F6] hover:bg-blue-50 rounded-md transition-colors">
+            <FontAwesomeIcon icon={faEye} />
+          </button>
+          <button className="p-2 text-[#F48120] hover:bg-orange-50 rounded-md transition-colors">
+            <FontAwesomeIcon icon={faEdit} />
+          </button>
+          <button className="p-2 text-red-500 hover:bg-red-50 rounded-md transition-colors">
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+        </div>
+      ),
+    },
     ];
 
   return (
