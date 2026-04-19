@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import OrderFilters from "../components/filters/orders.filters";
 import type { BaseOrderFilters, FullOrderFilters, MonthlyOrderStat, TotalOrdersStats } from "../types/orders.types";
@@ -92,7 +92,9 @@ export default function Home() {
       ]
 
       setMetrics(newMetrics);
+      setMonthlyStats(statsMonthly.data)
 
+      toast.success(`Succesfully fetched dashboard statistics`)
     } catch (error) {
       console.error("Failed to fetch dashboard stats", error);
       toast.error(`${error}`);
@@ -101,7 +103,7 @@ export default function Home() {
     }
   }
 
-  const handleFilterChange = (filters: FullOrderFilters) => {
+  const handleFilterChange = (filters: BaseOrderFilters) => {
     console.log('Full filters:', filters);
   };
 
@@ -109,53 +111,12 @@ export default function Home() {
     console.log('Filters reset');
   };
 
-  const metricsData: MetricItem[] = [
-    {
-      label: 'Total Customers',
-      value: '3,782',
-      icon: faUsers,
-    },
-    {
-      label: 'Total Orders',
-      value: '5,359',
-      icon: faBox,
-    },
-    {
-      label: 'Pending Deliveries',
-      value: '142',
-      icon: faShoppingCart,
-    },
-    {
-      label: 'Revenue',
-      value: 'KES 1.2M',
-      icon: faDollarSign,
-    },
-    {
-      label: 'Active Agents',
-      value: '24',
-      icon: faTruck,
-    },
-    {
-      label: 'Completed Today',
-      value: '89',
-      icon: faCheckCircle,
-    },
-  ];
+  useEffect(
+    () => {
+      getDashboardStats({})
+    },[metrics,monthlyStats]
+  )
 
-  const monthlyData: MonthlyOrderStat[] = [
-    { month: 1, monthName: "Jan", totalValue: 168000, orderCount: 45 },
-    { month: 2, monthName: "Feb", totalValue: 385000, orderCount: 89 },
-    { month: 3, monthName: "Mar", totalValue: 201000, orderCount: 52 },
-    { month: 4, monthName: "Apr", totalValue: 298000, orderCount: 71 },
-    { month: 5, monthName: "May", totalValue: 187000, orderCount: 48 },
-    { month: 6, monthName: "Jun", totalValue: 195000, orderCount: 53 },
-    { month: 7, monthName: "Jul", totalValue: 291000, orderCount: 78 },
-    { month: 8, monthName: "Aug", totalValue: 110000, orderCount: 29 },
-    { month: 9, monthName: "Sep", totalValue: 215000, orderCount: 58 },
-    { month: 10, monthName: "Oct", totalValue: 390000, orderCount: 95 },
-    { month: 11, monthName: "Nov", totalValue: 280000, orderCount: 72 },
-    { month: 12, monthName: "Dec", totalValue: 112000, orderCount: 31 },
-  ];
 
   return (
     <div className="min-h-screen bg-gray-50 font-['Poppins',sans-serif]">
@@ -204,7 +165,7 @@ export default function Home() {
               <span className="text-sm text-gray-500">Live updates</span>
             </div>
           </div>
-          <MetricsGrid data={metricsData} />
+          <MetricsGrid data={metrics} />
         </section>
 
         {/* Sales Chart Section */}
@@ -218,7 +179,7 @@ export default function Home() {
             </button>
           </div>
           <MonthlySalesChart
-            data={monthlyData}
+            data={monthlyStats}
             currency="KES"
           />
         </section>
