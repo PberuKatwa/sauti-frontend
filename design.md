@@ -78,3 +78,35 @@ Our AI-powered platform enables businesses to close sales and provide support 24
 
 ```css
 font-family: 'Poppins', sans-serif;
+```
+
+---
+
+## Component Surfaces
+
+All floating components (tables, modals, cards, dropdowns, tooltips, popovers) must use a **white background** regardless of dark mode setting.
+
+| Component | Background | Border | Notes |
+|-----------|------------|--------|-------|
+| Tables | `bg-white` | `border-gray-200` | Header row uses white bg with `border-gray-100` |
+| Modals | `bg-white` | `border-gray-200` | Rounded-xl container |
+| Cards | `bg-white` | `border-gray-200` | Rounded-xl, used for metric displays |
+| Dropdowns | `bg-white` | `border-gray-200` | Shadowed, rounded-lg |
+| Tooltips | `bg-white` | `border-gray-200` | Small padding, shadowed |
+| Popovers | `bg-white` | `border-gray-200` | Shadowed, rounded-lg |
+
+### Implementation
+
+```tsx
+// Table container
+<div className="bg-white border border-gray-200 rounded-xl">
+  {/* ... */}
+</div>
+
+// Modal
+<div className="bg-white border border-gray-200 rounded-xl p-6">
+  {/* ... */}
+</div>
+```
+
+**Note**: The white background is a design constant. Do NOT use `dark:bg-*` utilities on these components—they should always remain white to maintain visual consistency and readability.

@@ -161,17 +161,17 @@ const DataTable: React.FC<DataTableProps> = ({
 
   return (
     <div
-      className={`overflow-hidden rounded-xl border border-[#F48120]/20 bg-white dark:border-[#F48120]/10 dark:bg-[#020617] ${containerClassName}`}
+      className={`overflow-hidden rounded-xl border border-gray-200 bg-white ${containerClassName}`}
     >
       <div className="max-w-full overflow-x-auto">
         <Table>
-          <TableHeader className="border-b border-[#F48120]/10 dark:border-[#F48120]/20 bg-[#F48120]/5 dark:bg-[#F48120]/10">
+          <TableHeader className="border-b border-gray-100 bg-white">
             <TableRow>
               {columns.map((column) => (
                 <TableCell
                   key={column.key}
                   isHeader
-                  className={`px-5 py-3 font-medium text-[#12245B] text-start text-theme-xs dark:text-[#F48120] ${column.headerClassName || ""}`}
+                  className={`px-5 py-3 font-medium text-gray-500 text-start text-theme-xs ${column.headerClassName || ""}`}
                 >
                   {column.label}
                 </TableCell>
@@ -179,12 +179,12 @@ const DataTable: React.FC<DataTableProps> = ({
             </TableRow>
           </TableHeader>
 
-          <TableBody className="divide-y divide-[#F48120]/10 dark:divide-[#F48120]/20">
+          <TableBody className="divide-y divide-gray-100">
             {paginatedData.length === 0 ? (
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="px-5 py-8 text-center text-[#12245B]/60 dark:text-white/60"
+                  className="px-5 py-8 text-center text-gray-500"
                 >
                   {emptyMessage}
                 </TableCell>
@@ -195,7 +195,7 @@ const DataTable: React.FC<DataTableProps> = ({
                   {columns.map((column) => (
                     <TableCell
                       key={column.key}
-                      className={`px-5 py-4 text-[#12245B] text-start text-theme-sm dark:text-white/80 ${column.cellClassName || ""}`}
+                      className={`px-5 py-4 text-gray-700 text-start text-theme-sm ${column.cellClassName || ""}`}
                     >
                       {renderCell(column, row)}
                     </TableCell>
@@ -208,9 +208,9 @@ const DataTable: React.FC<DataTableProps> = ({
       </div>
 
       {showPagination && data.length > 0 && (
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-5 py-4 border-t border-[#F48120]/10 dark:border-[#F48120]/20">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-5 py-4 border-t border-gray-100">
           <div className="flex items-center gap-2">
-            <span className="text-[#12245B]/60 text-theme-sm dark:text-white/60">
+            <span className="text-gray-500 text-theme-sm">
               Items per page:
             </span>
             <select
@@ -218,7 +218,7 @@ const DataTable: React.FC<DataTableProps> = ({
               onChange={(e) =>
                 handleItemsPerPageChange(Number(e.target.value))
               }
-              className="px-2 py-1 rounded-md border border-[#F48120]/20 bg-white text-[#12245B] text-theme-sm focus:outline-none focus:ring-2 focus:ring-[#F48120]/50 dark:bg-[#12245B] dark:text-white dark:border-[#F48120]/30"
+              className="px-2 py-1 rounded-md border border-gray-200 bg-white text-gray-700 text-theme-sm focus:outline-none focus:ring-2 focus:ring-[#F48120]/50"
             >
               {[5, 10, 15, 20].map((size) => (
                 <option key={size} value={size}>
@@ -232,7 +232,7 @@ const DataTable: React.FC<DataTableProps> = ({
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-3 py-1.5 rounded-md border border-[#F48120]/20 text-[#12245B] text-theme-sm hover:bg-[#F48120]/10 disabled:opacity-50 disabled:cursor-not-allowed dark:text-white dark:border-[#F48120]/30 dark:hover:bg-[#F48120]/20"
+              className="px-3 py-1.5 rounded-md border border-gray-200 text-gray-700 text-theme-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Previous
             </button>
@@ -241,7 +241,7 @@ const DataTable: React.FC<DataTableProps> = ({
               page === "..." ? (
                 <span
                   key={`ellipsis-${index}`}
-                  className="px-2 py-1.5 text-[#12245B]/60 dark:text-white/60"
+                  className="px-2 py-1.5 text-gray-500"
                 >
                   ...
                 </span>
@@ -252,7 +252,7 @@ const DataTable: React.FC<DataTableProps> = ({
                   className={`px-3 py-1.5 rounded-md text-theme-sm ${
                     currentPage === page
                       ? "bg-[#F48120] text-white"
-                      : "border border-[#F48120]/20 text-[#12245B] hover:bg-[#F48120]/10 dark:text-white dark:border-[#F48120]/30 dark:hover:bg-[#F48120]/20"
+                      : "border border-gray-200 text-gray-700 hover:bg-gray-50"
                   }`}
                 >
                   {page}
@@ -263,13 +263,13 @@ const DataTable: React.FC<DataTableProps> = ({
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-3 py-1.5 rounded-md border border-[#F48120]/20 text-[#12245B] text-theme-sm hover:bg-[#F48120]/10 disabled:opacity-50 disabled:cursor-not-allowed dark:text-white dark:border-[#F48120]/30 dark:hover:bg-[#F48120]/20"
+              className="px-3 py-1.5 rounded-md border border-gray-200 text-gray-700 text-theme-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Next
             </button>
           </div>
 
-          <span className="text-[#12245B]/60 text-theme-sm dark:text-white/60">
+          <span className="text-gray-500 text-theme-sm">
             Page {currentPage} of {totalPages}
           </span>
         </div>
