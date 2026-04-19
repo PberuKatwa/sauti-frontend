@@ -15,6 +15,7 @@ import {
 import MonthlySalesChart from "../components/charts/monthlyOrders.chart";
 import { DashboardService } from "../services/dashboard.service";
 import { getDateRange } from "../utils/getDateRange";
+import { SautiCloudLoader } from "../components/spinners/sauti.loader";
 
 
 
@@ -123,6 +124,10 @@ export default function Home() {
       getDashboardStats(filters)
     },[filters]
   )
+
+  if (loading) {
+    return <SautiCloudLoader/>
+  }
 
 
   return (
