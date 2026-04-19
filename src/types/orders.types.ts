@@ -79,6 +79,12 @@ export interface AdminOrderRow {
   total: number;
   delivery_status: OrderStatus;
   client_phone: number | null;
+  latitude: string;
+  longitude: string;
+  order_contact: number;
+  delivery_type: 'scheduled' | 'immediate';
+  special_instructions: string;
+  google_maps_link?: string;
   created_at: string;
 }
 
