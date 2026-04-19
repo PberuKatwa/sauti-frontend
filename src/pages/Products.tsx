@@ -46,7 +46,6 @@ export const Products = function () {
       setLoading(true);
       const response = await ProductsService.getAllProducts(currentPage, limit);
       const productsData: AllProducts = response.data!;
-      console.log("responseeeee", response)
       setProducts(productsData.products);
       setCurrentPage(productsData.pagination.currentPage);
       setTotalPages(productsData.pagination.totalPages);
