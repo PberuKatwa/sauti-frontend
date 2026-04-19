@@ -22,7 +22,7 @@ const OrderStatsTemplate: TotalOrdersStats = {
   totalValue: 0
 };
 
-const MonthlyDataStats: MonthlyOrderStat[] = [
+const MonthlySampleData: MonthlyOrderStat[] = [
   { month: 1, monthName: "Jan", totalValue: 168000, orderCount: 45 },
   { month: 2, monthName: "Feb", totalValue: 385000, orderCount: 89 },
   { month: 3, monthName: "Mar", totalValue: 201000, orderCount: 52 },
@@ -37,11 +37,31 @@ const MonthlyDataStats: MonthlyOrderStat[] = [
   { month: 12, monthName: "Dec", totalValue: 112000, orderCount: 31 },
 ];
 
+const MetricsSampleData: MetricItem[] = [
+  {
+    label: 'Total Customers',
+    value: '3,782',
+    icon: faUsers,
+  },
+  {
+    label: 'Total Orders',
+    value: '5,359',
+    icon: faBox,
+  },
+  {
+    label: 'Pending Deliveries',
+    value: '142',
+    icon: faShoppingCart,
+  }
+];
+
 export default function Home() {
 
   const [orderStats, setOrderStats] = useState<TotalOrdersStats>(OrderStatsTemplate);
   const [totalCLients, setTotalClients] = useState<number>(0);
-  const [monthlyStats, setMonthlyStats] = useState<MonthlyOrderStat[]>(MonthlyDataStats);
+  const [monthlyStats, setMonthlyStats] = useState<MonthlyOrderStat[]>(MonthlySampleData);
+  const [metrics, setMetrics] = useState<MetricItem[]>(MetricsSampleData);
+
   const [loading, setLoading] = useState(true);
 
   const getDashboardStats = async (filters:BaseOrderFilters)=>{
@@ -54,7 +74,7 @@ export default function Home() {
         DashboardService.getMonthlyOrderStats()
       ]);
 
-      const metricss: MetricItem[] = [
+      const newMetrics: MetricItem[] = [
         {
           label: `Total Orders`,
           value: statsOrder.data.count,
@@ -70,6 +90,8 @@ export default function Home() {
           icon:faUsers
         },
       ]
+
+      setMetrics(newMetrics);
 
     } catch (error) {
       console.error("Failed to fetch dashboard stats", error);
