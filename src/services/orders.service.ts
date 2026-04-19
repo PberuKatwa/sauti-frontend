@@ -1,10 +1,11 @@
+import type { ApiResponse } from "../types/api.types";
 import type { AllAdminOrdersApiResponse, FullOrderFilters, UpdateStatusPayload } from "../types/orders.types";
 import { apiClient } from "./api.client";
 
 
 export const OrdersService = {
 
-  async getAllOrders(filters:FullOrderFilters) {
+  async getAllOrders(filters:FullOrderFilters):Promise<AllAdminOrdersApiResponse> {
     const params = new URLSearchParams();
 
     if (filters.startDate) {
@@ -34,14 +35,16 @@ export const OrdersService = {
     return orders;
   },
 
-  async updateStatus(payload: UpdateStatusPayload) {
+  async updateStatus(payload: UpdateStatusPayload):Promise<ApiResponse> {
 
     const response = await apiClient.patch(
-      "products/catalog",
-      payload,
+      `orders/status/${payload.orderId}/${payload.status}`,
       { headers: { "Content-Type": "application/json", } }
     )
 
+    const updateRes: ApiResponse = response.data;
+
+    return updateRes;
   }
 
 }
