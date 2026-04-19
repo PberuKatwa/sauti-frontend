@@ -236,7 +236,7 @@ const DataTable: React.FC<DataTableProps> = ({
                 </TableCell>
               </TableRow>
             ) : (
-              paginatedData.map((row, rowIndex) => (
+              paginatedData.map((row: Record<string, unknown>, rowIndex: number) => (
                 <TableRow key={rowIndex}>
                   {columns.map((column) => (
                     <TableCell
