@@ -6,8 +6,8 @@ import { Sidebar } from "./components/layout/Sidebar";
 import { DashboardLayout } from "./components/layout/DashboardLayout";
 import { Products } from "./pages/Products";
 import Test from "./pages/Test";
-import TestMemo from "./pages/TestMemo";
 import Home from "./pages/Home";
+import Orders from "./pages/Orders";
 
 function AppContent() {
   return (
@@ -25,13 +25,12 @@ function AppContent() {
       />
       <Routes>
         <Route path="/test" element={<Test />} />
-        <Route path="/test-memo" element={<TestMemo />}/>
-
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sidebar" element={<Sidebar />} />
         <Route path="/dashboard" element={<DashboardLayout />}>
-          <Route path="" element={<Home />}/>
+          <Route path="home" element={<Home />}/>
           <Route path="products" element={<Products />} />
+          <Route path="orders" element={<Orders />} />
         </Route>
       </Routes>
     </div>

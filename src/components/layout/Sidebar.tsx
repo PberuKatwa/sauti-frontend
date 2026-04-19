@@ -6,10 +6,13 @@ import {
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { authService } from "../../services/auth.service";
+import { faBox } from "@fortawesome/free-solid-svg-icons/faBox";
 
 const navItems = [
-  { path: "/dashboard", label: "Home", icon: faHome, end: false },
+  { path: "/dashboard/home", label: "Home", icon: faHome, end: false },
   { path: "/dashboard/products", label: "Products", icon: faBoxOpen, end: false },
+  { path: "/dashboard/orders", label: "Orders", icon: faBox, end: false },
+
 ];
 
 export const Sidebar = () => {
