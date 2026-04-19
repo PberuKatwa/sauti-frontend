@@ -45,41 +45,75 @@ export type { ColumnType, ImageColumnType, BadgeColumnType, TextColumnType, Cust
 
 interface DataTableProps {
   columns: ColumnType[];
-  data: Record<string, unknown>[];
+  data: any;
+  // External pagination props
+  currentPage?: number;
+  totalPages?: number;
   itemsPerPage?: number;
+  onPageChange?: (page: number) => void;
+  onItemsPerPageChange?: (size: number) => void;
+  // Internal or external pagination mode
   showPagination?: boolean;
   containerClassName?: string;
   emptyMessage?: string;
+  // Loading state
+  isLoading?: boolean;
 }
 
 const DataTable: React.FC<DataTableProps> = ({
   columns,
   data,
-  itemsPerPage: initialItemsPerPage = 5,
+  currentPage: externalCurrentPage,
+  totalPages: externalTotalPages,
+  itemsPerPage: externalItemsPerPage,
+  onPageChange,
+  onItemsPerPageChange,
   showPagination = true,
   containerClassName = "",
   emptyMessage = "No data available",
+  isLoading = false,
 }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(initialItemsPerPage);
+  // Internal state for when external pagination is not provided
+  const [internalCurrentPage, setInternalCurrentPage] = useState(1);
+  const [internalItemsPerPage, setInternalItemsPerPage] = useState(5);
 
-  const totalPages = Math.ceil(data.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const paginatedData = useMemo(
-    () => data.slice(startIndex, endIndex),
-    [data, startIndex, endIndex]
-  );
+  // Determine if using external or internal pagination
+  const isExternalPagination = externalCurrentPage !== undefined && externalTotalPages !== undefined;
+
+  const currentPage = isExternalPagination ? externalCurrentPage : internalCurrentPage;
+  const itemsPerPage = externalItemsPerPage || internalItemsPerPage;
+
+  // Calculate total pages
+  const calculatedTotalPages = Math.ceil(data.length / itemsPerPage);
+  const totalPages = isExternalPagination ? externalTotalPages! : calculatedTotalPages;
+
+  // Paginate data (only for internal mode, external should already be paginated)
+  const paginatedData = useMemo(() => {
+    if (isExternalPagination) {
+      return data; // Data already paginated from server
+    }
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return data.slice(startIndex, endIndex);
+  }, [data, currentPage, itemsPerPage, isExternalPagination]);
 
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
+      if (isExternalPagination && onPageChange) {
+        onPageChange(page);
+      } else {
+        setInternalCurrentPage(page);
+      }
     }
   };
 
   const handleItemsPerPageChange = (newSize: number) => {
-    setItemsPerPage(newSize);
-    setCurrentPage(1);
+    if (isExternalPagination && onItemsPerPageChange) {
+      onItemsPerPageChange(newSize);
+    } else {
+      setInternalItemsPerPage(newSize);
+      setInternalCurrentPage(1);
+    }
   };
 
   const renderCell = (column: ColumnType, row: Record<string, unknown>) => {
@@ -180,7 +214,19 @@ const DataTable: React.FC<DataTableProps> = ({
           </TableHeader>
 
           <TableBody className="divide-y divide-gray-100">
-            {paginatedData.length === 0 ? (
+            {isLoading ? (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="px-5 py-8 text-center text-gray-500"
+                >
+                  <div className="flex items-center justify-center gap-2">
+                    <div className="w-4 h-4 border-2 border-[#F48120] border-t-transparent rounded-full animate-spin" />
+                    Loading...
+                  </div>
+                </TableCell>
+              </TableRow>
+            ) : paginatedData.length === 0 ? (
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
@@ -207,7 +253,7 @@ const DataTable: React.FC<DataTableProps> = ({
         </Table>
       </div>
 
-      {showPagination && data.length > 0 && (
+      {showPagination && totalPages > 0 && (
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-5 py-4 border-t border-gray-100">
           <div className="flex items-center gap-2">
             <span className="text-gray-500 text-theme-sm">
@@ -220,7 +266,7 @@ const DataTable: React.FC<DataTableProps> = ({
               }
               className="px-2 py-1 rounded-md border border-gray-200 bg-white text-gray-700 text-theme-sm focus:outline-none focus:ring-2 focus:ring-[#F48120]/50"
             >
-              {[5, 10, 15, 20].map((size) => (
+              {[5, 10, 15, 20, 50].map((size) => (
                 <option key={size} value={size}>
                   {size}
                 </option>

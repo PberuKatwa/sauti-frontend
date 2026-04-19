@@ -5,8 +5,9 @@ import { OrdersService } from "../services/orders.service";
 import { getDateRange } from "../utils/getDateRange";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash,faEye } from "@fortawesome/free-solid-svg-icons";
-import type { ColumnType } from "../components/tables/basic.table";
+import type { ColumnType } from "../components/tables/DataTable";
 import { SautiCloudLoader } from "../components/spinners/sauti.loader";
+import DataTable from "../components/tables/DataTable";
 
 const OrderFallback: AdminOrderRow[] = [
   {
@@ -87,6 +88,15 @@ export default function Orders() {
     console.log('Filters reset');
   };
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleLimitChange = (newLimit: number) => {
+    setLimit(newLimit);
+    setCurrentPage(1); // Reset to first page when changing limit
+  };
+
   useEffect(
     () => {
       getAllOrders()
@@ -160,7 +170,17 @@ export default function Orders() {
 
   return (
     <div>
-
+      <DataTable
+        columns={orderColumns}
+        data={orders}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        itemsPerPage={limit}
+        onPageChange={handlePageChange}
+        onItemsPerPageChange={handleLimitChange}
+        isLoading={loading}
+        emptyMessage="No orders found"
+      />
     </div>
   )
 

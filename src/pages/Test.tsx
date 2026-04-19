@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import DataTable, { type ColumnType } from "../components/tables/basic.table";
+import DataTable, { type ColumnType } from "../components/tables/DataTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
 
