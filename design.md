@@ -82,6 +82,27 @@ font-family: 'Poppins', sans-serif;
 
 ---
 
+## Primary Gradient Background
+
+**All full-page backgrounds default to this gradient unless explicitly stated otherwise.**
+
+| Gradient | Tailwind Class |
+|----------|----------------|
+| Sauti Primary Gradient | `bg-gradient-to-b from-slate-950 via-slate-900 to-blue-950` |
+
+This gradient is used for landing pages, auth pages, and any full-viewport surfaces. It transitions from deep slate (`slate-950`) through mid-slate (`slate-900`) to deep blue (`blue-950`), creating a sense of depth and technological sophistication.
+
+### Implementation
+
+```tsx
+// Full-page background
+<div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-blue-950">
+  {/* ... */}
+</div>
+```
+
+---
+
 ## Default Background Rule
 
 **All component backgrounds default to white (`bg-white`) unless explicitly specified otherwise.** This includes but is not limited to:
