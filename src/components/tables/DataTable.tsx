@@ -278,13 +278,13 @@ const DataTable: React.FC<DataTableProps> = ({
               <th
                 key={column.key}
                 scope="col"
-                className={`px-6 py-3 font-medium ${column.headerClassName || ""}`}
+                className={`px-3 py-3 font-medium ${column.headerClassName || ""}`}
               >
                 {column.label}
               </th>
             ))}
             {(onEdit || onDelete) && (
-              <th scope="col" className="px-6 py-3 font-medium">
+              <th scope="col" className="px-3 py-3 font-medium">
                 Action
               </th>
             )}
@@ -336,13 +336,13 @@ const DataTable: React.FC<DataTableProps> = ({
                   <td
                     key={column.key}
                     scope={column.type === "text" && column.key === displayColumns[0]?.key ? "row" : undefined}
-                    className={`px-6 py-4 ${column.cellClassName || ""} ${column.type === "text" && column.key === displayColumns[0]?.key ? "font-medium text-heading whitespace-nowrap" : "text-body"}`}
+                    className={`px-3 py-4 ${column.cellClassName || ""} ${column.type === "text" && column.key === displayColumns[0]?.key ? "font-medium text-heading whitespace-nowrap" : "text-body"}`}
                   >
                     {renderCell(column, row, rowIndex)}
                   </td>
                 ))}
                 {(onEdit || onDelete) && (
-                  <td className="flex items-center px-6 py-4">
+                  <td className="flex items-center px-3 py-4">
                     {onEdit && (
                       <a
                         href="#"
