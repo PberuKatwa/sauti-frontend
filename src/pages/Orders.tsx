@@ -292,6 +292,8 @@ export default function Orders() {
       <UpdateOrderStatusModal
         isOpen={isUpdateOpen}
         order={selectedOrder}
+        onClose={() => setIsUpdateOpen(false)}
+        onSuccess={() => getAllOrders()}
       />
     </div>
   );
