@@ -51,12 +51,35 @@ export default function LoginPage() {
 
           {/* Top: Logo */}
           <div className="relative z-10">
-            <img
-              src="/logo/sauti-main.png"
-              alt="Sauti-Cloud"
-              className="object-contain"
-              style={{ height: 40, maxHeight: 40, width: "auto" }}
-            />
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "12px",
+                background: "linear-gradient(135deg, #12245B 0%, #020617 100%)",
+                borderRadius: "10px",
+                padding: "10px 16px",
+                boxShadow: "0 4px 12px rgba(18, 36, 91, 0.25)",
+              }}
+            >
+              <img
+                src="/logo/sauti-main.png"
+                alt="Sauti-Cloud"
+                className="object-contain"
+                style={{ height: 32, maxHeight: 32, width: "auto" }}
+              />
+              <span
+                style={{
+                  fontFamily: "'Poppins', sans-serif",
+                  fontSize: "18px",
+                  fontWeight: 700,
+                  lineHeight: 1.2,
+                }}
+              >
+                <span style={{ color: "#ffffff" }}>Sauti</span>
+                <span style={{ color: "#F48120" }}> Cloud</span>
+              </span>
+            </div>
           </div>
 
           {/* Middle: Preamble + Form */}
