@@ -70,27 +70,15 @@ export default function LoginPage() {
                 >
                   Sauti<span style={{ color: "#F48120" }}>Cloud</span>
                 </span>
-                <p
-                  style={{
-                    fontFamily: "'Poppins', sans-serif",
-                    fontSize: "9px",
-                    fontWeight: 500,
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    color: "#9CA3AF",
-                    marginTop: "2px",
-                  }}
-                >
-                  AI-Powered Sales Automation
-                </p>
               </div>
             </div>
           </div>
 
           {/* Middle: Preamble + Form */}
-          <div className="relative z-10 flex-1 flex flex-col justify-center py-8">
+          <div className="relative z-10 flex-1 flex flex-col justify-center py-2">
+
             {/* AI Badge */}
-            <div className="ai-pill mb-5" style={{ width: "fit-content" }}>
+            {/*<div className="ai-pill mb-5" style={{ width: "fit-content" }}>
               <span className="pulse-dot" />
               <span
                 className="font-mono-ui"
@@ -104,7 +92,7 @@ export default function LoginPage() {
               >
                 AI-Powered Sales
               </span>
-            </div>
+            </div>*/}
 
             {/* Heading */}
             <h1
