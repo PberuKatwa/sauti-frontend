@@ -51,34 +51,39 @@ export default function LoginPage() {
 
           {/* Top: Logo */}
           <div className="relative z-10">
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "12px",
-                background: "linear-gradient(135deg, #12245B 0%, #020617 100%)",
-                borderRadius: "10px",
-                padding: "5px",
-                boxShadow: "0 4px 12px rgba(18, 36, 91, 0.25)",
-              }}
-            >
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <img
                 src="/logo/sauti-main.png"
                 alt="Sauti-Cloud"
                 className="object-contain"
-                style={{ height: 42, maxHeight: 42, width: "auto" }}
+                style={{ height: 48, maxHeight: 48, width: "auto" }}
               />
-              <span
-                style={{
-                  fontFamily: "'Poppins', sans-serif",
-                  fontSize: "23px",
-                  fontWeight: 700,
-                  lineHeight: 1.2,
-                }}
-              >
-                <span style={{ color: "#ffffff" }}>Sauti</span>
-                <span style={{ color: "#F48120" }}> Cloud</span>
-              </span>
+              <div>
+                <span
+                  style={{
+                    fontFamily: "'Poppins', sans-serif",
+                    fontSize: "24px",
+                    fontWeight: 700,
+                    lineHeight: 1.1,
+                    color: "#12245B",
+                  }}
+                >
+                  Sauti<span style={{ color: "#F48120" }}>Cloud</span>
+                </span>
+                <p
+                  style={{
+                    fontFamily: "'Poppins', sans-serif",
+                    fontSize: "9px",
+                    fontWeight: 500,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: "#9CA3AF",
+                    marginTop: "2px",
+                  }}
+                >
+                  AI-Powered Sales Automation
+                </p>
+              </div>
             </div>
           </div>
 
