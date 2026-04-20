@@ -195,10 +195,10 @@ const DataTable: React.FC<DataTableProps> = ({
 
   return (
     <div
-      className={`overflow-hidden rounded-xl border border-gray-200 bg-white ${containerClassName}`}
+      className={`w-full rounded-xl border border-gray-200 bg-white ${containerClassName}`}
     >
-      <div className="max-w-full overflow-x-auto">
-        <Table>
+      <div className="overflow-x-auto">
+        <Table className="whitespace-nowrap">
           <TableHeader className="border-b border-gray-100 bg-white">
             <TableRow>
               {columns.map((column) => (
