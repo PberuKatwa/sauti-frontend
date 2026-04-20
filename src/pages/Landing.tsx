@@ -24,6 +24,7 @@ export default function Landing() {
 
       <main className="relative z-10 flex min-h-[80vh] flex-col items-center justify-center px-4 md:px-16 lg:px-24 text-center m-10">
         <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full mb-8 text-sm text-white/90">
+
           <span className="bg-[#F48120] text-white text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">AI-Powered</span>
           <div className="h-4 w-px bg-white/30" />
           <span className="font-semibold text-[#3B82F6]">Intelligent Sales & Support</span>
