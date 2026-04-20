@@ -214,7 +214,7 @@ export default function Orders() {
           <button
             className="p-2 text-[#F48120] hover:bg-orange-50 rounded-md transition-colors"
             title="Edit"
-            onClick={() => handleEdit(row)}
+            onClick={() => openUpdateModal(row as unknown as AdminOrderRow)}
           >
             <FontAwesomeIcon icon={faEdit} />
           </button>
