@@ -180,12 +180,12 @@ export default function Orders() {
       label: "Actions",
       render: (_value, row) => (
         <div className="flex items-center gap-2">
-          <button
+          {/*<button
             className="p-2 text-[#3B82F6] hover:bg-blue-50 rounded-md transition-colors"
             title="View"
           >
             <FontAwesomeIcon icon={faEye} />
-          </button>
+          </button>*/}
           <button
             className="p-2 text-[#F48120] hover:bg-orange-50 rounded-md transition-colors"
             title="Edit"
@@ -193,13 +193,13 @@ export default function Orders() {
           >
             <FontAwesomeIcon icon={faEdit} />
           </button>
-          <button
+          {/*<button
             className="p-2 text-red-500 hover:bg-red-50 rounded-md transition-colors"
             title="Delete"
             onClick={() => handleDelete(row)}
           >
             <FontAwesomeIcon icon={faTrash} />
-          </button>
+          </button>*/}
         </div>
       ),
     },
