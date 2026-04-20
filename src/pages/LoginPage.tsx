@@ -58,7 +58,7 @@ export default function LoginPage() {
                 gap: "12px",
                 background: "linear-gradient(135deg, #12245B 0%, #020617 100%)",
                 borderRadius: "10px",
-                padding: "10px 16px",
+                padding: "5px",
                 boxShadow: "0 4px 12px rgba(18, 36, 91, 0.25)",
               }}
             >
@@ -66,12 +66,12 @@ export default function LoginPage() {
                 src="/logo/sauti-main.png"
                 alt="Sauti-Cloud"
                 className="object-contain"
-                style={{ height: 32, maxHeight: 32, width: "auto" }}
+                style={{ height: 42, maxHeight: 42, width: "auto" }}
               />
               <span
                 style={{
                   fontFamily: "'Poppins', sans-serif",
-                  fontSize: "18px",
+                  fontSize: "23px",
                   fontWeight: 700,
                   lineHeight: 1.2,
                 }}
