@@ -77,23 +77,6 @@ export default function LoginPage() {
           {/* Middle: Preamble + Form */}
           <div className="relative z-10 flex-1 flex flex-col justify-center py-2">
 
-            {/* AI Badge */}
-            {/*<div className="ai-pill mb-5" style={{ width: "fit-content" }}>
-              <span className="pulse-dot" />
-              <span
-                className="font-mono-ui"
-                style={{
-                  fontSize: "10px",
-                  fontWeight: 600,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  color: "#12245B",
-                }}
-              >
-                AI-Powered Sales
-              </span>
-            </div>*/}
-
             {/* Heading */}
             <h1
               style={{

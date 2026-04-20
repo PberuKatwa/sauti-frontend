@@ -9,6 +9,7 @@ import Test from "./pages/Test";
 import Home from "./pages/Home";
 import Orders from "./pages/Orders";
 import Profile from "./pages/Profile";
+import Landing from "./pages/Landing";
 
 function AppContent() {
   return (
@@ -25,6 +26,7 @@ function AppContent() {
         pauseOnHover
       />
       <Routes>
+        <Route path="" element={<Landing />} />
         <Route path="/test" element={<Test />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sidebar" element={<Sidebar />} />
