@@ -10,8 +10,10 @@ export const DashboardLayout = () => {
       </div>
 
       {/* Main content */}
-      <main className="flex-1 bg-gray-50 p-1">
-        <Outlet />
+      <main className="flex-1 min-w-0 bg-gray-50 p-1">
+        <div className="w-full max-w-full overflow-x-hidden">
+          <Outlet />
+        </div>
       </main>
     </div>
   );

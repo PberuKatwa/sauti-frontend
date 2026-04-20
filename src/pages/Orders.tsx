@@ -153,6 +153,11 @@ export default function Orders() {
     },
     {
       type: "text",
+      key: "google_maps_link",
+      label: "Google Maps",
+    },
+    {
+      type: "text",
       key: "delivery_type",
       label: "Delivery Type",
     },
