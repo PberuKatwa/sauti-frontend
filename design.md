@@ -96,6 +96,21 @@ Do NOT use `dark:bg-*` utilities or colored backgrounds unless there is a delibe
 
 ---
 
+## Destructive Actions & Error States
+
+Destructive actions (delete, cancel, remove) and error states must use **danger red** to clearly signal caution or failure.
+
+| Context | Usage | Tailwind Class |
+|---------|-------|----------------|
+| Buttons | Delete/Remove actions | `bg-red-600 hover:bg-red-700 text-white` |
+| Text/Icons | Error messages, warnings | `text-red-600` |
+| Borders | Invalid inputs, error outlines | `border-red-500` |
+| Backgrounds | Error alerts, banners | `bg-red-50 border-red-200` |
+
+**Note**: Always pair red destructive buttons with a confirmation step (e.g., modal dialog) to prevent accidental data loss. Use neutral or secondary colors for non-destructive actions like "Cancel" when placed near a true delete action.
+
+---
+
 ## Component Surfaces
 
 All floating components (tables, modals, cards, dropdowns, tooltips, popovers) must use a **white background** regardless of dark mode setting.
