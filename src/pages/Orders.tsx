@@ -9,8 +9,26 @@ import { getDateRange } from "../utils/getDateRange";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { SautiCloudLoader } from "../components/spinners/sauti.loader";
+import { UpdateOrderStatusModal } from "../components/orders/orderStatus.update";
 
-const OrderFallback: AdminOrderRow[] = [];
+const OrderFallback: AdminOrderRow[] = [
+
+  {
+    id: 0,
+    order_number: 0,
+    total: 0,
+    delivery_status: 'pending_delivery' as OrderStatus,
+    client_phone: 0,
+    latitude: "",
+    longitude: "",
+    order_contact: 0,
+    delivery_type: 'immediate',
+    special_instructions: "",
+    google_maps_link: "",
+    created_at: "",
+  }
+
+];
 
 export default function Orders() {
   const { startDate, endDate } = getDateRange(32);
@@ -23,12 +41,19 @@ export default function Orders() {
     clientPhone: "",
   };
 
+  const [isUpdateOpen, setIsUpdateOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState<AdminOrderRow>(OrderFallback[0]);
   const [filters, setFilters] = useState<FullOrderFilters>(startFilters);
   const [orders, setOrders] = useState<AdminOrderRow[]>(OrderFallback);
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
+
+  const openUpdateModal = (order: AdminOrderRow) => {
+    setSelectedOrder(order);
+    setIsUpdateOpen(true);
+  };
 
   const getAllOrders = async () => {
     try {
@@ -263,6 +288,11 @@ export default function Orders() {
           />
         </section>
       </div>
+
+      <UpdateOrderStatusModal
+        isOpen={isUpdateOpen}
+        order={selectedOrder}
+      />
     </div>
   );
 }
