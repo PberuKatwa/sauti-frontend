@@ -8,6 +8,7 @@ import { Products } from "./pages/Products";
 import Test from "./pages/Test";
 import Home from "./pages/Home";
 import Orders from "./pages/Orders";
+import Profile from "./pages/Profile";
 
 function AppContent() {
   return (
@@ -31,6 +32,7 @@ function AppContent() {
           <Route path="home" element={<Home />}/>
           <Route path="products" element={<Products />} />
           <Route path="orders" element={<Orders />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
       </Routes>
     </div>

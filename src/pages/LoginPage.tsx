@@ -20,7 +20,7 @@ export default function LoginPage() {
         position: "top-right",
         autoClose: 3000,
       });
-      navigate("/dashboard/products");
+      navigate("/dashboard/home");
     } catch (error: any) {
       toast.error("Invalid email or password", {
         position: "top-right",
