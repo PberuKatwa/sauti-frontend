@@ -82,6 +82,20 @@ font-family: 'Poppins', sans-serif;
 
 ---
 
+## Default Background Rule
+
+**All component backgrounds default to white (`bg-white`) unless explicitly specified otherwise.** This includes but is not limited to:
+
+- Data tables and table rows
+- Filters, search bars, and input fields
+- Selected/active states (e.g., sidebar items, tabs, buttons)
+- Cards, modals, dropdowns, tooltips, popovers
+- Form containers and settings panels
+
+Do NOT use `dark:bg-*` utilities or colored backgrounds unless there is a deliberate, documented reason. White is the baseline for readability and visual consistency.
+
+---
+
 ## Component Surfaces
 
 All floating components (tables, modals, cards, dropdowns, tooltips, popovers) must use a **white background** regardless of dark mode setting.

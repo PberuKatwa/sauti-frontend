@@ -64,8 +64,8 @@ export const Sidebar = () => {
               flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
               transition-all duration-150 border
               ${
-                isActive
-                  ? "bg-[rgba(192,24,42,0.25)] border-[rgba(192,24,42,0.35)] text-red-300 font-semibold"
+               isActive
+                   ? "bg-white border-white text-black font-semibold"
                   : "border-transparent text-white/40 font-normal"
               }
               `
