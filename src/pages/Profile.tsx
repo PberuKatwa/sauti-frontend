@@ -107,7 +107,7 @@ export default function Profile() {
               </div>
 
               {/* Name & Role */}
-              <div className="flex-1 pb-2">
+              <div className="flex-1 pt-16">
                 <h2 className="text-2xl font-bold text-[#12245B]">
                   {first_name} {last_name}
                 </h2>
