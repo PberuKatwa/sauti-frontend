@@ -97,18 +97,6 @@ export default function Orders() {
     getAllOrders();
   }, [filters, currentPage, limit]);
 
-  const getStatusBadgeColor = (status: string): "success" | "warning" | "error" | "info" | "primary" => {
-    const map: Record<string, "success" | "warning" | "error" | "info" | "primary"> = {
-      pending_location: "info",
-      pending_contact: "warning",
-      pending_delivery_type: "warning",
-      pending_delivery: "warning",
-      enroute: "primary",
-      delivered: "success",
-    };
-    return map[status] || "info";
-  };
-
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("en-KE", { style: "currency", currency: "KES" }).format(value);
   };
@@ -152,9 +140,22 @@ export default function Orders() {
       label: "Recipient",
     },
     {
-      type: "text",
+      type: "custom",
       key: "google_maps_link",
       label: "Google Maps",
+      render: (value) =>
+        value ? (
+          <a
+            href={String(value)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#3B82F6] hover:underline font-medium"
+          >
+            Open Maps
+          </a>
+        ) : (
+          <span className="text-gray-400">N/A</span>
+        ),
     },
     {
       type: "text",
