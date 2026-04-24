@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { authService } from "../services/auth.service";
@@ -7,7 +7,7 @@ import "../assets/css/login.css";
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const [emailSent, setEmailSent] = useState(false);
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -37,7 +37,7 @@ export default function ForgotPassword() {
           autoClose: 6000,
         }
       );
-      navigate("/login");
+      setEmailSent(true);
     } catch (error: any) {
       const message =
         error?.response?.data?.message ||
@@ -131,49 +131,97 @@ export default function ForgotPassword() {
               style={{ borderBottom: "1.5px solid #E5E7EB", marginBottom: "28px" }}
             />
 
-            {/* Form */}
-            <form
-              onSubmit={handleSubmit}
-              style={{ display: "flex", flexDirection: "column", gap: "12px" }}
-            >
-              <div>
-                <label
-                  className="font-mono-ui"
+            {emailSent ? (
+              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                <div
                   style={{
-                    display: "block",
-                    fontSize: "10px",
-                    fontWeight: 600,
-                    letterSpacing: "0.07em",
-                    textTransform: "uppercase",
-                    color: "#9CA3AF",
-                    marginBottom: "6px",
+                    width: "64px",
+                    height: "64px",
+                    borderRadius: "50%",
+                    background: "#F48120",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: "8px",
                   }}
                 >
-                  Business Email
-                </label>
-                <input
-                  type="email"
-                  className="input-field"
-                  placeholder="you@sauti-cloud.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
+                  </svg>
+                </div>
 
-              <button
-                type="submit"
-                className="btn-signin"
-                disabled={loading}
-                style={{ marginTop: "4px" }}
-              >
-                {loading ? (
-                  <>
-                    <span className="spinner" />
-                    <span>Sending instructions…</span>
-                  </>
-                ) : (
-                  <>
+                <h1
+                  style={{
+                    fontSize: "26px",
+                    fontWeight: 700,
+                    letterSpacing: "-0.6px",
+                    lineHeight: 1.2,
+                    color: "#12245B",
+                    marginBottom: "10px",
+                  }}
+                >
+                  Check Your Email
+                </h1>
+
+                <p
+                  style={{
+                    fontSize: "13px",
+                    lineHeight: 1.65,
+                    color: "#6B7280",
+                    marginBottom: "16px",
+                    maxWidth: "360px",
+                  }}
+                >
+                  We have sent a password reset link to <strong style={{ color: "#12245B" }}>{email}</strong>. Click the link in the email to set your new password.
+                </p>
+
+                <div
+                  style={{
+                    background: "rgba(244, 129, 32, 0.08)",
+                    border: "1px solid rgba(244, 129, 32, 0.2)",
+                    borderRadius: "8px",
+                    padding: "12px 16px",
+                    marginBottom: "20px",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      lineHeight: 1.6,
+                      color: "#F48120",
+                      margin: 0,
+                    }}
+                  >
+                    This link will expire in <strong>15 minutes</strong> for security purposes.
+                  </p>
+                </div>
+
+                <div
+                  style={{ borderBottom: "1.5px solid #E5E7EB", marginBottom: "20px" }}
+                />
+
+                <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                  <Link
+                    to="/login"
+                    className="btn-signin"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "8px",
+                      textDecoration: "none",
+                    }}
+                  >
                     <svg
                       width="15"
                       height="15"
@@ -184,32 +232,104 @@ export default function ForgotPassword() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                      <polyline points="22,6 12,13 2,6" />
+                      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                      <polyline points="10 17 15 12 10 7" />
+                      <line x1="15" y1="12" x2="3" y2="12" />
                     </svg>
-                    <span>Send Reset Instructions</span>
-                  </>
-                )}
-              </button>
+                    <span>Sign In</span>
+                  </Link>
 
-              <div style={{ textAlign: "center", marginTop: "8px" }}>
-                <button
-                  type="button"
-                  onClick={() => navigate("/login")}
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: 600,
-                    color: "#12245B",
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    padding: 0,
-                  }}
-                >
-                  Back to Sign In
-                </button>
+                  <div style={{ textAlign: "center" }}>
+                    <Link
+                      to="/register"
+                      style={{
+                        fontSize: "12px",
+                        fontWeight: 600,
+                        color: "#12245B",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Don't have an account? Sign Up
+                    </Link>
+                  </div>
+                </div>
               </div>
-            </form>
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                style={{ display: "flex", flexDirection: "column", gap: "12px" }}
+              >
+                <div>
+                  <label
+                    className="font-mono-ui"
+                    style={{
+                      display: "block",
+                      fontSize: "10px",
+                      fontWeight: 600,
+                      letterSpacing: "0.07em",
+                      textTransform: "uppercase",
+                      color: "#9CA3AF",
+                      marginBottom: "6px",
+                    }}
+                  >
+                    Business Email
+                  </label>
+                  <input
+                    type="email"
+                    className="input-field"
+                    placeholder="you@sauti-cloud.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn-signin"
+                  disabled={loading}
+                  style={{ marginTop: "4px" }}
+                >
+                  {loading ? (
+                    <>
+                      <span className="spinner" />
+                      <span>Sending instructions…</span>
+                    </>
+                  ) : (
+                    <>
+                      <svg
+                        width="15"
+                        height="15"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                      </svg>
+                      <span>Send Reset Instructions</span>
+                    </>
+                  )}
+                </button>
+
+                <div style={{ textAlign: "center", marginTop: "8px" }}>
+                  <Link
+                    to="/login"
+                    style={{
+                      fontSize: "12px",
+                      fontWeight: 600,
+                      color: "#12245B",
+                      textDecoration: "none",
+                    }}
+                  >
+                    Back to Sign In
+                  </Link>
+                </div>
+              </form>
+            )}
           </div>
 
           {/* Footer */}
