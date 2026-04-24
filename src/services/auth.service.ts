@@ -1,3 +1,4 @@
+import type { ApiResponse } from "../types/api.types";
 import type { AuthUserApiResponse, CreateUserPayload, ProfileApiResponse } from "../types/auth.types";
 import { apiClient } from "./api.client";
 
@@ -41,11 +42,27 @@ export const authService = {
     return user;
   },
 
-  async resetPassword(email:string): Promise<void>{
-    await apiClient.patch(
-      `/auth/reset-password/${email}`,
+  async resetPassword(token:string, password:string): Promise<ApiResponse>{
+    const response = await apiClient.post(
+      `auth/reset-password/${token}`,
+      {password:password},
       { headers: { "Content-Type": "application/json", } }
     )
+
+    const result: ApiResponse = response.data;
+
+    return result;
+  },
+
+  async forgotPassword(email:string): Promise<ApiResponse>{
+    const response = await apiClient.patch(
+      `/auth/forgot-password/${email}`,
+      { headers: { "Content-Type": "application/json", } }
+    )
+
+    const result: ApiResponse = response.data;
+
+    return result;
   },
 
   async logout(): Promise<void>{

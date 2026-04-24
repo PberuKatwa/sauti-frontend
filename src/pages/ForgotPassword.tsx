@@ -28,7 +28,7 @@ export default function ForgotPassword() {
 
     try {
       setLoading(true);
-      await authService.resetPassword(email);
+      await authService.forgotPassword(email);
       toast.success(
         "If an account exists with this email, you will receive password reset instructions.",
         {
