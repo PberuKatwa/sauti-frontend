@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Sidebar } from "./components/layout/Sidebar";
@@ -29,6 +30,7 @@ function AppContent() {
         <Route path="" element={<Landing />} />
         <Route path="/test" element={<Test />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/sidebar" element={<Sidebar />} />
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route path="home" element={<Home />}/>
