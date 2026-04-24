@@ -1,4 +1,4 @@
-import type { AuthUserApiResponse, ProfileApiResponse } from "../types/auth.types";
+import type { AuthUserApiResponse, CreateUserPayload, ProfileApiResponse } from "../types/auth.types";
 import { apiClient } from "./api.client";
 
 export const authService = {
@@ -27,6 +27,18 @@ export const authService = {
     } catch (error) {
       throw error;
     }
+  },
+
+  async registerUser(payload:CreateUserPayload): Promise<ProfileApiResponse>{
+    const response = await apiClient.post(
+      "auth/register",
+      payload,
+      { headers: { "Content-Type": "application/json", } }
+    )
+
+    const user: ProfileApiResponse = response.data;
+
+    return user;
   },
 
   async logout(): Promise<void>{

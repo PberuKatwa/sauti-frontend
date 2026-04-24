@@ -7,7 +7,6 @@ export const ProductsService = {
   async createProduct(payload:CreateProductPayload):Promise<SingleProductMinimalApiResponse> {
 
     payload.user_id = 1;
-    console.log("userrr id", payload)
     const response = await apiClient.post(
       "products/catalog",
       payload,
