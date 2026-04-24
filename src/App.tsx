@@ -12,6 +12,7 @@ import Home from "./pages/Home";
 import Orders from "./pages/Orders";
 import Profile from "./pages/Profile";
 import Landing from "./pages/Landing";
+import ResetPassword from "./pages/ResetPassword";
 
 function AppContent() {
   return (
@@ -33,6 +34,7 @@ function AppContent() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/auth/reset-password/:token" element={<ResetPassword />} />
         <Route path="/sidebar" element={<Sidebar />} />
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route path="home" element={<Home />}/>
