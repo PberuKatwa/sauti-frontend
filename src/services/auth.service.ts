@@ -41,6 +41,13 @@ export const authService = {
     return user;
   },
 
+  async resetPassword(email:string): Promise<void>{
+    await apiClient.patch(
+      `/auth/reset-password/${email}`,
+      { headers: { "Content-Type": "application/json", } }
+    )
+  },
+
   async logout(): Promise<void>{
     try {
       await apiClient.post("/auth/logout");

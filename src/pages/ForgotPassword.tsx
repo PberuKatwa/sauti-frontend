@@ -1,28 +1,48 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { authService } from "../services/auth.service";
 import "../assets/css/login.css";
 
-export default function LoginPage() {
+export default function ForgotPassword() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (loading) return;
+
+    if (!validateEmail(email)) {
+      toast.error("Please enter a valid email address.", {
+        position: "top-right",
+        autoClose: 5000,
+      });
+      return;
+    }
+
     try {
       setLoading(true);
-      await authService.login(email, password);
-      toast.success("Successfully logged in", {
-        position: "top-right",
-        autoClose: 3000,
-      });
-      navigate("/dashboard/home");
+      await authService.resetPassword(email);
+      toast.success(
+        "If an account exists with this email, you will receive password reset instructions.",
+        {
+          position: "top-right",
+          autoClose: 6000,
+        }
+      );
+      navigate("/login");
     } catch (error: any) {
-      toast.error("Invalid email or password", {
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Failed to send reset instructions. Please try again.";
+      toast.error(message, {
         position: "top-right",
         autoClose: 5000,
       });
@@ -74,9 +94,8 @@ export default function LoginPage() {
             </div>
           </div>
 
-          {/* Middle: Preamble + Form */}
+          {/* Middle: Form */}
           <div className="relative z-10 flex-1 flex flex-col justify-center py-2">
-
             {/* Heading */}
             <h1
               style={{
@@ -88,100 +107,21 @@ export default function LoginPage() {
                 marginBottom: "10px",
               }}
             >
-              Automate Your Sales
-              <br />
-              <span style={{ color: "#F48120" }}>24/7 Intelligence</span>
+              Reset Your Password
             </h1>
 
-            {/* Preamble */}
             <p
               style={{
                 fontSize: "13px",
                 lineHeight: 1.65,
                 color: "#6B7280",
-                marginBottom: "24px",
+                marginBottom: "28px",
                 maxWidth: "360px",
               }}
             >
-              Close deals and provide support around the clock with AI bots that
-              understand your customers—no human in the loop required.
+              Enter the email address associated with your account and we will
+              send you instructions to reset your password.
             </p>
-
-            {/* Stat chips */}
-            <div style={{ display: "flex", gap: "10px", marginBottom: "28px" }}>
-              <div className="stat-card">
-                <span
-                  style={{
-                    fontSize: "17px",
-                    fontWeight: 700,
-                    color: "#12245B",
-                    letterSpacing: "-0.5px",
-                  }}
-                >
-                  24/7<span style={{ color: "#F48120" }}>+</span>
-                </span>
-                <span
-                  className="font-mono-ui"
-                  style={{
-                    fontSize: "9px",
-                    fontWeight: 500,
-                    color: "#9CA3AF",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.07em",
-                  }}
-                >
-                  Availability
-                </span>
-              </div>
-              <div className="stat-card">
-                <span
-                  style={{
-                    fontSize: "17px",
-                    fontWeight: 700,
-                    color: "#12245B",
-                    letterSpacing: "-0.5px",
-                  }}
-                >
-                  40<span style={{ color: "#F48120" }}>%</span>
-                </span>
-                <span
-                  className="font-mono-ui"
-                  style={{
-                    fontSize: "9px",
-                    fontWeight: 500,
-                    color: "#9CA3AF",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.07em",
-                  }}
-                >
-                  Higher Conversion
-                </span>
-              </div>
-              <div className="stat-card">
-                <span
-                  style={{
-                    fontSize: "17px",
-                    fontWeight: 700,
-                    color: "#12245B",
-                    letterSpacing: "-0.5px",
-                  }}
-                >
-                  0<span style={{ color: "#F48120" }}>s</span>
-                </span>
-                <span
-                  className="font-mono-ui"
-                  style={{
-                    fontSize: "9px",
-                    fontWeight: 500,
-                    color: "#9CA3AF",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.07em",
-                  }}
-                >
-                  Wait Time
-                </span>
-              </div>
-            </div>
 
             {/* Divider */}
             <div
@@ -218,56 +158,6 @@ export default function LoginPage() {
                 />
               </div>
 
-              <div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "6px",
-                  }}
-                >
-                  <label
-                    className="font-mono-ui"
-                    style={{
-                      fontSize: "10px",
-                      fontWeight: 600,
-                      letterSpacing: "0.07em",
-                      textTransform: "uppercase",
-                      color: "#9CA3AF",
-                    }}
-                  >
-                    Password
-                  </label>
-                  <Link
-                    to="/forgot-password"
-                    className="font-mono-ui"
-                    style={{
-                      fontSize: "11px",
-                      color: "#9CA3AF",
-                      textDecoration: "none",
-                      transition: "color 0.2s",
-                    }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.color = "#12245B")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.color = "#9CA3AF")
-                    }
-                  >
-                    Forgot password?
-                  </Link>
-                </div>
-                <input
-                  type="password"
-                  className="input-field"
-                  placeholder="••••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-
               <button
                 type="submit"
                 className="btn-signin"
@@ -277,7 +167,7 @@ export default function LoginPage() {
                 {loading ? (
                   <>
                     <span className="spinner" />
-                    <span>Signing in…</span>
+                    <span>Sending instructions…</span>
                   </>
                 ) : (
                   <>
@@ -291,14 +181,31 @@ export default function LoginPage() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
-                      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
-                      <polyline points="10 17 15 12 10 7" />
-                      <line x1="15" y1="12" x2="3" y2="12" />
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
                     </svg>
-                    <span>Sign In</span>
+                    <span>Send Reset Instructions</span>
                   </>
                 )}
               </button>
+
+              <div style={{ textAlign: "center", marginTop: "8px" }}>
+                <button
+                  type="button"
+                  onClick={() => navigate("/login")}
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: 600,
+                    color: "#12245B",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: 0,
+                  }}
+                >
+                  Back to Sign In
+                </button>
+              </div>
             </form>
           </div>
 
@@ -354,7 +261,7 @@ export default function LoginPage() {
                 textTransform: "uppercase",
               }}
             >
-              Live Bot Activity
+              Secure Account Recovery
             </span>
           </div>
 
@@ -371,7 +278,7 @@ export default function LoginPage() {
                 marginBottom: "12px",
               }}
             >
-              What you get access to
+              Need help?
             </p>
 
             <div className="feature-row">
@@ -393,7 +300,7 @@ export default function LoginPage() {
               <span
                 style={{ fontSize: "12px", color: "rgba(255,255,255,0.85)", fontWeight: 500 }}
               >
-                Conversational AI sales bots
+                Check your spam folder if you do not see the email
               </span>
             </div>
 
@@ -415,7 +322,7 @@ export default function LoginPage() {
               <span
                 style={{ fontSize: "12px", color: "rgba(255,255,255,0.85)", fontWeight: 500 }}
               >
-                Real-time sales analytics & tracking
+                Reset links expire after 15 minutes for security
               </span>
             </div>
 
@@ -437,7 +344,7 @@ export default function LoginPage() {
               <span
                 style={{ fontSize: "12px", color: "rgba(255,255,255,0.85)", fontWeight: 500 }}
               >
-                Automated customer support 24/7
+                Contact support if you need further assistance
               </span>
             </div>
           </div>

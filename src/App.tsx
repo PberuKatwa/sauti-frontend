@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import ForgotPassword from "./pages/ForgotPassword";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Sidebar } from "./components/layout/Sidebar";
@@ -31,6 +32,7 @@ function AppContent() {
         <Route path="/test" element={<Test />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/sidebar" element={<Sidebar />} />
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route path="home" element={<Home />}/>
