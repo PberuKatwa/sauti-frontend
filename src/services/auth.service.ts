@@ -42,6 +42,24 @@ export const authService = {
     return user;
   },
 
+  async forgotPassword(email:string): Promise<ApiResponse>{
+    const response = await apiClient.patch(
+      `/auth/forgot-password/${email}`,
+      { headers: { "Content-Type": "application/json", } }
+    )
+
+    const result: ApiResponse = response.data;
+
+    return result;
+  },
+
+  async validateToken(token: string): Promise<ApiResponse>{
+    const response = await apiClient.get(`/auth/validate-password-token/${token}`);
+    const result: ApiResponse = response.data;
+
+    return result;
+  },
+
   async resetPassword(token:string, password:string): Promise<ApiResponse>{
     const response = await apiClient.post(
       `auth/reset-password/${token}`,
@@ -54,16 +72,6 @@ export const authService = {
     return result;
   },
 
-  async forgotPassword(email:string): Promise<ApiResponse>{
-    const response = await apiClient.patch(
-      `/auth/forgot-password/${email}`,
-      { headers: { "Content-Type": "application/json", } }
-    )
-
-    const result: ApiResponse = response.data;
-
-    return result;
-  },
 
   async logout(): Promise<void>{
     try {
