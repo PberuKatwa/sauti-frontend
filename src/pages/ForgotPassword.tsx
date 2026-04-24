@@ -28,9 +28,10 @@ export default function ForgotPassword() {
 
     try {
       setLoading(true);
-      await authService.forgotPassword(email);
+      const response = await authService.forgotPassword(email);
+      if (!response.success) throw new Error(`Error in sending reset link to email`);
       toast.success(
-        "If an account exists with this email, you will receive password reset instructions.",
+        response.message,
         {
           position: "top-right",
           autoClose: 6000,
@@ -42,10 +43,12 @@ export default function ForgotPassword() {
         error?.response?.data?.message ||
         error?.message ||
         "Failed to send reset instructions. Please try again.";
-      toast.error(message, {
+      toast.error(`Error in sending reset link to email`, {
         position: "top-right",
         autoClose: 5000,
       });
+
+      console.error("error in sending reset link", message)
     } finally {
       setLoading(false);
     }
