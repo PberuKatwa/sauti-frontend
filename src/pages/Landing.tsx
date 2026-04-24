@@ -1,8 +1,20 @@
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faRobot,
+  faHeadset,
+  faGlobe,
+  faChartLine,
+  faClock,
+  faBolt,
+  faArrowRight,
+  faCheckCircle,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Landing() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#020617] via-[#12245B] to-[#0a1a4a] font-[Poppins] relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-blue-950 font-[Poppins] relative overflow-hidden">
+      {/* Ambient glows */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-[#F48120]/15 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#F48120]/10 rounded-full blur-3xl" />
@@ -10,22 +22,33 @@ export default function Landing() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-white/2 rounded-full border border-white/5" />
       </div>
 
+      {/* ── NAVIGATION ── */}
       <nav className="relative z-20 flex justify-between items-center px-8 py-6 md:px-16">
         <div className="text-white font-bold text-2xl tracking-tight">
           SAUTI<span className="text-[#F48120]"> Cloud</span>
         </div>
-        <Link
-          to="/login"
-          className="px-6 py-2 rounded-full border border-[#F48120] text-[#F48120] font-medium hover:bg-[#F48120] hover:text-white transition-all"
-        >
-          Sign In
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link
+            to="/login"
+            className="px-6 py-2 rounded-full border border-[#F48120] text-[#F48120] font-medium hover:bg-[#F48120] hover:text-white transition-all hidden sm:inline-block"
+          >
+            Sign In
+          </Link>
+          <Link
+            to="/register"
+            className="px-6 py-2 rounded-full bg-[#F48120] text-white font-medium hover:bg-[#d96d12] transition-all shadow-lg shadow-[#F48120]/20"
+          >
+            Sign Up
+          </Link>
+        </div>
       </nav>
 
-      <main className="relative z-10 flex min-h-[80vh] flex-col items-center justify-center px-4 md:px-16 lg:px-24 text-center m-10">
+      {/* ── HERO ── */}
+      <main className="relative z-10 flex flex-col items-center justify-center px-4 md:px-16 lg:px-24 text-center pt-10 pb-20">
         <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full mb-8 text-sm text-white/90">
-
-          <span className="bg-[#F48120] text-white text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">AI-Powered</span>
+          <span className="bg-[#F48120] text-white text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+            AI-Powered
+          </span>
           <div className="h-4 w-px bg-white/30" />
           <span className="font-semibold text-[#3B82F6]">Intelligent Sales & Support</span>
           <div className="h-4 w-px bg-white/30" />
@@ -37,15 +60,21 @@ export default function Landing() {
         </h1>
 
         <p className="text-white/60 text-lg md:text-xl max-w-2xl leading-relaxed mb-10">
-          Close sales and deliver seamless customer support around the clock through AI-driven bots that feel human, not robotic. No human required in the loop.
+          Close sales and deliver seamless customer support around the clock
+          through AI-driven bots that feel human, not robotic. No human required
+          in the loop.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-4">
           <Link
-            to="/login"
-            className="px-8 py-3.5 rounded-full bg-gradient-to-r from-[#F48120] to-[#12245B] text-white font-semibold text-base hover:opacity-90 transition-opacity shadow-lg shadow-[#F48120]/20 w-full sm:w-auto text-center"
+            to="/register"
+            className="group px-8 py-3.5 rounded-full bg-gradient-to-r from-[#F48120] to-[#12245B] text-white font-semibold text-base hover:opacity-90 transition-opacity shadow-lg shadow-[#F48120]/20 w-full sm:w-auto text-center inline-flex items-center justify-center gap-2"
           >
-            Get Started
+            Get Started Free
+            <FontAwesomeIcon
+              icon={faArrowRight}
+              className="text-sm group-hover:translate-x-1 transition-transform"
+            />
           </Link>
 
           <a
@@ -56,21 +85,265 @@ export default function Landing() {
           </a>
         </div>
 
+        {/* ── MINI FEATURE CARDS ── */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 w-full max-w-5xl">
           <div className="p-6 rounded-2xl bg-white/5 border border-white/10 text-left">
             <h3 className="text-[#F48120] font-bold mb-2">AI Sales Bots</h3>
-            <p className="text-white/50 text-sm">Intelligent bots that engage leads, answer questions, and close deals automatically, 24/7.</p>
+            <p className="text-white/50 text-sm">
+              Intelligent bots that engage leads, answer questions, and close
+              deals automatically, 24/7.
+            </p>
           </div>
           <div className="p-6 rounded-2xl bg-white/10 border border-[#F48120]/30 text-left scale-105 shadow-xl shadow-[#F48120]/5">
             <h3 className="text-white font-bold mb-2">Customer Support</h3>
-            <p className="text-white/70 text-sm">Seamless, human-like support experiences that resolve issues instantly without human intervention.</p>
+            <p className="text-white/70 text-sm">
+              Seamless, human-like support experiences that resolve issues
+              instantly without human intervention.
+            </p>
           </div>
           <div className="p-6 rounded-2xl bg-white/5 border border-white/10 text-left">
             <h3 className="text-[#3B82F6] font-bold mb-2">Web Interfaces</h3>
-            <p className="text-white/50 text-sm">Beautiful, responsive web interfaces that integrate directly into your existing sales funnel.</p>
+            <p className="text-white/50 text-sm">
+              Beautiful, responsive web interfaces that integrate directly into
+              your existing sales funnel.
+            </p>
           </div>
         </div>
       </main>
+
+      {/* ── WHY SIGN UP ── */}
+      <section className="relative z-10 px-4 md:px-16 lg:px-24 py-20">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-14">
+            <span className="text-[#F48120] text-sm font-bold uppercase tracking-widest">
+              Why Sauti-Cloud
+            </span>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mt-3 mb-5">
+              Automate Your Revenue Engine
+            </h2>
+            <p className="text-white/60 text-lg max-w-2xl mx-auto">
+              Signing up gives you instant access to a complete AI sales and
+              support platform built to convert visitors into paying customers
+              while you sleep.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Card 1 */}
+            <div className="p-8 rounded-2xl bg-white border border-gray-200 hover:border-[#F48120]/40 transition-colors group">
+              <div className="w-12 h-12 rounded-xl bg-[#12245B] flex items-center justify-center mb-5 group-hover:bg-[#F48120] transition-colors">
+                <FontAwesomeIcon icon={faRobot} className="text-white text-lg" />
+              </div>
+              <h3 className="text-[#12245B] font-bold text-lg mb-2">
+                AI Sales Bots
+              </h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Deploy intelligent bots that qualify leads, handle objections,
+                and close deals on autopilot. Your sales team never sleeps.
+              </p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="p-8 rounded-2xl bg-white border border-gray-200 hover:border-[#F48120]/40 transition-colors group">
+              <div className="w-12 h-12 rounded-xl bg-[#12245B] flex items-center justify-center mb-5 group-hover:bg-[#F48120] transition-colors">
+                <FontAwesomeIcon icon={faHeadset} className="text-white text-lg" />
+              </div>
+              <h3 className="text-[#12245B] font-bold text-lg mb-2">
+                24/7 Support
+              </h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Deliver instant, human-like support at any hour. Reduce ticket
+                volume and keep customers happy without hiring more agents.
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="p-8 rounded-2xl bg-white border border-gray-200 hover:border-[#F48120]/40 transition-colors group">
+              <div className="w-12 h-12 rounded-xl bg-[#12245B] flex items-center justify-center mb-5 group-hover:bg-[#F48120] transition-colors">
+                <FontAwesomeIcon icon={faGlobe} className="text-white text-lg" />
+              </div>
+              <h3 className="text-[#12245B] font-bold text-lg mb-2">
+                Web Interfaces
+              </h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Embed beautiful chat widgets and landing pages into your website
+                in minutes. No coding required.
+              </p>
+            </div>
+
+            {/* Card 4 */}
+            <div className="p-8 rounded-2xl bg-white border border-gray-200 hover:border-[#F48120]/40 transition-colors group">
+              <div className="w-12 h-12 rounded-xl bg-[#12245B] flex items-center justify-center mb-5 group-hover:bg-[#F48120] transition-colors">
+                <FontAwesomeIcon icon={faChartLine} className="text-white text-lg" />
+              </div>
+              <h3 className="text-[#12245B] font-bold text-lg mb-2">
+                Real-Time Analytics
+              </h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Track conversions, bot performance, and customer sentiment with
+                a clean analytics dashboard.
+              </p>
+            </div>
+
+            {/* Card 5 */}
+            <div className="p-8 rounded-2xl bg-white border border-gray-200 hover:border-[#F48120]/40 transition-colors group">
+              <div className="w-12 h-12 rounded-xl bg-[#12245B] flex items-center justify-center mb-5 group-hover:bg-[#F48120] transition-colors">
+                <FontAwesomeIcon icon={faClock} className="text-white text-lg" />
+              </div>
+              <h3 className="text-[#12245B] font-bold text-lg mb-2">
+                Always On
+              </h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Your bots work weekends, holidays, and time zones you do not.
+                Capture every opportunity the moment it arrives.
+              </p>
+            </div>
+
+            {/* Card 6 */}
+            <div className="p-8 rounded-2xl bg-white border border-gray-200 hover:border-[#F48120]/40 transition-colors group">
+              <div className="w-12 h-12 rounded-xl bg-[#12245B] flex items-center justify-center mb-5 group-hover:bg-[#F48120] transition-colors">
+                <FontAwesomeIcon icon={faBolt} className="text-white text-lg" />
+              </div>
+              <h3 className="text-[#12245B] font-bold text-lg mb-2">
+                Minutes to Launch
+              </h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Sign up, configure your bot, and go live in under 10 minutes.
+                No technical expertise needed.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── HOW IT WORKS ── */}
+      <section id="features" className="relative z-10 px-4 md:px-16 lg:px-24 py-20">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-14">
+            <span className="text-[#F48120] text-sm font-bold uppercase tracking-widest">
+              How It Works
+            </span>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mt-3 mb-5">
+              Three Steps to Smarter Sales
+            </h2>
+            <p className="text-white/60 text-lg max-w-2xl mx-auto">
+              Sauti-Cloud replaces your static forms and slow response times with
+              an AI teammate that never clocks out.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Step 1 */}
+            <div className="relative text-center">
+              <div className="w-16 h-16 rounded-full bg-[#F48120] text-white text-2xl font-bold flex items-center justify-center mx-auto mb-5 shadow-lg shadow-[#F48120]/30">
+                1
+              </div>
+              <h3 className="text-white font-bold text-lg mb-2">Create Your Account</h3>
+              <p className="text-white/50 text-sm leading-relaxed">
+                Sign up in seconds. No credit card required to get started. Set up
+                your workspace and invite your team.
+              </p>
+            </div>
+
+            {/* Step 2 */}
+            <div className="relative text-center">
+              <div className="w-16 h-16 rounded-full bg-[#F48120] text-white text-2xl font-bold flex items-center justify-center mx-auto mb-5 shadow-lg shadow-[#F48120]/30">
+                2
+              </div>
+              <h3 className="text-white font-bold text-lg mb-2">Build Your Bot</h3>
+              <p className="text-white/50 text-sm leading-relaxed">
+                Customize conversation flows, connect your products, and train
+                your bot with your brand voice and sales playbook.
+              </p>
+            </div>
+
+            {/* Step 3 */}
+            <div className="relative text-center">
+              <div className="w-16 h-16 rounded-full bg-[#F48120] text-white text-2xl font-bold flex items-center justify-center mx-auto mb-5 shadow-lg shadow-[#F48120]/30">
+                3
+              </div>
+              <h3 className="text-white font-bold text-lg mb-2">Go Live & Convert</h3>
+              <p className="text-white/50 text-sm leading-relaxed">
+                Embed the widget on your site and watch leads turn into customers
+                automatically while you focus on strategy.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SOCIAL PROOF / CTA ── */}
+      <section className="relative z-10 px-4 md:px-16 lg:px-24 py-20">
+        <div className="max-w-4xl mx-auto text-center bg-gradient-to-br from-[#12245B] to-[#0a1a4a] border border-white/10 rounded-3xl p-10 md:p-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-5">
+            Ready to Stop Losing Leads?
+          </h2>
+          <p className="text-white/60 text-lg mb-8 max-w-xl mx-auto">
+            Every minute you wait is a potential customer bouncing to a competitor.
+            Join thousands of businesses already closing deals with AI.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+            <Link
+              to="/register"
+              className="group px-8 py-3.5 rounded-full bg-[#F48120] text-white font-semibold text-base hover:bg-[#d96d12] transition-colors shadow-lg shadow-[#F48120]/20 w-full sm:w-auto text-center inline-flex items-center justify-center gap-2"
+            >
+              Sign Up Free
+              <FontAwesomeIcon
+                icon={faArrowRight}
+                className="text-sm group-hover:translate-x-1 transition-transform"
+              />
+            </Link>
+            <Link
+              to="/login"
+              className="px-8 py-3.5 rounded-full border border-white/20 text-white font-semibold text-base hover:bg-white/5 transition-colors w-full sm:w-auto text-center"
+            >
+              I Already Have an Account
+            </Link>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-4 text-white/40 text-xs">
+            <span className="flex items-center gap-1.5">
+              <FontAwesomeIcon icon={faCheckCircle} className="text-[#F48120]" />
+              No credit card required
+            </span>
+            <span className="flex items-center gap-1.5">
+              <FontAwesomeIcon icon={faCheckCircle} className="text-[#F48120]" />
+              Free trial included
+            </span>
+            <span className="flex items-center gap-1.5">
+              <FontAwesomeIcon icon={faCheckCircle} className="text-[#F48120]" />
+              Cancel anytime
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer className="relative z-10 border-t border-white/10 px-4 md:px-16 lg:px-24 py-10">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-white font-bold text-xl tracking-tight">
+            SAUTI<span className="text-[#F48120]"> Cloud</span>
+          </div>
+          <p className="text-white/40 text-sm">
+            AI-powered sales automation &middot; sauti-cloud.com
+          </p>
+          <div className="flex items-center gap-6">
+            <Link
+              to="/register"
+              className="text-[#F48120] text-sm font-medium hover:underline"
+            >
+              Sign Up
+            </Link>
+            <Link
+              to="/login"
+              className="text-white/60 text-sm font-medium hover:text-white transition-colors"
+            >
+              Sign In
+            </Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
