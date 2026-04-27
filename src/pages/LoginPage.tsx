@@ -244,15 +244,16 @@ export default function LoginPage() {
                     className="font-mono-ui"
                     style={{
                       fontSize: "11px",
-                      color: "#9CA3AF",
+                      fontWeight: 600,
+                      color: "#12245B",
                       textDecoration: "none",
                       transition: "color 0.2s",
                     }}
                     onMouseEnter={(e) =>
-                      (e.currentTarget.style.color = "#12245B")
+                      (e.currentTarget.style.color = "#F48120")
                     }
                     onMouseLeave={(e) =>
-                      (e.currentTarget.style.color = "#9CA3AF")
+                      (e.currentTarget.style.color = "#12245B")
                     }
                   >
                     Forgot password?
@@ -300,6 +301,30 @@ export default function LoginPage() {
                 )}
               </button>
             </form>
+
+            <div style={{ marginTop: "20px", textAlign: "center" }}>
+              <span style={{ fontSize: "13px", color: "#6B7280" }}>
+                Don&apos;t have an account?{" "}
+              </span>
+              <Link
+                to="/register"
+                style={{
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  color: "#F48120",
+                  textDecoration: "none",
+                  transition: "color 0.2s",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.color = "#12245B")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = "#F48120")
+                }
+              >
+                Register
+              </Link>
+            </div>
           </div>
 
           {/* Footer */}
