@@ -10,7 +10,7 @@ import {
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 import { authService } from "../services/auth.service";
-import type { ProfileApiResponse } from "../types/auth.types";
+import type { ProfileApiResponse } from "../types/user.types";
 import { SautiCloudLoader } from "../components/spinners/sauti.loader";
 
 export default function Profile() {

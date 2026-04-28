@@ -1,5 +1,5 @@
 import type { ApiResponse } from "../types/api.types";
-import type { AuthUserApiResponse, CreateUserPayload, ProfileApiResponse } from "../types/auth.types";
+import type { AuthUserApiResponse, CreateUserPayload, ProfileApiResponse } from "../types/user.types";
 import { apiClient } from "./api.client";
 
 export const authService = {
