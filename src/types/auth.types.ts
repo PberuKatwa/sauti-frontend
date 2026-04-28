@@ -45,6 +45,11 @@ export interface UserProfile extends BaseUser {
   created_at: Date;
 }
 
+export type AuthContextType = {
+  user: AuthUser | null;
+  setUser: (user: AuthUser | null) => void;
+};
+
 export interface UserApiResponse extends ApiResponse<BaseUser> { };
 export interface AuthUserApiResponse extends ApiResponse<AuthUser> { };
 export interface ProfileApiResponse extends ApiResponse<UserProfile> { };
