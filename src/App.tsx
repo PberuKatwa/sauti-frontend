@@ -13,6 +13,7 @@ import Orders from "./pages/Orders";
 import Profile from "./pages/Profile";
 import Landing from "./pages/Landing";
 import ResetPassword from "./pages/ResetPassword";
+import { AuthProvider } from "./context/AuthContext";
 
 function AppContent() {
   return (
@@ -49,8 +50,10 @@ function AppContent() {
 
 export default function App() {
   return (
-      <BrowserRouter>
-        <AppContent />
-      </BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
+          <AppContent />
+      </AuthProvider>
+    </BrowserRouter>
   );
 }

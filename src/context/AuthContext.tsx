@@ -20,13 +20,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     } else {
       localStorage.removeItem("user");
     }
-
-    return (
-      <AuthContext.Provider value={{ user, setUser }}>
-        {children}
-      </AuthContext.Provider>
-    )
   }
+
+  return (
+    <AuthContext.Provider value={{ user, setUser }}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
 export const useAuth = () => {
