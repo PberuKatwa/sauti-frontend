@@ -21,11 +21,12 @@ const navItems = [
 
 export const Sidebar = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   const handleLogout = async () => {
     try {
       await authService.logout();
+      logout();
     } catch {
       // Continue with local cleanup even if API call fails
     } finally {
