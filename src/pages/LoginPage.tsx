@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import { authService } from "../services/auth.service";
 import "../assets/css/login.css";
+import { useAuth } from "../context/AuthContext";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -11,16 +12,23 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const { setUser } = useAuth()
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (loading) return;
     try {
       setLoading(true);
-      await authService.login(email, password);
+      const user = await authService.login(email, password);
+
+      if (!user.data) throw new Error(`User credentials are wrong`);
+      setUser(user.data)
+
       toast.success("Successfully logged in", {
         position: "top-right",
         autoClose: 3000,
       });
+
       navigate("/dashboard/home");
     } catch (error: any) {
       const message =

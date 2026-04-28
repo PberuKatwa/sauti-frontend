@@ -1,9 +1,6 @@
-import { useAuth } from "../context/AuthContext";
 import type { ApiResponse } from "../types/api.types";
 import type { AuthUserApiResponse, CreateUserPayload, ProfileApiResponse } from "../types/auth.types";
 import { apiClient } from "./api.client";
-
-const { setUser } = useAuth()
 
 export const authService = {
 
@@ -15,9 +12,6 @@ export const authService = {
     });
 
     const user: AuthUserApiResponse = response.data;
-
-    if (!user.data) throw new Error(`User credentials are wrong`);
-    setUser(user.data)
     return user
   },
 
@@ -77,7 +71,6 @@ export const authService = {
   async logout(): Promise<void>{
     try {
       await apiClient.post("/auth/logout");
-      setUser(null)
     } catch (error) {
       throw error;
     }

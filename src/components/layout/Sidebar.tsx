@@ -5,12 +5,15 @@ import {
   faHome,
   faRightFromBracket,
   faUser,
+  faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { authService } from "../../services/auth.service";
 import { faBox } from "@fortawesome/free-solid-svg-icons/faBox";
+import { useAuth } from "../../context/AuthContext";
 
 const navItems = [
   { path: "/dashboard/home", label: "Home", icon: faHome, end: false },
+  { path: "/dashboard/users", label: "Users", icon: faUsers, adminOnly: true },
   { path: "/dashboard/products", label: "Products", icon: faBoxOpen, end: false },
   { path: "/dashboard/orders", label: "Orders", icon: faBox, end: false },
   { path: "/dashboard/profile", label: "Profile", icon: faUser, end: false },
@@ -18,6 +21,7 @@ const navItems = [
 
 export const Sidebar = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const handleLogout = async () => {
     try {
@@ -55,29 +59,30 @@ export const Sidebar = () => {
           Menu
         </p>
 
-        {navItems.map((item) => (
-          <NavLink
-            key={item.path}
-            to={item.path}
-            end={item.end}
-            className={({ isActive }) =>
-              `
-              flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
-              transition-all duration-150 border
-              ${
-               isActive
-                   ? "bg-white border-white text-black font-semibold"
-                  : "border-transparent text-white/40 font-normal"
+        {navItems
+          .filter((item) => {
+            if (item.adminOnly && user?.role !== "admin") return false;
+            return true;
+          })
+          .map((item) => (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              className={({ isActive }) =>
+                `
+                flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm
+                transition-all duration-150 border
+                ${
+                  isActive
+                    ? "bg-white border-white text-black font-semibold"
+                    : "border-transparent text-white/40 font-normal"
+                }
+                `
               }
-              `
-            }
-          >
-            <FontAwesomeIcon
-              icon={item.icon}
-              className="w-3.5 h-3.5 flex-shrink-0"
-            />
-            <span>{item.label}</span>
-          </NavLink>
+            >
+              <FontAwesomeIcon icon={item.icon} />
+              <span>{item.label}</span>
+            </NavLink>
         ))}
       </nav>
 
