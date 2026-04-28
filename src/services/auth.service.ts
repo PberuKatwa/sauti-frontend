@@ -1,3 +1,4 @@
+import { useAuth } from "../context/AuthContext";
 import type { ApiResponse } from "../types/api.types";
 import type { AuthUserApiResponse, CreateUserPayload, ProfileApiResponse } from "../types/auth.types";
 import { apiClient } from "./api.client";
@@ -6,18 +7,15 @@ export const authService = {
 
   async login(email: string, password: string): Promise<AuthUserApiResponse> {
 
-    try {
-      const response = await apiClient.post("/auth/login", {
-        email,
-        password
-      });
+    const { setUser } = useAuth()
 
-      const user: AuthUserApiResponse = response.data;
-      return user
-    } catch (error) {
-      throw error
-    }
+    const response = await apiClient.post("/auth/login", {
+      email,
+      password
+    });
 
+    const user: AuthUserApiResponse = response.data;
+    return user
   },
 
   async profile(): Promise<ProfileApiResponse> {

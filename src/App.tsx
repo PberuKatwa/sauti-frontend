@@ -52,7 +52,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-          <AppContent />
+        <AppContent />
       </AuthProvider>
     </BrowserRouter>
   );

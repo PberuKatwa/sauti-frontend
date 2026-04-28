@@ -48,6 +48,7 @@ export interface UserProfile extends BaseUser {
 export type AuthContextType = {
   user: AuthUser | null;
   setUser: (user: AuthUser | null) => void;
+  logout: () => void;
 };
 
 export interface UserApiResponse extends ApiResponse<BaseUser> { };
