@@ -15,15 +15,15 @@ export const UsersService = {
     }
 
     if (filters?.firstName) {
-      params.append('startDate', filters.firstName);
+      params.append('firstName', filters.firstName);
     }
 
     if (filters?.email) {
-      params.append('endDate', filters.email);
+      params.append('email', filters.email);
     }
 
     if (filters?.lastName) {
-      params.append('clientPhone', filters.lastName);
+      params.append('lastName', filters.lastName);
     }
 
     const allParams = params.toString()
