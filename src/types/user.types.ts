@@ -19,6 +19,7 @@ export interface UpdateUserPayload{
 }
 
 export interface UpdateUserDetailsPayload {
+  userId: number;
   firstName?: string;
   lastName?: string;
   email?: string;
