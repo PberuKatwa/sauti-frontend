@@ -14,6 +14,7 @@ import Profile from "./pages/Profile";
 import Landing from "./pages/Landing";
 import ResetPassword from "./pages/ResetPassword";
 import { AuthProvider } from "./context/AuthContext";
+import UserManagement from "./pages/UserManagement";
 
 function AppContent() {
   return (
@@ -38,7 +39,8 @@ function AppContent() {
         <Route path="/auth/reset-password/:token" element={<ResetPassword />} />
         <Route path="/sidebar" element={<Sidebar />} />
         <Route path="/dashboard" element={<DashboardLayout />}>
-          <Route path="home" element={<Home />}/>
+          <Route path="home" element={<Home />} />
+          <Route path="users" element={<UserManagement />}/>
           <Route path="products" element={<Products />} />
           <Route path="orders" element={<Orders />} />
           <Route path="profile" element={<Profile />} />
