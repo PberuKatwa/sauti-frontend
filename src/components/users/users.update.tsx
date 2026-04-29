@@ -207,10 +207,12 @@ export const UpdateUserModal = function ({
               className={inputClass}
             >
               <option value="">Select a status</option>
-              {statusOptions.map((status) => (
-                <option key={status} value={status}>
-                  {status.charAt(0).toUpperCase() + status.slice(1)}
-                </option>
+              {statusOptions
+                .filter((status) => status !== "trash")
+                .map((status) => (
+                  <option key={status} value={status}>
+                    {status.charAt(0).toUpperCase() + status.slice(1)}
+                  </option>
               ))}
             </select>
           </div>
