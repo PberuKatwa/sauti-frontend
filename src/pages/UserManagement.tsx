@@ -90,6 +90,27 @@ export default function UserManagement() {
     setIsUpdateModalOpen(true);
   };
 
+  const handleTrash = async (userId: number) => {
+    try {
+
+      setLoading(true);
+
+      const response = await UsersService.trashUser(userId);
+      if (!response.success) throw new Error(`The user deletion failed`)
+
+      toast.success(response.message)
+
+      await getAllUsers()
+
+    } catch (error) {
+
+      console.error(`Error in deleting user`, error)
+      toast.error(`Error in deleting user`)
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const handleUpdateSuccess = () => {
     getAllUsers();
   };

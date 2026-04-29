@@ -43,5 +43,15 @@ export const UsersService = {
     const updateRes: ApiResponse = response.data;
 
     return updateRes;
+  },
+
+  async trashUser(userId: number): Promise<ApiResponse>{
+    const response = await apiClient.delete(
+      `/users/${userId}`
+    )
+
+    const trashRes: ApiResponse = response.data;
+
+    return trashRes;
   }
 }
