@@ -141,6 +141,16 @@ export default function UserManagement() {
       },
     },
     {
+      type: "badge",
+      key: "status",
+      label: "Status",
+      colorMap: {
+        active: "success",
+        trash: "error",
+        pending: "warning",
+      },
+    },
+    {
       type: "custom",
       key: "created_at",
       label: "Created At",

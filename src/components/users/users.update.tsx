@@ -70,8 +70,15 @@ export const UpdateUserModal = function ({
       toast.success("User updated successfully");
       onSuccess();
       onClose();
-    } catch {
-      toast.error("Error updating user");
+    } catch(error:any) {
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Update failed. Please try again.";
+      toast.error(message, {
+        position: "top-right",
+        autoClose: 5000,
+      });
     } finally {
       setLoading(false);
     }
