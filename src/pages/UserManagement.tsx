@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import UserFilters from "../components/filters/users.filters";
-import type { BaseUserFilters, UserProfile } from "../types/user.types";
+import type { BaseUserFilters, UserProfile, UserStatus } from "../types/user.types";
 import type { ColumnType } from "../components/tables/DataTable";
 import DataTable from "../components/tables/DataTable";
 import { UsersService } from "../services/users.service";
 import { SautiCloudLoader } from "../components/spinners/sauti.loader";
+import { UpdateUserModal, EditUserButton } from "../components/users/users.update";
 
 const UserFallback: UserProfile[] = [
   {
@@ -14,6 +15,7 @@ const UserFallback: UserProfile[] = [
     last_name: "",
     email: "",
     role: "",
+    status: "active" as UserStatus,
     created_at: new Date(),
   },
 ];
@@ -31,6 +33,8 @@ export default function UserManagement() {
   const [limit, setLimit] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<UserProfile | null>(null);
 
   const getAllUsers = async () => {
     try {
@@ -73,7 +77,26 @@ export default function UserManagement() {
   };
 
   const handleEdit = (row: Record<string, unknown>) => {
-    toast.info(`Edit user ${row.first_name} ${row.last_name}`);
+    const user: UserProfile = {
+      id: row.id as number,
+      first_name: row.first_name as string,
+      last_name: row.last_name as string,
+      email: row.email as string,
+      role: row.role as string,
+      status: row.status as UserStatus,
+      created_at: row.created_at as Date,
+    };
+    setSelectedUser(user);
+    setIsUpdateModalOpen(true);
+  };
+
+  const handleUpdateSuccess = () => {
+    getAllUsers();
+  };
+
+  const handleUpdateClose = () => {
+    setIsUpdateModalOpen(false);
+    setSelectedUser(null);
   };
 
   useEffect(() => {
@@ -111,9 +134,10 @@ export default function UserManagement() {
       key: "role",
       label: "Role",
       colorMap: {
+        super_admin: "error",
         admin: "error",
-        user: "success",
-        manager: "primary",
+        basic: "success",
+        demo: "primary",
       },
     },
     {
@@ -128,13 +152,7 @@ export default function UserManagement() {
       label: "Actions",
       render: (_value, row) => (
         <div className="flex items-center gap-2">
-          <button
-            className="p-2 text-[#F48120] hover:bg-orange-50 rounded-md transition-colors"
-            title="Edit"
-            onClick={() => handleEdit(row)}
-          >
-            Edit
-          </button>
+          <EditUserButton onClick={() => handleEdit(row)} />
         </div>
       ),
     },
@@ -197,6 +215,15 @@ export default function UserManagement() {
           />
         </section>
       </div>
+
+      {selectedUser && (
+        <UpdateUserModal
+          isOpen={isUpdateModalOpen}
+          user={selectedUser}
+          onClose={handleUpdateClose}
+          onSuccess={handleUpdateSuccess}
+        />
+      )}
     </div>
   );
 }
