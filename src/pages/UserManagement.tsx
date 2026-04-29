@@ -7,6 +7,8 @@ import DataTable from "../components/tables/DataTable";
 import { UsersService } from "../services/users.service";
 import { SautiCloudLoader } from "../components/spinners/sauti.loader";
 import { UpdateUserModal, EditUserButton } from "../components/users/users.update";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const UserFallback: UserProfile[] = [
   {
@@ -90,7 +92,7 @@ export default function UserManagement() {
     setIsUpdateModalOpen(true);
   };
 
-  const handleTrash = async (userId: number) => {
+  const handleDelete = async (userId: number) => {
     try {
 
       setLoading(true);
@@ -183,8 +185,25 @@ export default function UserManagement() {
       label: "Actions",
       render: (_value, row) => (
         <div className="flex items-center gap-2">
-          <EditUserButton onClick={() => handleEdit(row)} />
+
+          <button
+            className="p-2 text-[#F48120] hover:bg-orange-50 rounded-md transition-colors"
+            title="Edit"
+            onClick={() => handleEdit(row)}
+          >
+            <FontAwesomeIcon icon={faEdit} />
+          </button>
+
+          <button
+            className="p-2 text-red-500 hover:bg-red-50 rounded-md transition-colors"
+            title="Delete"
+            onClick={() => handleDelete(( row.id as unknown as number))}
+          >
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+
         </div>
+
       ),
     },
   ];
