@@ -1,5 +1,20 @@
 import type { ApiResponse } from "./api.types";
 
+export type ProductBrands = 'classic' | 'premium' | 'luxury'
+
+export type FlowerProductCategories =
+  | 'birthday'
+  | 'wedding'
+  | 'funeral'
+  | 'anniversary'
+  | 'romantic'
+  | 'valentines'
+  | 'sympathy'
+  | 'congratulations'
+  | 'apology'
+  | 'family-occasions'
+  | 'corporate';
+
 export type availabilityStatus = 'in stock' | 'out of stock' | 'preorder' | 'available for order' | 'discontinued' | 'pending';
 export type CrudOperations = "CREATE" | "UPDATE" | "DELETE";
 export type SyncColumnNames = "is_catalog_created" | "is_catalog_updated" | "is_catalog_deleted";
@@ -22,8 +37,8 @@ export interface FullProduct extends BaseProduct {
   user_id: number;
   currency: string | null;
   availability: availabilityStatus;
-  brand: string | null;
-  category: string | null;
+  brand: ProductBrands | null;
+  category: FlowerProductCategories | null;
   file_id: number | null;
   file_url: string | null;
   inventory: number;
@@ -45,11 +60,17 @@ export interface ProductPayload {
   price: number;
   currency: string;
   availability: availabilityStatus;
-  brand: string;
-  category: string;
+  brand: ProductBrands;
+  category: FlowerProductCategories;
   file_id: number;
   inventory: number;
   metadata: Record<string, any>;
+}
+
+export interface BaseProductFilters {
+  name?: string;
+  brand?: ProductBrands;
+  category?: FlowerProductCategories;
 }
 
 export interface CreateProductPayload extends ProductPayload {
