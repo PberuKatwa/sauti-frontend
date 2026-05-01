@@ -3,9 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import { ProductsService } from "../services/products.service";
-import type { AllProducts, FullProduct } from "../types/product.types";
+import type { AllProducts, FullProduct, BaseProductFilters } from "../types/product.types";
 import { CreateProductModal } from "../components/products/product.create";
 import { UpdateProductModal } from "../components/products/products.update";
+import ProductFilters from "../components/filters/products.filters";
 
 const initialUploadPayload: FullProduct = {
   id: 0,
@@ -31,20 +32,29 @@ export const Products = function () {
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<FullProduct>(initialUploadPayload);
   const [currentPage, setCurrentPage] = useState(1);
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(6);
   const [totalPages, setTotalPages] = useState(1);
   const [products, setProducts] = useState<FullProduct[]>([]);
   const [loading, setLoading] = useState(true);
+  const [filters, setFilters] = useState<BaseProductFilters>({});
 
   const openUpdateModal = (product: FullProduct) => {
     setSelectedProduct(product);
     setIsUpdateOpen(true);
   };
 
-  const getAllProducts = async function (currentPage: number, limit: number) {
+  const getAllProducts = async function (
+    currentPage: number,
+    limit: number,
+    currentFilters?: BaseProductFilters
+  ) {
     try {
       setLoading(true);
-      const response = await ProductsService.getAllProducts(currentPage, limit);
+      const response = await ProductsService.getAllProducts(
+        currentPage,
+        limit,
+        currentFilters
+      );
       const productsData: AllProducts = response.data!;
       setProducts(productsData.products);
       setCurrentPage(productsData.pagination.currentPage);
@@ -70,10 +80,20 @@ export const Products = function () {
 
   useEffect(
     function () {
-      getAllProducts(currentPage, limit);
+      getAllProducts(currentPage, limit, filters);
     },
-    [currentPage, limit]
+    [currentPage, limit, filters]
   );
+
+  const handleFilterChange = (newFilters: BaseProductFilters) => {
+    setFilters(newFilters);
+    setCurrentPage(1);
+  };
+
+  const handleFilterReset = () => {
+    setFilters({});
+    setCurrentPage(1);
+  };
 
   return (
     <div className="min-h-screen bg-white px-3 py-8 font-[Poppins]">
@@ -107,6 +127,14 @@ export const Products = function () {
       </div>
 
       <div className="border-t border-gray-100 mb-10" />
+
+      {/* Filters */}
+      <div className="mb-8">
+        <ProductFilters
+          onFilterChange={handleFilterChange}
+          onReset={handleFilterReset}
+        />
+      </div>
 
       {/* Loading */}
       {loading && (

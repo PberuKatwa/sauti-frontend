@@ -20,8 +20,8 @@ const initialState: UpdateProductPayload = {
   price: 0,
   currency: "KES",
   availability: "in stock",
-  brand: "",
-  category: "",
+  brand: "classic",
+  category: "birthday",
   inventory: 0,
   metadata: {},
 };
@@ -53,8 +53,8 @@ export const UpdateProductModal = function ({
         price: Number(product.price),
         currency: product.currency || "KES",
         availability: product.availability,
-        brand: product.brand || "",
-        category: product.category || "",
+        brand: product.brand || "classic",
+        category: product.category || "birthday",
         inventory: product.inventory,
         metadata: product.metadata || {},
       });
@@ -236,27 +236,39 @@ export const UpdateProductModal = function ({
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
               <label htmlFor="update-brand" className={labelClass}>Brand</label>
-              <input
+              <select
                 id="update-brand"
-                type="text"
                 name="brand"
                 value={data.brand}
                 onChange={handleChange}
-                placeholder="e.g. Samsung"
                 className={inputClass}
-              />
+              >
+                <option value="classic">Classic</option>
+                <option value="premium">Premium</option>
+                <option value="luxury">Luxury</option>
+              </select>
             </div>
             <div className="flex flex-col gap-1.5">
               <label htmlFor="update-category" className={labelClass}>Category</label>
-              <input
+              <select
                 id="update-category"
-                type="text"
                 name="category"
                 value={data.category}
                 onChange={handleChange}
-                placeholder="e.g. Electronics"
                 className={inputClass}
-              />
+              >
+                <option value="birthday">Birthday</option>
+                <option value="wedding">Wedding</option>
+                <option value="funeral">Funeral</option>
+                <option value="anniversary">Anniversary</option>
+                <option value="romantic">Romantic</option>
+                <option value="valentines">Valentines</option>
+                <option value="sympathy">Sympathy</option>
+                <option value="congratulations">Congratulations</option>
+                <option value="apology">Apology</option>
+                <option value="family-occasions">Family Occasions</option>
+                <option value="corporate">Corporate</option>
+              </select>
             </div>
           </div>
 
