@@ -1,5 +1,5 @@
 import type { ApiResponse } from "../types/api.types";
-import type { AllAdminOrdersApiResponse, FullOrderFilters, UpdateStatusPayload } from "../types/orders.types";
+import type { AllAdminOrdersApiResponse, CreateContactAndOrder, FullOrderFilters, SingleOrderApiResponse, UpdateOrderPayload, UpdateStatusPayload } from "../types/orders.types";
 import { apiClient } from "./api.client";
 
 
@@ -43,10 +43,25 @@ export const OrdersService = {
     return orders;
   },
 
-  async updateStatus(payload: UpdateStatusPayload):Promise<ApiResponse> {
+  async createOrder(payload: CreateContactAndOrder): Promise<SingleOrderApiResponse>{
 
-    const response = await apiClient.patch(
-      `orders/status/${payload.orderId}/${payload.status}`,
+    const response = await apiClient.post(
+      `orders`,
+      payload,
+      { headers: { "Content-Type": "application/json", } }
+    );
+
+    const orderRes: SingleOrderApiResponse = response.data;
+
+    return orderRes;
+  },
+
+
+  async updateOrder(payload: UpdateOrderPayload):Promise<ApiResponse> {
+
+    const response = await apiClient.put(
+      `orders/${payload.orderId}`,
+      payload,
       { headers: { "Content-Type": "application/json", } }
     )
 

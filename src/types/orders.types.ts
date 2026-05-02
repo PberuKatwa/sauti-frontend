@@ -36,6 +36,11 @@ export interface CreateOrderPayload {
   items: OrderItem[];
 }
 
+export interface CreateContactAndOrder{
+  clientPhone: number;
+  items: OrderItem[];
+}
+
 export interface UpdateContactPayload {
   orderId: number;
   orderContact?: number;
@@ -52,6 +57,15 @@ export interface UpdateLocationPayload {
 export interface UpdateStatusPayload {
   orderId: number;
   status: 'pending_location' | 'pending_contact' | 'pending_delivery_type' | 'pending_delivery' | 'enroute' | 'delivered';
+}
+
+export interface UpdateOrderPayload {
+  orderId: number;
+  delivery_status?: OrderStatus;
+  order_contact?: number;
+  delivery_type?: 'scheduled' | 'immediate';
+  special_instructions?: string;
+  rider_phone?: number;
 }
 
 export interface SingleOrderApiResponse extends ApiResponse {
