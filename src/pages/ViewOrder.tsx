@@ -191,7 +191,7 @@ export default function ViewOrder() {
                 <FontAwesomeIcon icon={faTruck} className="text-[#F48120] text-xs" />
                 Delivery
               </h2>
-              <div className="space-y-3">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <p className="text-xs text-gray-400">Type</p>
                   <p className="text-sm font-medium text-gray-900 capitalize">{order.delivery_type}</p>
