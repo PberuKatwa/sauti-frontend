@@ -99,6 +99,7 @@ export interface AdminOrderRow {
   delivery_type: 'scheduled' | 'immediate';
   special_instructions: string;
   rider_phone: number;
+  items: OrderItem[];
   google_maps_link?: string;
   created_at: string;
 }

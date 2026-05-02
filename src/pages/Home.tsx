@@ -14,7 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import MonthlySalesChart from "../components/charts/monthlyOrders.chart";
 import { DashboardService } from "../services/dashboard.service";
-import { getDateRange } from "../utils/getDateRange";
+import { getMonthDateRange } from "../utils/getDateRange";
 import { SautiCloudLoader } from "../components/spinners/sauti.loader";
 
 
@@ -59,7 +59,7 @@ const MetricsSampleData: MetricItem[] = [
 
 export default function Home() {
 
-  const { startDate, endDate } = getDateRange(32);
+  const { startDate, endDate } = getMonthDateRange();
 
   const startFilters: BaseOrderFilters = {
     startDate,

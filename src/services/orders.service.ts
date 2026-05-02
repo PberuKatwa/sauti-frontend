@@ -46,7 +46,7 @@ export const OrdersService = {
   async createOrder(payload: CreateContactAndOrder): Promise<SingleOrderApiResponse>{
 
     const response = await apiClient.post(
-      `orders`,
+      `orders/create-client/${payload.clientPhone}`,
       payload,
       { headers: { "Content-Type": "application/json", } }
     );

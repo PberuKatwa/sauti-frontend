@@ -5,7 +5,7 @@ import type { AdminOrderRow, BaseOrderFilters, FullOrderFilters, OrderStatus } f
 import type { ColumnType } from "../components/tables/DataTable";
 import DataTable from "../components/tables/DataTable";
 import { OrdersService } from "../services/orders.service";
-import { getDateRange } from "../utils/getDateRange";
+import { getMonthDateRange } from "../utils/getDateRange";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { SautiCloudLoader } from "../components/spinners/sauti.loader";
@@ -26,12 +26,13 @@ const OrderFallback: AdminOrderRow[] = [
     delivery_type: "immediate",
     special_instructions: "",
     google_maps_link: "",
+    items:[],
     created_at: "",
   },
 ];
 
 export default function Orders() {
-  const { startDate, endDate } = getDateRange(32);
+  const { startDate, endDate } = getMonthDateRange();
 
   const startFilters: FullOrderFilters = {
     startDate,
@@ -136,14 +137,38 @@ export default function Orders() {
       },
     },
     {
+      type: "custom",
+      key: "items",
+      label: "Items",
+      render: (_value, row) => {
+        const items = (row as unknown as AdminOrderRow).items || [];
+        if (items.length === 0) return <span className="text-gray-400 text-xs">No items</span>;
+        return (
+          <div className="flex flex-col gap-0.5">
+            {items.map((item, idx) => (
+              <div key={idx} className="text-xs text-gray-700">
+                <span className="font-medium">{item.name}</span>
+                <span className="text-gray-400"> × {item.quantity} @ {formatCurrency(item.unitPrice)}</span>
+              </div>
+            ))}
+          </div>
+        );
+      },
+    },
+    {
       type: "text",
       key: "client_phone",
-      label: "Client Phone",
+      label: "Client",
     },
     {
       type: "text",
       key: "order_contact",
       label: "Recipient",
+    },
+    {
+      type: "text",
+      key: "rider_phone",
+      label: "Rider",
     },
     {
       type: "custom",
