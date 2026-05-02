@@ -7,7 +7,7 @@ import {
   faUser,
   faTruck,
   faBox,
-  faClipboard,
+  faLocationDot,
   faReceipt,
 } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
@@ -185,15 +185,42 @@ export default function ViewOrder() {
               </div>
             </div>
 
-            {/* Special Instructions */}
+            {/* Delivery */}
             <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-              <h2 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <FontAwesomeIcon icon={faClipboard} className="text-[#F48120] text-xs" />
-                Special Instructions
+              <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                <FontAwesomeIcon icon={faTruck} className="text-[#F48120] text-xs" />
+                Delivery
               </h2>
-              <p className="text-sm text-gray-600">
-                {displayValue(order.special_instructions)}
-              </p>
+              <div className="space-y-3">
+                <div>
+                  <p className="text-xs text-gray-400">Type</p>
+                  <p className="text-sm font-medium text-gray-900 capitalize">{order.delivery_type}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400">Rider Phone</p>
+                  <p className="text-sm font-medium text-gray-900">{displayValue(order.rider_phone)}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400">Location</p>
+                  {order.latitude && order.longitude ? (
+                    <a
+                      href={`https://www.google.com/maps?q=${order.latitude},${order.longitude}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-sm font-medium text-[#3B82F6] hover:underline"
+                    >
+                      <FontAwesomeIcon icon={faLocationDot} className="text-xs" />
+                      {order.latitude}, {order.longitude}
+                    </a>
+                  ) : (
+                    <p className="text-sm font-medium text-gray-900">N/A</p>
+                  )}
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400">Special Instructions</p>
+                  <p className="text-sm font-medium text-gray-900">{displayValue(order.special_instructions)}</p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -247,53 +274,6 @@ export default function ViewOrder() {
               </div>
             </div>
 
-            {/* Delivery Info */}
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-              <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <FontAwesomeIcon icon={faTruck} className="text-[#F48120] text-xs" />
-                Delivery
-              </h2>
-              <div className="space-y-3">
-                <div>
-                  <p className="text-xs text-gray-400">Type</p>
-                  <p className="text-sm font-medium text-gray-900 capitalize">{order.delivery_type}</p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-400">Rider Phone</p>
-                  <p className="text-sm font-medium text-gray-900">{displayValue(order.rider_phone)}</p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-400">Latitude</p>
-                  <p className="text-sm font-medium text-gray-900">{displayValue(order.latitude)}</p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-400">Longitude</p>
-                  <p className="text-sm font-medium text-gray-900">{displayValue(order.longitude)}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Financial Summary */}
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-              <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <FontAwesomeIcon icon={faReceipt} className="text-[#F48120] text-xs" />
-                Financials
-              </h2>
-              <div className="space-y-3">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Subtotal</span>
-                  <span className="font-medium text-gray-900">{formatCurrency(order.subtotal)}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Tax</span>
-                  <span className="font-medium text-gray-900">{formatCurrency(order.tax)}</span>
-                </div>
-                <div className="flex justify-between border-t border-gray-100 pt-2">
-                  <span className="text-sm font-semibold text-gray-900">Total</span>
-                  <span className="text-sm font-bold text-[#F48120]">{formatCurrency(order.total)}</span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
