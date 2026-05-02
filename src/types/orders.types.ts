@@ -27,6 +27,7 @@ export interface OrderProfile extends BaseOrder {
   client_id: number;
   latitude: number | null;
   longitude: number | null;
+  rider_phone: number | null;
   created_at: string;
   updated_at: string;
 }

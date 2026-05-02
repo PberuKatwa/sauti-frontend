@@ -15,6 +15,7 @@ import Landing from "./pages/Landing";
 import ResetPassword from "./pages/ResetPassword";
 import { AuthProvider } from "./context/AuthContext";
 import UserManagement from "./pages/UserManagement";
+import ViewOrder from "./pages/ViewOrder";
 
 function AppContent() {
   return (
@@ -43,6 +44,7 @@ function AppContent() {
           <Route path="users" element={<UserManagement />}/>
           <Route path="products" element={<Products />} />
           <Route path="orders" element={<Orders />} />
+          <Route path="orders/:orderId" element={<ViewOrder />} />
           <Route path="profile" element={<Profile />} />
         </Route>
       </Routes>

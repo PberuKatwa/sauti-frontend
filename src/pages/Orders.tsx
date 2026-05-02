@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import OrderFilters from "../components/filters/orders.filters";
 import type { AdminOrderRow, BaseOrderFilters, FullOrderFilters, OrderStatus } from "../types/orders.types";
@@ -7,7 +8,7 @@ import DataTable from "../components/tables/DataTable";
 import { OrdersService } from "../services/orders.service";
 import { getMonthDateRange } from "../utils/getDateRange";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faEye } from "@fortawesome/free-solid-svg-icons";
 import { SautiCloudLoader } from "../components/spinners/sauti.loader";
 import { CreateOrderModal } from "../components/orders/order.create";
 import { UpdateOrderModal } from "../components/orders/order.update";
@@ -32,6 +33,7 @@ const OrderFallback: AdminOrderRow[] = [
 ];
 
 export default function Orders() {
+  const navigate = useNavigate();
   const { startDate, endDate } = getMonthDateRange();
 
   const startFilters: FullOrderFilters = {
@@ -211,6 +213,13 @@ export default function Orders() {
       label: "Actions",
       render: (_value, row) => (
         <div className="flex items-center gap-2">
+          <button
+            className="p-2 text-[#3B82F6] hover:bg-blue-50 rounded-md transition-colors"
+            title="View"
+            onClick={() => navigate(`/dashboard/orders/${(row as unknown as AdminOrderRow).id}`)}
+          >
+            <FontAwesomeIcon icon={faEye} />
+          </button>
           <button
             className="p-2 text-[#F48120] hover:bg-orange-50 rounded-md transition-colors"
             title="Edit"
