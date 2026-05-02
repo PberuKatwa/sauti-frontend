@@ -7,27 +7,27 @@ import DataTable from "../components/tables/DataTable";
 import { OrdersService } from "../services/orders.service";
 import { getDateRange } from "../utils/getDateRange";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { SautiCloudLoader } from "../components/spinners/sauti.loader";
-import { UpdateOrderStatusModal } from "../components/orders/orderStatus.update";
+import { CreateOrderModal } from "../components/orders/order.create";
+import { UpdateOrderModal } from "../components/orders/order.update";
 
 const OrderFallback: AdminOrderRow[] = [
-
   {
     id: 0,
     order_number: 0,
     total: 0,
-    delivery_status: 'pending_delivery' as OrderStatus,
+    delivery_status: "pending_delivery" as OrderStatus,
     client_phone: 0,
     latitude: "",
     longitude: "",
     order_contact: 0,
-    delivery_type: 'immediate',
+    rider_phone:0,
+    delivery_type: "immediate",
     special_instructions: "",
     google_maps_link: "",
     created_at: "",
-  }
-
+  },
 ];
 
 export default function Orders() {
@@ -41,6 +41,7 @@ export default function Orders() {
     clientPhone: "",
   };
 
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState<AdminOrderRow>(OrderFallback[0]);
   const [filters, setFilters] = useState<FullOrderFilters>(startFilters);
@@ -72,18 +73,6 @@ export default function Orders() {
     }
   };
 
-  const handleStatusUpdate = async (id: number, status: OrderStatus) => {
-    try {
-      const update = await OrdersService.updateStatus({ orderId: id, status });
-      if (!update.success) throw new Error("Error in updating status");
-      toast.success("Successfully updated the order");
-      await getAllOrders();
-    } catch (error) {
-      toast.error("Error in updating status");
-      console.error("Error in updating status", error);
-    }
-  };
-
   const handleFilterChange = (newFilters: BaseOrderFilters | FullOrderFilters) => {
     const full = newFilters as FullOrderFilters;
     setFilters({
@@ -108,14 +97,6 @@ export default function Orders() {
   const handleLimitChange = (newLimit: number) => {
     setLimit(newLimit);
     setCurrentPage(1);
-  };
-
-  const handleEdit = (row: Record<string, unknown>) => {
-    toast.info(`Edit order #${row.order_number}`);
-  };
-
-  const handleDelete = (row: Record<string, unknown>) => {
-    toast.warning(`Delete order #${row.order_number}`);
   };
 
   useEffect(() => {
@@ -205,12 +186,6 @@ export default function Orders() {
       label: "Actions",
       render: (_value, row) => (
         <div className="flex items-center gap-2">
-          {/*<button
-            className="p-2 text-[#3B82F6] hover:bg-blue-50 rounded-md transition-colors"
-            title="View"
-          >
-            <FontAwesomeIcon icon={faEye} />
-          </button>*/}
           <button
             className="p-2 text-[#F48120] hover:bg-orange-50 rounded-md transition-colors"
             title="Edit"
@@ -218,13 +193,6 @@ export default function Orders() {
           >
             <FontAwesomeIcon icon={faEdit} />
           </button>
-          {/*<button
-            className="p-2 text-red-500 hover:bg-red-50 rounded-md transition-colors"
-            title="Delete"
-            onClick={() => handleDelete(row)}
-          >
-            <FontAwesomeIcon icon={faTrash} />
-          </button>*/}
         </div>
       ),
     },
@@ -237,13 +205,26 @@ export default function Orders() {
   return (
     <div className="min-h-screen bg-gray-50 font-['Poppins',sans-serif]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-[#12245B]">
-            Orders Management
-          </h1>
-          <p className="mt-2 text-gray-500 text-sm">
-            Track, manage, and fulfill all customer orders in one place
-          </p>
+        <div className="mb-8 flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-[#12245B]">
+              Orders Management
+            </h1>
+            <p className="mt-2 text-gray-500 text-sm">
+              Track, manage, and fulfill all customer orders in one place
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsCreateOpen(true)}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white
+              bg-[#F48120] shadow-sm shadow-[#F48120]/20
+              hover:bg-[#E57514] hover:shadow-md hover:shadow-[#F48120]/30
+              active:scale-95 transition-all duration-200"
+          >
+            <FontAwesomeIcon icon={faEdit} className="w-3.5 h-3.5" />
+            New Order
+          </button>
         </div>
 
         <section className="mb-8">
@@ -289,7 +270,13 @@ export default function Orders() {
         </section>
       </div>
 
-      <UpdateOrderStatusModal
+      <CreateOrderModal
+        isOpen={isCreateOpen}
+        onClose={() => setIsCreateOpen(false)}
+        onSuccess={() => getAllOrders()}
+      />
+
+      <UpdateOrderModal
         isOpen={isUpdateOpen}
         order={selectedOrder}
         onClose={() => setIsUpdateOpen(false)}
