@@ -4,12 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowLeft,
   faPenToSquare,
-  faLocationDot,
-  faPhone,
   faUser,
   faTruck,
   faBox,
-  faCalendarDays,
+  faClipboard,
+  faReceipt,
 } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import { OrdersService } from "../services/orders.service";
@@ -66,6 +65,11 @@ export default function ViewOrder() {
       hour: "2-digit",
       minute: "2-digit",
     });
+  };
+
+  const displayValue = (value: string | number | null) => {
+    if (value === null || value === undefined || value === "") return "N/A";
+    return String(value);
   };
 
   if (loading) {
@@ -136,7 +140,7 @@ export default function ViewOrder() {
 
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Left Column - Order Details */}
+          {/* Left Column */}
           <div className="lg:col-span-2 space-y-6">
             {/* Items Card */}
             <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
@@ -165,16 +169,16 @@ export default function ViewOrder() {
                   </div>
                 ))}
               </div>
-              <div className="px-6 py-4 bg-gray-50 border-t border-gray-100">
-                <div className="flex justify-between text-sm mb-1">
+              <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 space-y-1">
+                <div className="flex justify-between text-sm">
                   <span className="text-gray-500">Subtotal</span>
                   <span className="font-medium text-gray-900">{formatCurrency(order.subtotal)}</span>
                 </div>
-                <div className="flex justify-between text-sm mb-2">
+                <div className="flex justify-between text-sm">
                   <span className="text-gray-500">Tax</span>
                   <span className="font-medium text-gray-900">{formatCurrency(order.tax)}</span>
                 </div>
-                <div className="flex justify-between text-base font-semibold">
+                <div className="flex justify-between text-base font-semibold pt-1">
                   <span className="text-gray-900">Total</span>
                   <span className="text-[#F48120]">{formatCurrency(order.total)}</span>
                 </div>
@@ -182,16 +186,49 @@ export default function ViewOrder() {
             </div>
 
             {/* Special Instructions */}
-            {order.special_instructions && (
-              <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-                <h2 className="text-sm font-semibold text-gray-900 mb-2">Special Instructions</h2>
-                <p className="text-sm text-gray-600">{order.special_instructions}</p>
-              </div>
-            )}
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+              <h2 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                <FontAwesomeIcon icon={faClipboard} className="text-[#F48120] text-xs" />
+                Special Instructions
+              </h2>
+              <p className="text-sm text-gray-600">
+                {displayValue(order.special_instructions)}
+              </p>
+            </div>
           </div>
 
-          {/* Right Column - Customer & Delivery Info */}
+          {/* Right Column */}
           <div className="space-y-6">
+            {/* Order Info */}
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+              <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                <FontAwesomeIcon icon={faReceipt} className="text-[#F48120] text-xs" />
+                Order Info
+              </h2>
+              <div className="space-y-3">
+                <div>
+                  <p className="text-xs text-gray-400">Order Number</p>
+                  <p className="text-sm font-medium text-gray-900">#{order.order_number}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400">Status</p>
+                  <span
+                    className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium border mt-0.5 ${
+                      statusColors[order.delivery_status]
+                    }`}
+                  >
+                    {order.delivery_status
+                      .replace(/_/g, " ")
+                      .replace(/\b\w/g, (c) => c.toUpperCase())}
+                  </span>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400">Created At</p>
+                  <p className="text-sm font-medium text-gray-900">{formatDate(order.created_at)}</p>
+                </div>
+              </div>
+            </div>
+
             {/* Customer Info */}
             <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
               <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
@@ -203,15 +240,10 @@ export default function ViewOrder() {
                   <p className="text-xs text-gray-400">Client ID</p>
                   <p className="text-sm font-medium text-gray-900">{order.client_id}</p>
                 </div>
-                {order.order_contact && (
-                  <div className="flex items-center gap-2">
-                    <FontAwesomeIcon icon={faPhone} className="text-gray-400 text-xs" />
-                    <div>
-                      <p className="text-xs text-gray-400">Contact</p>
-                      <p className="text-sm font-medium text-gray-900">{order.order_contact}</p>
-                    </div>
-                  </div>
-                )}
+                <div>
+                  <p className="text-xs text-gray-400">Contact Phone</p>
+                  <p className="text-sm font-medium text-gray-900">{displayValue(order.order_contact)}</p>
+                </div>
               </div>
             </div>
 
@@ -226,43 +258,39 @@ export default function ViewOrder() {
                   <p className="text-xs text-gray-400">Type</p>
                   <p className="text-sm font-medium text-gray-900 capitalize">{order.delivery_type}</p>
                 </div>
-                {order.rider_phone && (
-                  <div className="flex items-center gap-2">
-                    <FontAwesomeIcon icon={faPhone} className="text-gray-400 text-xs" />
-                    <div>
-                      <p className="text-xs text-gray-400">Rider Phone</p>
-                      <p className="text-sm font-medium text-gray-900">{order.rider_phone}</p>
-                    </div>
-                  </div>
-                )}
-                {order.latitude && order.longitude && (
-                  <div className="flex items-start gap-2">
-                    <FontAwesomeIcon icon={faLocationDot} className="text-gray-400 text-xs mt-0.5" />
-                    <div>
-                      <p className="text-xs text-gray-400">Location</p>
-                      <p className="text-sm font-medium text-gray-900">
-                        {order.latitude}, {order.longitude}
-                      </p>
-                    </div>
-                  </div>
-                )}
+                <div>
+                  <p className="text-xs text-gray-400">Rider Phone</p>
+                  <p className="text-sm font-medium text-gray-900">{displayValue(order.rider_phone)}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400">Latitude</p>
+                  <p className="text-sm font-medium text-gray-900">{displayValue(order.latitude)}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400">Longitude</p>
+                  <p className="text-sm font-medium text-gray-900">{displayValue(order.longitude)}</p>
+                </div>
               </div>
             </div>
 
-            {/* Timestamps */}
+            {/* Financial Summary */}
             <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
               <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <FontAwesomeIcon icon={faCalendarDays} className="text-[#F48120] text-xs" />
-                Timeline
+                <FontAwesomeIcon icon={faReceipt} className="text-[#F48120] text-xs" />
+                Financials
               </h2>
               <div className="space-y-3">
-                <div>
-                  <p className="text-xs text-gray-400">Created</p>
-                  <p className="text-sm font-medium text-gray-900">{formatDate(order.created_at)}</p>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-500">Subtotal</span>
+                  <span className="font-medium text-gray-900">{formatCurrency(order.subtotal)}</span>
                 </div>
-                <div>
-                  <p className="text-xs text-gray-400">Last Updated</p>
-                  <p className="text-sm font-medium text-gray-900">{formatDate(order.updated_at)}</p>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-500">Tax</span>
+                  <span className="font-medium text-gray-900">{formatCurrency(order.tax)}</span>
+                </div>
+                <div className="flex justify-between border-t border-gray-100 pt-2">
+                  <span className="text-sm font-semibold text-gray-900">Total</span>
+                  <span className="text-sm font-bold text-[#F48120]">{formatCurrency(order.total)}</span>
                 </div>
               </div>
             </div>
