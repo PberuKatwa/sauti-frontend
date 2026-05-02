@@ -252,11 +252,11 @@ const DataTable: React.FC<DataTableProps> = ({
 
   return (
     <div className={`relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default ${containerClassName}`}>
-      <table className="w-full text-sm text-left rtl:text-right text-body">
-        <thead className="text-sm text-body bg-neutral-secondary-medium border-b border-default-medium">
+      <table className="w-full text-xs text-left rtl:text-right text-body">
+        <thead className="text-xs text-body bg-neutral-secondary-medium border-b border-default-medium">
           <tr>
             {showSelection && (
-              <th scope="col" className="p-4">
+              <th scope="col" className="p-2">
                 <div className="flex items-center">
                   <input
                     id="table-checkbox-all"
@@ -278,13 +278,13 @@ const DataTable: React.FC<DataTableProps> = ({
               <th
                 key={column.key}
                 scope="col"
-                className={`px-3 py-3 font-medium ${column.headerClassName || ""}`}
+                className={`px-2 py-2 font-medium ${column.headerClassName || ""}`}
               >
                 {column.label}
               </th>
             ))}
             {(onEdit || onDelete) && (
-              <th scope="col" className="px-3 py-3 font-medium">
+              <th scope="col" className="px-2 py-2 font-medium">
                 Action
               </th>
             )}
@@ -295,7 +295,7 @@ const DataTable: React.FC<DataTableProps> = ({
             <tr className="bg-neutral-primary-soft border-b border-default">
               <td
                 colSpan={displayColumns.length + (showSelection ? 1 : 0) + ((onEdit || onDelete) ? 1 : 0)}
-                className="px-6 py-8 text-center"
+                className="px-6 py-3 text-center"
               >
                 <div className="flex items-center justify-center gap-2 text-body">
                   <div className="w-4 h-4 border-2 border-[#F48120] border-t-transparent rounded-full animate-spin" />
@@ -319,7 +319,7 @@ const DataTable: React.FC<DataTableProps> = ({
                 className={`bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium ${selectedRows.has(rowIndex) ? "bg-neutral-secondary-medium" : ""}`}
               >
                 {showSelection && (
-                  <td className="w-4 p-4">
+                  <td className="w-4 p-2">
                     <div className="flex items-center">
                       <input
                         id={`table-checkbox-${rowIndex}`}
@@ -336,13 +336,13 @@ const DataTable: React.FC<DataTableProps> = ({
                   <td
                     key={column.key}
                     scope={column.type === "text" && column.key === displayColumns[0]?.key ? "row" : undefined}
-                    className={`px-3 py-4 ${column.cellClassName || ""} ${column.type === "text" && column.key === displayColumns[0]?.key ? "font-medium text-heading whitespace-nowrap" : "text-body"}`}
+                    className={`px-2 py-2 ${column.cellClassName || ""} ${column.type === "text" && column.key === displayColumns[0]?.key ? "font-medium text-heading whitespace-nowrap" : "text-body"}`}
                   >
                     {renderCell(column, row, rowIndex)}
                   </td>
                 ))}
                 {(onEdit || onDelete) && (
-                  <td className="flex items-center px-3 py-4">
+                  <td className="flex items-center px-2 py-2">
                     {onEdit && (
                       <a
                         href="#"
@@ -376,15 +376,15 @@ const DataTable: React.FC<DataTableProps> = ({
       </table>
 
       {showPagination && totalPages > 0 && (
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-5 py-4 border-t border-default-medium bg-neutral-primary-soft rounded-b-base">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-5 py-3 border-t border-default-medium bg-neutral-primary-soft rounded-b-base">
           <div className="flex items-center gap-2">
-            <span className="text-body text-sm">
+            <span className="text-body text-xs">
               Items per page:
             </span>
             <select
               value={itemsPerPage}
               onChange={(e) => handleItemsPerPageChange(Number(e.target.value))}
-              className="px-2 py-1 rounded-xs border border-default-medium bg-neutral-primary-soft text-body text-sm focus:outline-none focus:ring-2 focus:ring-brand-soft"
+              className="px-2 py-1 rounded-xs border border-default-medium bg-neutral-primary-soft text-body text-xs focus:outline-none focus:ring-2 focus:ring-brand-soft"
             >
               {[5, 10, 15, 20, 50].map((size) => (
                 <option key={size} value={size}>
@@ -398,7 +398,7 @@ const DataTable: React.FC<DataTableProps> = ({
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-3 py-1.5 rounded-xs border border-default-medium text-body text-sm hover:bg-neutral-secondary-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-3 py-1.5 rounded-xs border border-default-medium text-body text-xs hover:bg-neutral-secondary-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               Previous
             </button>
@@ -407,7 +407,7 @@ const DataTable: React.FC<DataTableProps> = ({
               page === "..." ? (
                 <span
                   key={`ellipsis-${index}`}
-                  className="px-2 py-1.5 text-body"
+                  className="px-2 py-1.5 text-body text-xs"
                 >
                   ...
                 </span>
@@ -415,7 +415,7 @@ const DataTable: React.FC<DataTableProps> = ({
                 <button
                   key={page}
                   onClick={() => handlePageChange(page as number)}
-                  className={`px-3 py-1.5 rounded-xs text-sm transition-colors ${
+                  className={`px-3 py-1.5 rounded-xs text-xs transition-colors ${
                     currentPage === page
                       ? "bg-[#F48120] text-white"
                       : "border border-default-medium text-body hover:bg-neutral-secondary-medium"
@@ -429,13 +429,13 @@ const DataTable: React.FC<DataTableProps> = ({
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-3 py-1.5 rounded-xs border border-default-medium text-body text-sm hover:bg-neutral-secondary-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-3 py-1.5 rounded-xs border border-default-medium text-body text-xs hover:bg-neutral-secondary-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               Next
             </button>
           </div>
 
-          <span className="text-body text-sm">
+          <span className="text-body text-xs">
             Page {currentPage} of {totalPages}
           </span>
         </div>
