@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import OrderFilters from "../components/filters/orders.filters";
-import type { AdminOrderRow, BaseOrderFilters, FullOrderFilters, OrderStatus } from "../types/orders.types";
+import type { AdminOrder, BaseOrderFilters, FullOrderFilters } from "../types/orders.types";
 import type { ColumnType } from "../components/tables/DataTable";
 import DataTable from "../components/tables/DataTable";
 import { OrdersService } from "../services/orders.service";
@@ -13,22 +13,27 @@ import { SautiCloudLoader } from "../components/spinners/sauti.loader";
 import { CreateOrderModal } from "../components/orders/order.create";
 import { UpdateOrderModal } from "../components/orders/order.update";
 
-const OrderFallback: AdminOrderRow[] = [
+const OrderFallback: AdminOrder[] = [
   {
     id: 0,
     order_number: 0,
     total: 0,
-    delivery_status: "pending_delivery" as OrderStatus,
-    client_phone: 0,
+    delivery_status: "pending_delivery",
+    order_contact: null,
+    delivery_type: "immediate",
+    special_instructions: null,
+    client_id: 0,
     latitude: "",
     longitude: "",
-    order_contact: 0,
-    rider_phone:0,
-    delivery_type: "immediate",
-    special_instructions: "",
-    google_maps_link: "",
-    items:[],
+    rider_phone: null,
     created_at: "",
+    updated_at: "",
+    client_phone: null,
+    payments: null,
+    payment_status: "unpaid",
+    total_paid: 0,
+    google_maps_link: "",
+    items: [],
   },
 ];
 
@@ -46,15 +51,15 @@ export default function Orders() {
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
-  const [selectedOrder, setSelectedOrder] = useState<AdminOrderRow>(OrderFallback[0]);
+  const [selectedOrder, setSelectedOrder] = useState<AdminOrder>(OrderFallback[0]);
   const [filters, setFilters] = useState<FullOrderFilters>(startFilters);
-  const [orders, setOrders] = useState<AdminOrderRow[]>(OrderFallback);
+  const [orders, setOrders] = useState<AdminOrder[]>(OrderFallback);
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const openUpdateModal = (order: AdminOrderRow) => {
+  const openUpdateModal = (order: AdminOrder) => {
     setSelectedOrder(order);
     setIsUpdateOpen(true);
   };
@@ -143,7 +148,7 @@ export default function Orders() {
       key: "items",
       label: "Items",
       render: (_value, row) => {
-        const items = (row as unknown as AdminOrderRow).items || [];
+        const items = (row as unknown as AdminOrder).items || [];
         if (items.length === 0) return <span className="text-gray-400 text-xs">No items</span>;
         return (
           <div className="flex flex-col gap-0.5">
@@ -202,6 +207,37 @@ export default function Orders() {
       render: (value) => formatCurrency(Number(value)),
     },
     {
+      type: "badge",
+      key: "payment_status",
+      label: "Payment",
+      colorMap: {
+        unpaid: "error",
+        partially_paid: "warning",
+        paid: "success",
+        overpaid: "info",
+      },
+    },
+    {
+      type: "custom",
+      key: "payments",
+      label: "Payments",
+      render: (_value, row) => {
+        const payments = (row as unknown as AdminOrder).payments;
+        if (!payments || payments.length === 0) return <span className="text-gray-400 text-xs">No payments</span>;
+        return (
+          <div className="flex flex-col gap-0.5">
+            {payments.map((p, idx) => (
+              <div key={idx} className="text-xs text-gray-700">
+                <span className="font-medium">{p.source}</span>
+                <span className="text-gray-400"> · {p.reference}</span>
+                <span className="text-gray-600"> · {formatCurrency(p.amount)}</span>
+              </div>
+            ))}
+          </div>
+        );
+      },
+    },
+    {
       type: "custom",
       key: "created_at",
       label: "Created At",
@@ -216,14 +252,14 @@ export default function Orders() {
           <button
             className="p-2 text-[#3B82F6] hover:bg-blue-50 rounded-md transition-colors"
             title="View"
-            onClick={() => navigate(`/dashboard/orders/${(row as unknown as AdminOrderRow).id}`)}
+            onClick={() => navigate(`/dashboard/orders/${(row as unknown as AdminOrder).id}`)}
           >
             <FontAwesomeIcon icon={faEye} />
           </button>
           <button
             className="p-2 text-[#F48120] hover:bg-orange-50 rounded-md transition-colors"
             title="Edit"
-            onClick={() => openUpdateModal(row as unknown as AdminOrderRow)}
+            onClick={() => openUpdateModal(row as unknown as AdminOrder)}
           >
             <FontAwesomeIcon icon={faEdit} />
           </button>

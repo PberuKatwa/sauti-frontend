@@ -1,5 +1,6 @@
 import type { ApiResponse } from "../types/api.types";
-import type { BaseOrderFilters, MonthlyOrdersStatsApiResponse, TotalOrdersStatsApiResponse } from "../types/orders.types";
+import type { MonthlyOrdersStatsApiResponse, TotalOrdersStatsApiResponse } from "../types/ordersStats.types";
+import type { BaseOrderFilters } from "../types/orders.types";
 import { apiClient } from "./api.client";
 
 export const DashboardService = {

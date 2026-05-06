@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import OrderFilters from "../components/filters/orders.filters";
-import type { BaseOrderFilters, FullOrderFilters, MonthlyOrderStat, TotalOrdersStats } from "../types/orders.types";
+import type { BaseOrderFilters } from "../types/orders.types";
+import type { MonthlyOrderStat,TotalOrdersStats } from "../types/ordersStats.types";
 import type { MetricItem } from '../components/cards/metrics.cards';
 import MetricsGrid from "../components/cards/metrics.cards";
 import {

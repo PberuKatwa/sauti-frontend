@@ -172,11 +172,15 @@ export default function ViewOrder() {
               <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 space-y-1">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-500">Subtotal</span>
-                  <span className="font-medium text-gray-900">{formatCurrency(order.subtotal)}</span>
+                  <span className="font-medium text-gray-900">
+                    {formatCurrency(order.items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0))}
+                  </span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Tax</span>
-                  <span className="font-medium text-gray-900">{formatCurrency(order.tax)}</span>
+                  <span className="text-gray-500">VAT / Charges</span>
+                  <span className="font-medium text-gray-900">
+                    {formatCurrency(order.total - order.items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0))}
+                  </span>
                 </div>
                 <div className="flex justify-between text-base font-semibold pt-1">
                   <span className="text-gray-900">Total</span>

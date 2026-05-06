@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import { OrdersService } from "../../services/orders.service";
-import type { UpdateOrderPayload, OrderStatus, AdminOrderRow, OrderProfile } from "../../types/orders.types";
+import type { UpdateOrderPayload, OrderStatus, AdminOrder, OrderProfile } from "../../types/orders.types";
 
 const initialState: UpdateOrderPayload = {
   orderId: 0,
@@ -20,7 +20,7 @@ const initialState: UpdateOrderPayload = {
 
 interface UpdateOrderModalProps {
   isOpen: boolean;
-  order: AdminOrderRow | OrderProfile;
+  order: AdminOrder | OrderProfile;
   onClose: () => void;
   onSuccess: () => void;
 }
@@ -42,7 +42,7 @@ export const UpdateOrderModal = function ({
         order_contact: order.order_contact ?? undefined,
         delivery_type: order.delivery_type,
         special_instructions: order.special_instructions || "",
-        rider_phone: (order as AdminOrderRow & { rider_phone?: number | null }).rider_phone || 0,
+        rider_phone: (order as AdminOrder).rider_phone ?? 0,
       });
     }
   }, [order]);
