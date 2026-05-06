@@ -1,5 +1,5 @@
 import type { ApiResponse } from "../types/api.types";
-import type { AllAdminOrdersApiResponse, CreateContactAndOrder, FullOrderFilters, SingleOrderApiResponse, UpdateOrderPayload } from "../types/orders.types";
+import type { AllAdminOrdersApiResponse, CreateContactAndOrder, FullOrderFilters, SingleAdminOrderApiResponse, SingleOrderApiResponse, UpdateOrderPayload } from "../types/orders.types";
 import { apiClient } from "./api.client";
 
 
@@ -70,10 +70,10 @@ export const OrdersService = {
     return updateRes;
   },
 
-  async getOrder(orderId: number): Promise<SingleOrderApiResponse>{
+  async getOrder(orderId: number): Promise<SingleAdminOrderApiResponse>{
     const response = await apiClient.get(`orders/${orderId}`)
 
-    const order: SingleOrderApiResponse = response.data;
+    const order: SingleAdminOrderApiResponse = response.data;
 
     return order;
   }

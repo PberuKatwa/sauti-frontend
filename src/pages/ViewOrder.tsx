@@ -9,10 +9,11 @@ import {
   faBox,
   faLocationDot,
   faReceipt,
+  faCreditCard,
 } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import { OrdersService } from "../services/orders.service";
-import type { OrderProfile, OrderStatus } from "../types/orders.types";
+import type { AdminOrder, OrderStatus } from "../types/orders.types";
 import { SautiCloudLoader } from "../components/spinners/sauti.loader";
 import { UpdateOrderModal } from "../components/orders/order.update";
 
@@ -28,7 +29,7 @@ const statusColors: Record<OrderStatus, string> = {
 export default function ViewOrder() {
   const { orderId } = useParams<{ orderId: string }>();
   const navigate = useNavigate();
-  const [order, setOrder] = useState<OrderProfile | null>(null);
+  const [order, setOrder] = useState<AdminOrder | null>(null);
   const [loading, setLoading] = useState(true);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
 
@@ -276,6 +277,33 @@ export default function ViewOrder() {
                   <p className="text-sm font-medium text-gray-900">{displayValue(order.order_contact)}</p>
                 </div>
               </div>
+            </div>
+
+            {/* Payments */}
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+              <h2 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                <FontAwesomeIcon icon={faCreditCard} className="text-[#F48120] text-xs" />
+                Payments
+              </h2>
+              {order.payments && order.payments.length > 0 ? (
+                <div className="space-y-3">
+                  {order.payments.map((payment, idx) => (
+                    <div key={idx}>
+                      <p className="text-xs text-gray-400">{payment.source}</p>
+                      <div className="flex items-center justify-between">
+                        <p className="text-sm font-medium text-gray-900">{payment.reference}</p>
+                        <p className="text-sm font-medium text-[#F48120]">{formatCurrency(payment.amount)}</p>
+                      </div>
+                    </div>
+                  ))}
+                  <div className="pt-2 border-t border-gray-100 flex justify-between text-sm font-semibold">
+                    <span className="text-gray-900">Total Paid</span>
+                    <span className="text-[#F48120]">{formatCurrency(order.total_paid)}</span>
+                  </div>
+                </div>
+              ) : (
+                <p className="text-sm text-gray-400">No payments recorded</p>
+              )}
             </div>
 
           </div>
