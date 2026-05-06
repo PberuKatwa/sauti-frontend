@@ -37,7 +37,7 @@ export const OrdersService = {
     }
 
     const allParams = params.toString()
-    const response = await apiClient.get(`/orders/admin?${allParams}`);
+    const response = await apiClient.get(`/orders/?${allParams}`);
 
     const orders: AllAdminOrdersApiResponse = response.data;
     return orders;
@@ -71,7 +71,7 @@ export const OrdersService = {
   },
 
   async getOrder(orderId: number): Promise<SingleOrderApiResponse>{
-    const response = await apiClient.get(`orders/individual/${orderId}`)
+    const response = await apiClient.get(`orders/${orderId}`)
 
     const order: SingleOrderApiResponse = response.data;
 
