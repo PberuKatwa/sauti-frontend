@@ -133,22 +133,47 @@ export default function Orders() {
 
   const orderColumns: ColumnType[] = [
     {
+      type: "custom",
+      key: "created_at",
+      label: "Date",
+      render: (value) => formatDate(String(value)),
+    },
+    {
       type: "text",
       key: "order_number",
       label: "Order Number",
       cellClassName: "font-medium text-heading",
     },
     {
-      type: "badge",
-      key: "delivery_status",
-      label: "Status",
-      colorMap: {
-        pending_location: "info",
-        pending_contact: "warning",
-        pending_delivery_type: "warning",
-        pending_delivery: "warning",
-        enroute: "primary",
-        delivered: "success",
+      type: "custom",
+      key: "details",
+      label: "Details",
+      cellClassName: "min-w-[180px]",
+      render: (_value, row) => {
+        const order = row as unknown as AdminOrder;
+        const client = order.client_phone ? order.client_phone : "NA";
+        const recipient = order.order_contact ? order.order_contact : "NA";
+        const rider = order.rider_phone ? order.rider_phone : "NA";
+        const location = order.google_maps_link ? (
+          <a
+            href={order.google_maps_link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#3B82F6] hover:underline font-medium"
+          >
+            Open Maps
+          </a>
+        ) : (
+          "NA"
+        );
+        return (
+          <div className="flex flex-col gap-0.5 text-xs text-gray-600">
+            <div><span className="font-bold underline text-gray-700">Client:</span> {client}</div>
+            <div><span className="font-bold underline text-gray-700">Recipient:</span> {recipient}</div>
+            <div><span className="font-bold underline text-gray-700">Rider:</span> {rider}</div>
+            <div><span className="font-bold underline text-gray-700">Location:</span> {location}</div>
+          </div>
+        );
       },
     },
     {
@@ -171,43 +196,23 @@ export default function Orders() {
       },
     },
     {
-      type: "text",
-      key: "client_phone",
-      label: "Client",
+      type: "badge",
+      key: "delivery_status",
+      label: "Status",
+      colorMap: {
+        pending_location: "info",
+        pending_contact: "warning",
+        pending_delivery_type: "warning",
+        pending_delivery: "warning",
+        enroute: "primary",
+        delivered: "success",
+      },
     },
-    {
-      type: "text",
-      key: "order_contact",
-      label: "Recipient",
-    },
-    {
-      type: "text",
-      key: "rider_phone",
-      label: "Rider",
-    },
-    {
-      type: "custom",
-      key: "google_maps_link",
-      label: "Google Maps",
-      render: (value) =>
-        value ? (
-          <a
-            href={String(value)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#3B82F6] hover:underline font-medium"
-          >
-            Open Maps
-          </a>
-        ) : (
-          <span className="text-gray-400">N/A</span>
-        ),
-    },
-    {
-      type: "text",
-      key: "delivery_type",
-      label: "Delivery Type",
-    },
+    // {
+    //   type: "text",
+    //   key: "delivery_type",
+    //   label: "Delivery Type",
+    // },
     {
       type: "custom",
       key: "total",
@@ -245,12 +250,7 @@ export default function Orders() {
         );
       },
     },
-    {
-      type: "custom",
-      key: "created_at",
-      label: "Created At",
-      render: (value) => formatDate(String(value)),
-    },
+
     {
       type: "custom",
       key: "actions",
