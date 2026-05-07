@@ -8,10 +8,11 @@ import DataTable from "../components/tables/DataTable";
 import { OrdersService } from "../services/orders.service";
 import { getMonthDateRange } from "../utils/getDateRange";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faEye, faMoneyBill } from "@fortawesome/free-solid-svg-icons";
 import { SautiCloudLoader } from "../components/spinners/sauti.loader";
 import { CreateOrderModal } from "../components/orders/order.create";
 import { UpdateOrderModal } from "../components/orders/order.update";
+import { CreatePaymentModal } from "../components/payments/payments.create";
 
 const OrderFallback: AdminOrder[] = [
   {
@@ -51,6 +52,8 @@ export default function Orders() {
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+  const [selectedPaymentOrderId, setSelectedPaymentOrderId] = useState<number>(0);
   const [selectedOrder, setSelectedOrder] = useState<AdminOrder>(OrderFallback[0]);
   const [filters, setFilters] = useState<FullOrderFilters>(startFilters);
   const [orders, setOrders] = useState<AdminOrder[]>(OrderFallback);
@@ -62,6 +65,11 @@ export default function Orders() {
   const openUpdateModal = (order: AdminOrder) => {
     setSelectedOrder(order);
     setIsUpdateOpen(true);
+  };
+
+  const openPaymentModal = (orderId: number) => {
+    setSelectedPaymentOrderId(orderId);
+    setIsPaymentOpen(true);
   };
 
   const getAllOrders = async () => {
@@ -263,6 +271,13 @@ export default function Orders() {
           >
             <FontAwesomeIcon icon={faEdit} />
           </button>
+          <button
+            className="p-2 text-green-600 hover:bg-green-50 rounded-md transition-colors"
+            title="Record Payment"
+            onClick={() => openPaymentModal((row as unknown as AdminOrder).id)}
+          >
+            <FontAwesomeIcon icon={faMoneyBill} />
+          </button>
         </div>
       ),
     },
@@ -351,6 +366,13 @@ export default function Orders() {
         order={selectedOrder}
         onClose={() => setIsUpdateOpen(false)}
         onSuccess={() => getAllOrders()}
+      />
+
+      <CreatePaymentModal
+        isOpen={isPaymentOpen}
+        onClose={() => setIsPaymentOpen(false)}
+        onSuccess={() => getAllOrders()}
+        orderId={selectedPaymentOrderId}
       />
     </div>
   );

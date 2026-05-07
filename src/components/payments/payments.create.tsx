@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faXmark,
@@ -29,15 +29,23 @@ interface CreatePaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSuccess: () => void;
+  orderId?: number;
 }
 
 export const CreatePaymentModal = function ({
   isOpen,
   onClose,
   onSuccess,
+  orderId,
 }: CreatePaymentModalProps) {
   const [data, setData] = useState<CreatePaymentPayload>(initialPayload);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (orderId) {
+      setData((prev) => ({ ...prev, order_id: orderId }));
+    }
+  }, [orderId]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -45,7 +53,7 @@ export const CreatePaymentModal = function ({
     const { name, value } = e.target;
     setData((prev) => ({
       ...prev,
-      [name]: name === "source" ? value : Number(value),
+      [name]: name === "source" || name === "reference" ? value : Number(value),
     }));
   };
 
