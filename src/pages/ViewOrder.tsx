@@ -10,12 +10,15 @@ import {
   faLocationDot,
   faReceipt,
   faCreditCard,
+  faPrint,
 } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import { OrdersService } from "../services/orders.service";
 import type { AdminOrder, OrderStatus } from "../types/orders.types";
 import { SautiCloudLoader } from "../components/spinners/sauti.loader";
 import { UpdateOrderModal } from "../components/orders/order.update";
+import { CreatePaymentModal } from "../components/payments/payments.create";
+import OrderReceipt from "../components/orders/order.receipt";
 
 const statusColors: Record<OrderStatus, string> = {
   pending_location: "bg-blue-50 text-blue-700 border-blue-200",
@@ -32,6 +35,8 @@ export default function ViewOrder() {
   const [order, setOrder] = useState<AdminOrder | null>(null);
   const [loading, setLoading] = useState(true);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+  const [isReceiptOpen, setIsReceiptOpen] = useState(false);
 
   const getOrder = async () => {
     try {
@@ -127,16 +132,38 @@ export default function ViewOrder() {
               </p>
             </div>
           </div>
-          <button
-            onClick={() => setIsUpdateOpen(true)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white
-              bg-[#F48120] shadow-sm shadow-[#F48120]/20
-              hover:bg-[#E57514] hover:shadow-md hover:shadow-[#F48120]/30
-              active:scale-95 transition-all duration-200"
-          >
-            <FontAwesomeIcon icon={faPenToSquare} className="w-3.5 h-3.5" />
-            Edit Order
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setIsReceiptOpen(true)}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold
+                bg-white border-2 border-[#12245B] text-[#12245B]
+                hover:bg-[#12245B] hover:text-white hover:shadow-md hover:shadow-[#12245B]/20
+                active:scale-95 transition-all duration-200"
+            >
+              <FontAwesomeIcon icon={faPrint} className="w-3.5 h-3.5" />
+              Print Receipt
+            </button>
+            <button
+              onClick={() => setIsPaymentOpen(true)}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white
+                bg-green-600 shadow-sm shadow-green-600/20
+                hover:bg-green-700 hover:shadow-md hover:shadow-green-600/30
+                active:scale-95 transition-all duration-200"
+            >
+              <FontAwesomeIcon icon={faCreditCard} className="w-3.5 h-3.5" />
+              Record Payment
+            </button>
+            <button
+              onClick={() => setIsUpdateOpen(true)}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white
+                bg-[#F48120] shadow-sm shadow-[#F48120]/20
+                hover:bg-[#E57514] hover:shadow-md hover:shadow-[#F48120]/30
+                active:scale-95 transition-all duration-200"
+            >
+              <FontAwesomeIcon icon={faPenToSquare} className="w-3.5 h-3.5" />
+              Edit Order
+            </button>
+          </div>
         </div>
 
         {/* Main Content Grid */}
@@ -315,6 +342,19 @@ export default function ViewOrder() {
         order={order}
         onClose={() => setIsUpdateOpen(false)}
         onSuccess={() => getOrder()}
+      />
+
+      <CreatePaymentModal
+        isOpen={isPaymentOpen}
+        onClose={() => setIsPaymentOpen(false)}
+        onSuccess={() => getOrder()}
+        orderId={Number(orderId)}
+      />
+
+      <OrderReceipt
+        isOpen={isReceiptOpen}
+        order={order}
+        onClose={() => setIsReceiptOpen(false)}
       />
     </div>
   );

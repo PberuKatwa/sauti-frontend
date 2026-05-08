@@ -42,10 +42,10 @@ export const CreatePaymentModal = function ({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (orderId) {
+    if (isOpen && orderId) {
       setData((prev) => ({ ...prev, order_id: orderId }));
     }
-  }, [orderId]);
+  }, [isOpen, orderId]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -133,22 +133,24 @@ export const CreatePaymentModal = function ({
           className="overflow-y-auto flex-1 px-6 py-5 flex flex-col gap-5"
           onSubmit={handleSubmit}
         >
-          {/* ORDER ID */}
-          <div className="flex flex-col gap-1.5">
-            <label htmlFor="create-payment-order-id" className={labelClass}>
-              Order ID
-            </label>
-            <input
-              id="create-payment-order-id"
-              type="number"
-              name="order_id"
-              value={data.order_id || ""}
-              onChange={handleChange}
-              placeholder="e.g. 123"
-              required
-              className={inputClass}
-            />
-          </div>
+          {/* ORDER ID - only shown when not pre-filled */}
+          {!orderId && (
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="create-payment-order-id" className={labelClass}>
+                Order ID
+              </label>
+              <input
+                id="create-payment-order-id"
+                type="number"
+                name="order_id"
+                value={data.order_id || ""}
+                onChange={handleChange}
+                placeholder="e.g. 123"
+                required
+                className={inputClass}
+              />
+            </div>
+          )}
 
           {/* PAYMENT SOURCE */}
           <div className="flex flex-col gap-1.5">
