@@ -258,21 +258,21 @@ export default function Orders() {
       render: (_value, row) => (
         <div className="flex items-center gap-2">
           <button
-            className="p-2 text-[#3B82F6] hover:bg-blue-50 rounded-md transition-colors"
+            className="p-1 text-lg text-[#3B82F6] hover:bg-blue-50 rounded-md transition-colors"
             title="View"
             onClick={() => navigate(`/dashboard/orders/${(row as unknown as AdminOrder).id}`)}
           >
             <FontAwesomeIcon icon={faEye} />
           </button>
           <button
-            className="p-2 text-[#F48120] hover:bg-orange-50 rounded-md transition-colors"
+            className="p-1 text-lg text-[#F48120] hover:bg-orange-50 rounded-md transition-colors"
             title="Edit"
             onClick={() => openUpdateModal(row as unknown as AdminOrder)}
           >
             <FontAwesomeIcon icon={faEdit} />
           </button>
           <button
-            className="p-2 text-green-600 hover:bg-green-50 rounded-md transition-colors"
+            className="p-1 text-lg text-green-600 hover:bg-green-50 rounded-md transition-colors"
             title="Record Payment"
             onClick={() => openPaymentModal((row as unknown as AdminOrder).id)}
           >
