@@ -6,8 +6,7 @@ import {
   faEnvelope,
   faShieldHalved,
   faCalendarDays,
-  faIdBadge,
-  faSpinner,
+  faIdBadge
 } from "@fortawesome/free-solid-svg-icons";
 import { authService } from "../services/auth.service";
 import type { ProfileApiResponse } from "../types/user.types";

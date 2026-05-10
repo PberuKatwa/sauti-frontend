@@ -178,7 +178,7 @@ const DataTable: React.FC<DataTableProps> = ({
     return colorMap?.[value] || defaultMap[value] || "info";
   };
 
-  const renderCell = (column: ColumnType, row: Record<string, unknown>, rowIndex: number) => {
+  const renderCell = (column: ColumnType, row: Record<string, unknown>) => {
     // Handle checkbox column
     if (column.type === "checkbox" || (showSelection && column.type === "action" && column.key === "actions")) {
       return null; // Checkboxes are rendered separately
@@ -338,7 +338,7 @@ const DataTable: React.FC<DataTableProps> = ({
                     scope={column.type === "text" && column.key === displayColumns[0]?.key ? "row" : undefined}
                     className={`px-2 py-2 ${column.cellClassName || ""} ${column.type === "text" && column.key === displayColumns[0]?.key ? "font-medium text-heading whitespace-nowrap" : "text-body"}`}
                   >
-                    {renderCell(column, row, rowIndex)}
+                    {renderCell(column, row)}
                   </td>
                 ))}
                 {(onEdit || onDelete) && (

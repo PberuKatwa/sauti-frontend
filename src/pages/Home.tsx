@@ -2,28 +2,19 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import OrderFilters from "../components/filters/orders.filters";
 import type { BaseOrderFilters } from "../types/orders.types";
-import type { MonthlyOrderStat,TotalOrdersStats } from "../types/ordersStats.types";
+import type { MonthlyOrderStat } from "../types/ordersStats.types";
 import type { MetricItem } from '../components/cards/metrics.cards';
 import MetricsGrid from "../components/cards/metrics.cards";
 import {
   faUsers,
   faBox,
   faShoppingCart,
-  faDollarSign,
-  faTruck,
-  faCheckCircle
+  faDollarSign
 } from '@fortawesome/free-solid-svg-icons';
 import MonthlySalesChart from "../components/charts/monthlyOrders.chart";
 import { DashboardService } from "../services/dashboard.service";
 import { getMonthDateRange } from "../utils/getDateRange";
 import { SautiCloudLoader } from "../components/spinners/sauti.loader";
-
-
-
-const OrderStatsTemplate: TotalOrdersStats = {
-  count: 0,
-  totalValue: 0
-};
 
 const MonthlySampleData: MonthlyOrderStat[] = [
   { month: 1, monthName: "Jan", totalValue: 168000, orderCount: 45 },

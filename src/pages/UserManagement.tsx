@@ -6,7 +6,7 @@ import type { ColumnType } from "../components/tables/DataTable";
 import DataTable from "../components/tables/DataTable";
 import { UsersService } from "../services/users.service";
 import { SautiCloudLoader } from "../components/spinners/sauti.loader";
-import { UpdateUserModal, EditUserButton } from "../components/users/users.update";
+import { UpdateUserModal } from "../components/users/users.update";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
